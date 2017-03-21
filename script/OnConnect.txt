@@ -1,0 +1,1 @@
+/say ADDME32 BOTS

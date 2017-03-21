@@ -1,0 +1,174 @@
+## In-game commands by KeFear and Shoozza
+## uncomment if you need it
+
+if $MESSAGE = !commands
+ /say Available commands:
+# /say !rate - shows your K:D rate
+ /say !version - shows ARSSE version
+ /say !test - performs test if ARSSE can see you
+ /say !time - displays current time
+ /say !admin - calls an admin to the server
+endif
+
+#if $MESSAGE = !rate
+# /say $PLAYER_NAME's rate: $PLAYER_RATE P: $PLAYER_SCORE, D: $PLAYER_DEATHS
+#endif
+
+if $MESSAGE = !version
+ /say $VERSION
+endif
+
+if $MESSAGE = !test
+ /say I can see you $PLAYER_NAME
+endif
+
+if $MESSAGE = !admin
+ /say An admin was requested
+ IRCmsg $PLAYER_NAME requested an admin on $SERVER_IP:$SERVER_PORT!
+ ADMINMSG $PLAYER_NAME requested an admin on $SERVER_NAME!!
+endif
+
+if $MESSAGE = !time
+ /say Current server time is $CLOCK
+endif
+
+## Team-change commands for players - written by Leo
+## Extended by Shoozza
+## uncomment if you need it
+
+#if $MESSAGE = !spectator
+# /setteam5 $PLAYER_NUM
+#endif
+          
+#if $MESSAGE = !joinA
+# /setteam1 $PLAYER_NUM
+#endif
+           
+#if $MESSAGE = !joinB
+# /setteam2 $PLAYER_NUM
+#endif
+
+#if $MESSAGE = !joinC
+# /setteam3 $PLAYER_NUM
+#endif
+           
+#if $MESSAGE = !joinD
+# /setteam4 $PLAYER_NUM
+#endif
+
+#if $MESSAGE = !spec
+# /setteam5 $PLAYER_NUM
+#endif
+
+#if $MESSAGE = !1
+# /setteam1 $PLAYER_NUM
+#endif
+
+#if $MESSAGE = !2
+# /setteam2 $PLAYER_NUM
+#endif
+
+#if $MESSAGE = !3
+# /setteam3 $PLAYER_NUM
+#endif
+
+#if $MESSAGE = !4
+# /setteam4 $PLAYER_NUM
+#endif
+
+#if $MESSAGE = !5
+# /setteam5 $PLAYER_NUM
+#endif
+
+## Commands supporting private server needs by KeFear, idea by Kaimelar
+## Extended by Shoozza
+## uncomment if you need it
+
+#if $MESSAGE = !myip
+# /say $PLAYER_NAME, your IP is $PLAYER_IP
+#endif
+
+#if $MESSAGE = !ping
+# /say $PLAYER_NAME, your ping is $PLAYER_PING
+#endif
+
+## Map commands
+
+#if $MESSAGE = !voland
+# /map ctf_Voland
+#endif
+
+#if $MESSAGE = !laos
+# /map ctf_Laos
+#endif
+
+#if $MESSAGE = !b2b
+# /map ctf_B2b
+#endif
+
+#if $MESSAGE = !nuubia
+# /map ctf_Nuubia
+#endif
+
+#if $MESSAGE = !viet
+# /map ctf_Viet
+#endif
+
+#if $MESSAGE = !run
+# /map ctf_Run
+#endif
+
+#if $MESSAGE = !kampf
+# /map ctf_Kampf
+#endif
+
+#if $MESSAGE = !death
+# /map ctf_Death
+#endif
+
+#if $MESSAGE = !maya
+# /map ctf_Maya
+#endif
+
+#if $MESSAGE = !lanubya
+# /map ctf_Lanubya
+#endif
+
+#if $MESSAGE = !equinox
+# /map ctf_equinox
+#endif
+
+## Server controll commands
+
+#if $MESSAGE = !p
+# /pause
+#endif
+
+#if $MESSAGE = !unp
+# /unpause
+#endif
+
+#if $MESSAGE = !restart
+# /restart
+#endif
+
+## These are written by Kaimelar
+
+#if $MESSAGE = !tnl
+# /respawntime 3
+# /maxrespawntime 4
+# /limit 10
+# /timelimit 10
+# /bonus 0
+# /map ctf_Laos
+#endif
+
+#if $MESSAGE = !srl
+# /respawntime 3
+# /maxrespawntime 4
+# /limit 6
+# /timelimit 10
+# /bonus 0
+# /friendlyfire 1
+# /realistic 1
+#endif

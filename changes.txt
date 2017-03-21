@@ -1,0 +1,11 @@
+release date: 2010.03.06.
+
+-added Send All Servers Command to CommandBox (only in full version)
+-modified new version of ip.adb added
+-modified replaced TagID with HWID
+-modified updated refreshx to work with new soldatserver and hardwareids
+-modified replaced banning by tagid with banning by hardwareid
+-fixed long connection timeout delay when connecting on startup
+-fixed OnConnect not called on connect on startup bug (#131)
+-fixed spelling error in command box "Unban Now" => "Unban Name" (fixed in full version) #134
+-fixed /amsg doesn't work from command box #133

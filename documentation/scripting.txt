@@ -1,0 +1,45 @@
+Hello World tutorial for ARSSEscripting by Shoozza
+
+ARSSEscripting is similar but not identical to writing program in pascal. So if you understand pascal you will have no real problems to write simple ARSSE scripts.
+
+Note that ARSSEscripting is very limited. For example you cannot save valued in variables and you have only access to a few predefined ones.
+
+This guide explains how to make a simple hello world script which gets triggerd when a player says !run ingame
+
+First we need to create a script file in the script folder (the folder inside the ARSSE folder)
+Let's name it OnPlayerSpeak.txt
+
+(the file might already exist for you just leave it like it is and add our lines to the beginning or the end)
+
+After that open ARSSE choose the servertab you what that script so be running on and click on the configuration button.
+The configuartion window pops up and you choose the Events tab.
+There you need to check the OnPlayerSpeak checkbox.
+And now you need to add the scripting file that will be executed when a player speaks.
+To do that just doubleclick in the scriptfile column and write "script\OnPlayerSpeak.txt" (without the ") and press enter.
+Now leftclick on that text and choose "Edit script".
+(Before you do that you may notice that the bottom box shows the Parameters you can use in that event for that script file)
+How you are in the script editor.
+Add following lines to the top:
+
+# This is a hello world script
+if $MESSAGE = !run
+ /say Hello World!
+endif
+
+And click on the Save Script button
+
+In the first line you see a comment. Comments start with #.
+Everything after the # is ignored and will not be executed.
+Make sure to comment your scripts so that you easily know what they do when you look at them after a few months again.
+The second line "if $MESSAGE = !run" checks if the player chat message is "!run"
+if that is the case it executes everything till it reaches the endif
+the "/say Hello World!" text just sends an admin message to the servers.
+You can basically use any commands the server or ARSSE supports.
+
+Now you need to click the OK button to apply the changes.
+
+
+To test the script simply join the server and press t and write "!run" (without the ").
+
+END OF FILE
+

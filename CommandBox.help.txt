@@ -1,0 +1,81 @@
+##############################################################
+#
+# This is the Command Box file for ARSSE
+#
+# The commands are loaded from this file to the Command Box
+# You can add your own commands to this list.
+# You can do this by the following sytnax:
+#
+# Command Name
+# {			(this is the opening bracket, it's a must)
+# /soldatcommand1	(this is a soldat command. you can use any)
+# }			(closing bracket, this is a must)
+#
+# Lines starting with # are comments, and left out from parsing.
+# There are built-in functions, which will help you make your
+# commands more flexible, more custom. These are the following:
+#
+# $INPUT('Caption','Question')
+# $CONFIRM('Question')
+# $TOGGLE('Caption','Question')
+# $TEAMSELECT
+# $JOINSOLDAT
+#
+#
+# $INPUT() will ask for a specific input. You can set the window
+# caption and the Question to ask. You can use it anywhere
+# in your command.
+# You must use the above syntax. You must make sure that it
+# ends with ') otherwise it will fail to work.
+# The following examples show you how to use it:
+#
+# Correct:
+#
+# /say $INPUT ( 'Server Message' , 'What do you want to say?')
+#
+# WRONG:
+#
+# /say $INPUT ( 'Server Message' , 'What do you want to say?'  )
+#
+# Notice that the only difference is at the end.
+#
+# $INPUT can have the following addons at it's end:
+#
+# :$LOADBOTS
+#
+# This will open a window with the default Bot names (check botlist.txt)
+#
+# :$LOADMAPS
+#
+# This will open a window with the default maps (check maplist.txt)
+# It will show only maps for the current game mode
+#
+# :$LOADBANS
+#
+# This will open a window with the banned names' list (if any)
+# Actually it is the contents of bannames.txt
+#
+# You can use these addons with $INPUT() only in the syntax below:
+#
+# $INPUT('Caption','Question'):$LOADXXX
+#
+#
+# $CONFIRM() will ask you a question, if you press Ok, the commands
+# after it will be executed, if you press Cancel, the command will abort.
+# The syntax is pretty much the same as $INPUT().
+#
+# $TOGGLE() asks you a question with buttons 'On' and 'Off'. If you press
+# 'On', it will insert a 1, if you press 'Off', it will insert 0 where
+# $TOGGLE() is. You can alternatively press Cancel to abort the command.
+#
+# $TEAMSELECT will let you select a team, and insert the team number in
+# place of the function. It acts different in each gamemode:
+# In DM, PM, RM it doesn't show at all
+# In CTF, INF and HTF it lets you select Alpha and Bravo
+# In TM it lets you select all teams (except Spectator)
+#
+# $JOINSOLDAT simply starts Soldat and joins the actual server.
+# Soldat must be properly installed for this to work.
+# (it uses the soldat://server:port method to run Soldat)
+#
+##############################################################

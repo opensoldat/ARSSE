@@ -1,0 +1,7 @@
+## Clanwar script for ARSSE by KeFear and Shoozza
+## uncomment if you need it
+
+#/say Starting private game...
+#/kickall
+#/load tnl-settings
+#/password EnterPassWordHere

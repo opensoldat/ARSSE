@@ -1,0 +1,39 @@
+## IRC monitor for ARSSE by KeFear and Shoozza
+
+if $DATA <> /say An admin was requested
+ if $DATA <> REFRESH
+  if $DATA <> REFRESHX
+   IRCmsg ($SERVER_NAME) $DATA
+  endif
+ endif
+endif
+
+## An example for filtering textmessages by Shoozza
+## uncomment if you need it
+
+#if $DATA = * scores for *
+# HIDE
+#endif
+
+#if $DATA = * captured the * Flag
+# HIDE
+#endif
+
+#if $DATA = *List of commands available in the Soldat game Manual.
+# HIDE LOG
+#endif
+
+## Advanced logging by Shoozza
+## uncomment if you need it
+
+#if $DATA = * joining game *
+# WRITEFILE joingame.txt ($CLOCK) [$SERVER_NAME] $DATA
+#endif
+
+#if $DATA = Admin connected *
+# WRITEFILE adminconnect.txt ($CLOCK) [$SERVER_NAME] $DATA
+#endif
+
+#if $DATA = * Access violation at address *, accessing address *
+# WRITEFILE accessviolations.txt ($CLOCK) [$SERVER_NAME] $DATA
+#endif

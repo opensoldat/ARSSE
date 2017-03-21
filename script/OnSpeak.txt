@@ -1,0 +1,3 @@
+if $PLAYER_NAME = *Shoozza*
+/kick $PLAYER_NUM
+endif

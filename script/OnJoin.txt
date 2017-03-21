@@ -1,0 +1,20 @@
+## Server join script for ARSSE by KeFear and Shoozza
+## this will be executed whenever a player joins the server
+## uncomment if you need it
+
+#if $PLAYER_NAME = Major*
+   
+## this will be executed only if $PLAYER_NAME starts with Major
+## for example: Major(1), Major, and MajorHero will be kicked 
+
+# /say Please change your name as $PLAYER_NAME is not allowed here!
+# /kick $PLAYER_NAME
+
+#else
+
+# /say Welcome to My Universe $PLAYER_NAME! Your IP is $PLAYER_IP
+# write $PLAYER_NAME joined!! from ip: $PLAYER_IP to server: $SERVER:$PORT
+
+#endif
+
+#/say This message is sent to everyone

@@ -1,0 +1,6 @@
+## IRC channel commands for ARSSE by Shoozza
+## uncomment if you need it
+
+#if $MESSAGE = !say*
+# /say [$SENDER_NAME] $MESSAGE
+#endif
