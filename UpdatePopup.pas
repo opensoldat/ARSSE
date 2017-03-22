@@ -12,6 +12,8 @@
 
 unit UpdatePopup;
 
+{$MODE Delphi}
+
 interface
 
 uses
@@ -35,7 +37,7 @@ var
 
 implementation
 
-{$R *.dfm}
+{$R *.lfm}
 
 procedure TUpdatePopup1.OkClick(Sender: TObject);
 begin

@@ -3,7 +3,7 @@
 {       UpdateThread                                                   }
 {         for ARSSE                                                    }
 {                                                                      }
-{       Copyright (c) 2008-2009 Hars�nyi L�szl� (a.k.a. KeFear         }
+{       Copyright (c) 2008-2009 Harsányi László (a.k.a. KeFear         }
 {       Copyright (c) 2008-2011 Gregor A. Cieslak (a.k.a. Shoozza)     }
 {       All rights reserved                                            }
 {                                                                      }
@@ -13,12 +13,14 @@
 
 unit UpdateThread;
 
+{$MODE Delphi}
+
 interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Buttons, ComCtrls, Menus, ExtCtrls, IdHTTP, ShellApi,
-  VersionInfo;
+  VersionInfo, lclintf;
 
 const
   // update files
@@ -59,7 +61,7 @@ implementation
 
 { UpdateThread }
 
-uses Unit1, StrUtils;
+uses MainProgramUnit, StrUtils;
 
 var
   IdHttp1: TIdHTTP;
@@ -89,20 +91,19 @@ begin
                          0);
   Result := (HFileRes = INVALID_HANDLE_VALUE);
   if not Result then
-    CloseHandle(HFileRes);
+    FileClose(HFileRes); { *Átlalakítva ebből: CloseHandle* }
 end;
 
 procedure TUpdateThread.ShowRestartQuestion;
 var
     delay : byte;
 begin
-  if needrestart and (IDYes = MessageBoxA(Application.Handle,
+  if needrestart and (IDYes = MessageBoxA(Self.Handle,
       'Update finished, and ARSSE needs a restart. Do you wish to restart ARSSE now?',
       'Restart', MB_YesNo + MB_IconQuestion + MB_DefButton2)) then
   begin
     Form1.SaveConfig(ExtractFilePath(Application.ExeName) + 'arsse.ini');
-    ShellExecute(0, nil, PChar(Application.ExeName), Pchar(''), Pchar(''),
-        SW_NORMAL);
+     OpenDocument(PChar(Application.ExeName)); { *Átlalakítva ebből: ShellExecute* }
     delay:=0;
     
     while not IsFileInUse(Application.ExeName) and (delay<37) do
@@ -356,7 +357,7 @@ begin
   end;
 
   // ask if we want to update
-  if IDno = MessageBoxA(Application.Handle,
+  if IDno = MessageBoxA(Self.Handle,
       'New Version of ARSSE available! Do you wish to download updates?',
       'New version of ARSSE', MB_YesNo + MB_IconQuestion + MB_DefButton2)
       then

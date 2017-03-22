@@ -1,0 +1,1383 @@
+object Settings1: TSettings1
+  Left = 361
+  Height = 428
+  Top = 201
+  Width = 464
+  BorderStyle = bsDialog
+  Caption = 'Configuration of Localhost'
+  ClientHeight = 428
+  ClientWidth = 464
+  Color = clBtnFace
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
+  Position = poMainFormCenter
+  LCLVersion = '1.6.4.0'
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 428
+    Top = 0
+    Width = 464
+    ActivePage = Colors
+    Align = alClient
+    TabIndex = 5
+    TabOrder = 2
+    object TabSheet1: TTabSheet
+      Caption = 'General'
+      ClientHeight = 402
+      ClientWidth = 456
+      object LocalSettings: TGroupBox
+        Left = 0
+        Height = 201
+        Top = 153
+        Width = 457
+        Caption = 'Server-Specific Settings'
+        ClientHeight = 183
+        ClientWidth = 453
+        TabOrder = 0
+        object Label3: TLabel
+          Left = 272
+          Height = 13
+          Top = 113
+          Width = 43
+          Caption = 'seconds:'
+          ParentColor = False
+        end
+        object savepass: TCheckBox
+          Left = 8
+          Height = 19
+          Top = 16
+          Width = 123
+          Caption = 'save server password'
+          TabOrder = 0
+        end
+        object savelog: TCheckBox
+          Left = 8
+          Height = 19
+          Top = 32
+          Width = 105
+          Caption = 'save message log'
+          TabOrder = 1
+        end
+        object hideRegistered: TCheckBox
+          Left = 8
+          Height = 19
+          Top = 48
+          Width = 190
+          Caption = 'hide "Registering Server" messages'
+          TabOrder = 3
+        end
+        object hideKills: TCheckBox
+          Left = 8
+          Height = 19
+          Top = 64
+          Width = 105
+          Caption = 'hide kill messages'
+          TabOrder = 4
+        end
+        object autoswap: TCheckBox
+          Left = 8
+          Height = 19
+          Top = 80
+          Width = 255
+          Caption = 'automatically swap teams after every map change'
+          TabOrder = 5
+        end
+        object autobalance: TCheckBox
+          Left = 8
+          Height = 19
+          Top = 96
+          Width = 271
+          Caption = 'automatically balance teams if difference is more than'
+          TabOrder = 6
+        end
+        object balancediff: TEdit
+          Left = 280
+          Height = 21
+          Top = 92
+          Width = 20
+          TabOrder = 7
+          Text = '2'
+        end
+        object AutoMsgTime: TEdit
+          Left = 240
+          Height = 21
+          Top = 113
+          Width = 25
+          TabOrder = 9
+          Text = '60'
+        end
+        object autosay: TCheckBox
+          Left = 8
+          Height = 19
+          Top = 112
+          Width = 224
+          Caption = 'automatically send server message(s) every'
+          TabOrder = 8
+        end
+        object AutoMsgList: TMemo
+          Left = 32
+          Height = 49
+          Top = 136
+          Width = 393
+          OnKeyDown = FormKeyDown
+          ScrollBars = ssVertical
+          TabOrder = 10
+        end
+        object OpenLogs: TButton
+          Left = 312
+          Height = 17
+          Top = 32
+          Width = 131
+          Caption = 'open logs folder'
+          OnClick = OpenLogsClick
+          TabOrder = 2
+        end
+      end
+      object GlobalSettings: TGroupBox
+        Left = 0
+        Height = 150
+        Top = 0
+        Width = 457
+        Caption = 'Global Settings'
+        ClientHeight = 132
+        ClientWidth = 453
+        TabOrder = 1
+        object Label1: TLabel
+          Left = 196
+          Height = 13
+          Top = 18
+          Width = 43
+          Caption = 'seconds.'
+          ParentColor = False
+        end
+        object Label26: TLabel
+          Left = 8
+          Height = 13
+          Top = 99
+          Width = 85
+          Caption = 'Admin chat name:'
+          ParentColor = False
+        end
+        object Label29: TLabel
+          Left = 8
+          Height = 13
+          Top = 122
+          Width = 112
+          Caption = 'Admin-Message-Sound:'
+          ParentColor = False
+        end
+        object Auto: TCheckBox
+          Left = 8
+          Height = 19
+          Top = 16
+          Width = 145
+          Caption = 'automatically refresh every'
+          TabOrder = 0
+        end
+        object mintotray: TCheckBox
+          Left = 8
+          Height = 19
+          Top = 32
+          Width = 126
+          Caption = 'minimize to system tray'
+          TabOrder = 2
+        end
+        object sortrefresh: TCheckBox
+          Left = 8
+          Height = 19
+          Top = 64
+          Width = 151
+          Caption = 'automatically sort on refresh'
+          TabOrder = 4
+        end
+        object refresh: TEdit
+          Left = 160
+          Height = 21
+          Top = 16
+          Width = 33
+          OnKeyDown = FormKeyDown
+          TabOrder = 1
+        end
+        object autoupdate: TCheckBox
+          Left = 8
+          Height = 19
+          Top = 80
+          Width = 199
+          Caption = 'automatically check for updates every'
+          TabOrder = 5
+        end
+        object ManualUpdate: TButton
+          Left = 312
+          Height = 17
+          Top = 80
+          Width = 131
+          Caption = 'check updates now'
+          TabOrder = 7
+        end
+        object updatefreq: TComboBox
+          Left = 216
+          Height = 21
+          Top = 77
+          Width = 73
+          ItemHeight = 13
+          ItemIndex = 0
+          Items.Strings = (
+            'month'
+            'week'
+            'day'
+          )
+          Style = csDropDownList
+          TabOrder = 6
+          Text = 'month'
+        end
+        object PlayersOnTab: TCheckBox
+          Left = 8
+          Height = 19
+          Top = 48
+          Width = 238
+          Caption = 'show player numbers on tabs while connected'
+          TabOrder = 3
+        end
+        object AdminName: TEdit
+          Left = 96
+          Height = 21
+          Top = 96
+          Width = 113
+          OnKeyDown = FormKeyDown
+          TabOrder = 8
+        end
+        object SoundfileName: TEdit
+          Left = 124
+          Height = 21
+          Top = 119
+          Width = 285
+          TabOrder = 9
+        end
+        object ButtonOpenSound: TButton
+          Left = 408
+          Height = 21
+          Top = 119
+          Width = 35
+          Caption = '...'
+          OnClick = ButtonOpenSoundClick
+          TabOrder = 10
+        end
+      end
+    end
+    object TabSheet4: TTabSheet
+      Caption = 'IRC'
+      ClientHeight = 0
+      ClientWidth = 0
+      ImageIndex = 3
+      object Label11: TLabel
+        Left = 47
+        Height = 13
+        Top = 4
+        Width = 55
+        Caption = 'IRC Server:'
+        ParentColor = False
+      end
+      object Label12: TLabel
+        Left = 272
+        Height = 13
+        Top = 4
+        Width = 22
+        Caption = 'Port:'
+        ParentColor = False
+      end
+      object Label13: TLabel
+        Left = 48
+        Height = 13
+        Top = 29
+        Width = 51
+        Caption = 'Nickname:'
+        ParentColor = False
+      end
+      object Label14: TLabel
+        Left = 56
+        Height = 13
+        Top = 101
+        Width = 42
+        Caption = 'Channel:'
+        ParentColor = False
+      end
+      object Label15: TLabel
+        Left = 34
+        Height = 13
+        Top = 125
+        Width = 63
+        Caption = 'Channel Key:'
+        ParentColor = False
+      end
+      object Label17: TLabel
+        Left = 16
+        Height = 13
+        Top = 245
+        Width = 82
+        Caption = 'AUTH Password:'
+        ParentColor = False
+      end
+      object Label16: TLabel
+        Left = 16
+        Height = 13
+        Top = 221
+        Width = 84
+        Caption = 'AUTH Username:'
+        ParentColor = False
+      end
+      object Label6: TLabel
+        Left = 48
+        Height = 13
+        Top = 53
+        Width = 53
+        Caption = 'Alternative:'
+        ParentColor = False
+      end
+      object Label7: TLabel
+        Left = 48
+        Height = 13
+        Top = 174
+        Width = 52
+        Caption = 'AUTH Bot:'
+        ParentColor = False
+      end
+      object Label19: TLabel
+        Left = 272
+        Height = 13
+        Top = 101
+        Width = 78
+        Caption = 'Command prefix:'
+        ParentColor = False
+      end
+      object Label8: TLabel
+        Left = 16
+        Height = 13
+        Top = 198
+        Width = 83
+        Caption = 'AUTH Command:'
+        ParentColor = False
+      end
+      object Label32: TLabel
+        Left = 49
+        Height = 13
+        Top = 77
+        Width = 51
+        Caption = 'Username:'
+        ParentColor = False
+      end
+      object IRCServer: TEdit
+        Left = 104
+        Height = 21
+        Top = 0
+        Width = 165
+        OnKeyDown = FormKeyDown
+        TabOrder = 0
+      end
+      object IRCPort: TEdit
+        Left = 301
+        Height = 21
+        Top = 0
+        Width = 35
+        OnKeyDown = FormKeyDown
+        TabOrder = 1
+        Text = '6667'
+      end
+      object IRCNick: TEdit
+        Left = 104
+        Height = 21
+        Top = 25
+        Width = 165
+        OnKeyDown = FormKeyDown
+        TabOrder = 2
+      end
+      object IRCChannel: TEdit
+        Left = 104
+        Height = 21
+        Top = 97
+        Width = 165
+        OnKeyDown = FormKeyDown
+        TabOrder = 5
+      end
+      object IRCKey: TEdit
+        Left = 104
+        Height = 21
+        Top = 121
+        Width = 165
+        EchoMode = emPassword
+        OnKeyDown = FormKeyDown
+        PasswordChar = '*'
+        TabOrder = 7
+      end
+      object QNetPass: TEdit
+        Left = 104
+        Height = 21
+        Top = 242
+        Width = 165
+        EchoMode = emPassword
+        OnKeyDown = FormKeyDown
+        PasswordChar = '*'
+        TabOrder = 12
+      end
+      object QNetUser: TEdit
+        Left = 104
+        Height = 21
+        Top = 218
+        Width = 165
+        OnKeyDown = FormKeyDown
+        TabOrder = 11
+      end
+      object QNetAuth: TCheckBox
+        Left = 18
+        Height = 17
+        Top = 149
+        Width = 119
+        Caption = 'enable AUTH/Login'
+        TabOrder = 8
+      end
+      object IRCAltNick: TEdit
+        Left = 104
+        Height = 21
+        Top = 49
+        Width = 165
+        OnKeyDown = FormKeyDown
+        TabOrder = 3
+      end
+      object QNetBot: TEdit
+        Left = 104
+        Height = 21
+        Top = 170
+        Width = 165
+        OnKeyDown = FormKeyDown
+        TabOrder = 9
+      end
+      object prefix: TEdit
+        Left = 352
+        Height = 21
+        Top = 98
+        Width = 17
+        OnKeyDown = FormKeyDown
+        TabOrder = 6
+        Text = '!'
+      end
+      object QNetCmd: TEdit
+        Left = 104
+        Height = 21
+        Top = 194
+        Width = 165
+        OnKeyDown = FormKeyDown
+        TabOrder = 10
+      end
+      object IRCUsername: TEdit
+        Left = 104
+        Height = 21
+        Top = 73
+        Width = 165
+        OnKeyDown = FormKeyDown
+        TabOrder = 4
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Events'
+      ClientHeight = 402
+      ClientWidth = 456
+      ImageIndex = 1
+      object EventList: TListView
+        Left = 0
+        Height = 313
+        Top = 0
+        Width = 457
+        Checkboxes = True
+        Columns = <        
+          item
+            Caption = 'Event'
+            Width = 145
+          end        
+          item
+            Caption = 'Script file'
+            Width = 289
+          end>
+        GridLines = True
+        Items.LazData = {
+          EA0200001200000000000000FFFFFFFFFFFFFFFF01000000060000004F6E4C6F
+          61640000000000000000FFFFFFFFFFFFFFFF01000000060000004F6E45786974
+          0000000000000000FFFFFFFFFFFFFFFF01000000090000004F6E436F6E6E6563
+          740000000000000000FFFFFFFFFFFFFFFF010000000C0000004F6E446973636F
+          6E6E6563740000000000000000FFFFFFFFFFFFFFFF010000000D0000004F6E4A
+          6F696E526571756573740000000000000000FFFFFFFFFFFFFFFF010000000C00
+          00004F6E506C617965724A6F696E0000000000000000FFFFFFFFFFFFFFFF0100
+          00000D0000004F6E506C617965724C656176650000000000000000FFFFFFFFFF
+          FFFFFF010000000D0000004F6E506C61796572537065616B1800000073637269
+          70745C4F6E506C61796572537065616B2E74787400000000FFFFFFFFFFFFFFFF
+          010000000E0000004F6E41646D696E436F6E6E6563740000000000000000FFFF
+          FFFFFFFFFFFF01000000110000004F6E41646D696E446973636F6E6E65637400
+          00000000000000FFFFFFFFFFFFFFFF010000000A0000004F6E54696D654C6566
+          740000000000000000FFFFFFFFFFFFFFFF01000000060000004F6E4461746111
+          0000007363726970745C4F6E446174612E74787400000000FFFFFFFFFFFFFFFF
+          01000000090000004F6E526566726573680000000000000000FFFFFFFFFFFFFF
+          FF01000000080000004F6E4952434D73670000000000000000FFFFFFFFFFFFFF
+          FF01000000090000004F6E4952434A6F696E0000000000000000FFFFFFFFFFFF
+          FFFF01000000090000004F6E495243506172740000000000000000FFFFFFFFFF
+          FFFFFF010000000C0000004F6E495243436F6E6E6563740000000000000000FF
+          FFFFFFFFFFFFFF010000000F0000004F6E495243446973636F6E6E6563740000
+          0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFF
+        }
+        PopupMenu = EventPopup
+        ReadOnly = True
+        RowSelect = True
+        TabOrder = 0
+        ViewStyle = vsReport
+        OnDblClick = EventListDblClick
+        OnMouseDown = EventListMouseDown
+        OnSelectItem = EventListSelectItem
+      end
+      object EventDesc: TMemo
+        Left = 1
+        Height = 44
+        Top = 318
+        Width = 448
+        BorderStyle = bsNone
+        Color = clBtnFace
+        ReadOnly = True
+        TabOrder = 1
+      end
+      object ScriptFileEdit: TEdit
+        Left = 262
+        Height = 13
+        Top = 54
+        Width = 121
+        BorderStyle = bsNone
+        OnChange = ScriptFileEditChange
+        OnExit = ScriptFileEditExit
+        OnKeyDown = FormKeyDown
+        OnKeyPress = ScriptFileEditKeyPress
+        TabOrder = 2
+        Text = 'ScriptFileEdit'
+        Visible = False
+      end
+    end
+    object TabSheet6: TTabSheet
+      Caption = 'Timers'
+      ClientHeight = 402
+      ClientWidth = 456
+      ImageIndex = 5
+      object TimerList: TListView
+        Left = 0
+        Height = 329
+        Top = 0
+        Width = 457
+        Checkboxes = True
+        Columns = <        
+          item
+            Caption = 'Timer'
+            MinWidth = 145
+            Width = 145
+          end        
+          item
+            Caption = 'Repeat'
+            MinWidth = 47
+            Width = 47
+          end        
+          item
+            Caption = 'Interval'
+            MinWidth = 47
+            Width = 47
+          end        
+          item
+            Caption = 'Script File'
+            MinWidth = 180
+            Width = 180
+          end>
+        GridLines = True
+        PopupMenu = TimerPopup
+        ReadOnly = True
+        RowSelect = True
+        TabOrder = 0
+        ViewStyle = vsReport
+        OnDblClick = TimerListDblClick
+        OnMouseDown = TimerListMouseDown
+      end
+      object AddTimer: TButton
+        Left = 0
+        Height = 21
+        Top = 332
+        Width = 89
+        Caption = 'Add Timer'
+        OnClick = AddTimerClick
+        TabOrder = 1
+      end
+      object EditTimer: TButton
+        Left = 200
+        Height = 21
+        Top = 332
+        Width = 75
+        Caption = 'Edit Timer'
+        OnClick = EditTimerClick
+        TabOrder = 3
+      end
+      object DeleteTimer: TButton
+        Left = 104
+        Height = 21
+        Top = 332
+        Width = 81
+        Caption = 'Delete Timer'
+        OnClick = DeleteTimerClick
+        TabOrder = 2
+      end
+      object TimerEdit: TEdit
+        Left = 248
+        Height = 13
+        Top = 48
+        Width = 121
+        BorderStyle = bsNone
+        OnExit = TimerEditExit
+        OnKeyDown = FormKeyDown
+        OnKeyPress = TimerEditKeyPress
+        TabOrder = 4
+        Text = 'TimerEdit'
+        Visible = False
+      end
+    end
+    object TabSheet3: TTabSheet
+      Caption = 'Script Editor'
+      ClientHeight = 402
+      ClientWidth = 456
+      ImageIndex = 2
+      object Label2: TLabel
+        Left = 0
+        Height = 13
+        Top = 0
+        Width = 49
+        Caption = 'Script File:'
+        ParentColor = False
+      end
+      object Label4: TLabel
+        Left = 0
+        Height = 13
+        Top = 40
+        Width = 70
+        Caption = 'Script Content:'
+        ParentColor = False
+      end
+      object Label5: TLabel
+        Left = 240
+        Height = 13
+        Top = 0
+        Width = 122
+        Caption = 'Commands and Variables:'
+        ParentColor = False
+      end
+      object ScriptFile: TEdit
+        Left = 0
+        Height = 21
+        Top = 16
+        Width = 233
+        OnKeyDown = FormKeyDown
+        TabOrder = 0
+      end
+      object ScriptEditor: TMemo
+        Left = 0
+        Height = 287
+        Top = 56
+        Width = 455
+        OnKeyDown = FormKeyDown
+        ScrollBars = ssBoth
+        TabOrder = 3
+        WantTabs = True
+        WordWrap = False
+      end
+      object CommandList: TComboBox
+        Left = 240
+        Height = 21
+        Top = 16
+        Width = 177
+        DropDownCount = 25
+        ItemHeight = 13
+        ItemIndex = 0
+        Items.Strings = (
+          '/say'
+          '/shutdown'
+          '/addbot'
+          '/kick'
+          '/kicklast'
+          '/kickall '
+          '/ban'
+          '/banip'
+          '/banname'
+          '/unbanip'
+          '/unbanname'
+          '/map'
+          '/nextmap'
+          '/restart'
+          '/adm'
+          '/admip'
+          '/unadm'
+          '/respawntime'
+          '/maxrespawntime'
+          '/limit'
+          '/timelimit'
+          '/password'
+          '/setteam'
+          '/setteamall'
+          '/spectall'
+          '/swapteams'
+          '/friendlyfire'
+          '/vote%'
+          '/bonus'
+          '/maxplayers'
+          '/load'
+          '/loadwep '
+          '/loadconf'
+          '/kill'
+          '/advance'
+          '/realistic'
+          '/survival'
+          '/gamemode'
+          ''
+          'if '
+          'endif'
+          'else'
+          ' = '
+          ' <> '
+          'write '
+          'IRCmsg '
+          'ADMINmsg '
+          ''
+          '$PLAYER_NAME'
+          '$PLAYER_IP'
+          '$PLAYER_NUM'
+          '$PLAYER_SCORE'
+          '$PLAYER_DEATHS'
+          '$PLAYER_RATE'
+          '$PLAYER_PING'
+          '$PLAYER_IP'
+          '$PLAYER_PORT'
+          '$PLAYER_TEAM'
+          '$SERVER_IP'
+          '$SERVER_PORT'
+          '$SERVER_NAME'
+          '$SERVER_NUM'
+          '$SERVER_COUNT'
+          '$MESSAGE'
+          '$TEAMCHAT'
+          '$TIME_LEFT'
+          '$DATA'
+          '$ADMIN_IP'
+          '$CLOCK'
+          '$DATE'
+          '$VERSION'
+          '$LOGIN_SUCCESS'
+          '$ALPHA_PLAYERS'
+          '$BRAVO_PLAYERS'
+          '$CHARLIE_PLAYERS'
+          '$DELTA_PLAYERS'
+          '$ALPHA_SCORE'
+          '$BRAVO_SCORE'
+          '$CHARLIE_SCORE'
+          '$DELTA_SCORE'
+          '$MAXPLAYERS'
+          '$MAP'
+          '$NEXTMAP'
+        )
+        OnKeyDown = FormKeyDown
+        TabOrder = 1
+        Text = '/say'
+      end
+      object LoadScript: TButton
+        Left = 83
+        Height = 21
+        Top = 344
+        Width = 86
+        Caption = 'Load Script'
+        OnClick = LoadScriptClick
+        TabOrder = 5
+      end
+      object InsertCmd: TButton
+        Left = 419
+        Height = 21
+        Top = 16
+        Width = 36
+        Caption = 'Insert'
+        OnClick = InsertCmdClick
+        TabOrder = 2
+      end
+      object SaveScript: TButton
+        Left = 0
+        Height = 21
+        Top = 344
+        Width = 75
+        Caption = 'Save Script'
+        OnClick = SaveScriptClick
+        TabOrder = 4
+      end
+      object NewScript: TButton
+        Left = 176
+        Height = 21
+        Top = 344
+        Width = 75
+        Caption = 'New Script'
+        OnClick = NewScriptClick
+        TabOrder = 6
+      end
+      object ScriptHelp: TButton
+        Left = 352
+        Height = 21
+        Top = 344
+        Width = 99
+        Caption = 'Documentation'
+        OnClick = ScriptHelpClick
+        TabOrder = 7
+      end
+    end
+    object Colors: TTabSheet
+      Caption = 'Colors'
+      ClientHeight = 402
+      ClientWidth = 456
+      ImageIndex = 6
+      object ItemColors: TGroupBox
+        Left = 0
+        Height = 225
+        Top = 0
+        Width = 457
+        Caption = 'Colors of main console'
+        ClientHeight = 207
+        ClientWidth = 453
+        TabOrder = 0
+        object Label10: TLabel
+          Left = 20
+          Height = 13
+          Top = 20
+          Width = 67
+          Caption = 'Main Console:'
+          ParentColor = False
+        end
+        object Label18: TLabel
+          Left = 31
+          Height = 13
+          Top = 44
+          Width = 56
+          Caption = 'Normal text:'
+          ParentColor = False
+        end
+        object Label20: TLabel
+          Left = 61
+          Height = 13
+          Top = 68
+          Width = 25
+          Caption = 'Chat:'
+          ParentColor = False
+        end
+        object Label21: TLabel
+          Left = 33
+          Height = 13
+          Top = 92
+          Width = 54
+          Caption = 'Team chat:'
+          ParentColor = False
+        end
+        object Label22: TLabel
+          Left = 33
+          Height = 13
+          Top = 140
+          Width = 53
+          Caption = 'Admin Say:'
+          ParentColor = False
+        end
+        object Label23: TLabel
+          Left = 29
+          Height = 13
+          Top = 116
+          Width = 57
+          Caption = 'Muted chat:'
+          ParentColor = False
+        end
+        object Label24: TLabel
+          Left = 4
+          Height = 13
+          Top = 188
+          Width = 82
+          Caption = 'Private Message:'
+          ParentColor = False
+        end
+        object Label25: TLabel
+          Left = 29
+          Height = 13
+          Top = 164
+          Width = 56
+          Caption = 'Admin chat:'
+          ParentColor = False
+        end
+        object Label28: TLabel
+          Left = 272
+          Height = 13
+          Top = 20
+          Width = 24
+          Caption = 'Font:'
+          ParentColor = False
+        end
+        object Label30: TLabel
+          Left = 260
+          Height = 13
+          Top = 44
+          Width = 41
+          Caption = 'Clientlist:'
+          ParentColor = False
+        end
+        object mainConsole: TColorBox
+          Left = 92
+          Height = 22
+          Top = 16
+          Width = 145
+          Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbCustomColor, cbPrettyNames]
+          ItemHeight = 16
+          TabOrder = 0
+        end
+        object normalText: TColorBox
+          Left = 92
+          Height = 22
+          Top = 40
+          Width = 145
+          Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbCustomColor, cbPrettyNames]
+          ItemHeight = 16
+          TabOrder = 2
+        end
+        object Chat: TColorBox
+          Left = 92
+          Height = 22
+          Top = 64
+          Width = 145
+          Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbCustomColor, cbPrettyNames]
+          ItemHeight = 16
+          TabOrder = 3
+        end
+        object teamChat: TColorBox
+          Left = 92
+          Height = 22
+          Top = 88
+          Width = 145
+          Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbCustomColor, cbPrettyNames]
+          ItemHeight = 16
+          TabOrder = 4
+        end
+        object Say: TColorBox
+          Left = 92
+          Height = 22
+          Top = 136
+          Width = 145
+          Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbCustomColor, cbPrettyNames]
+          ItemHeight = 16
+          TabOrder = 6
+        end
+        object mutedChat: TColorBox
+          Left = 92
+          Height = 22
+          Top = 112
+          Width = 145
+          Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbCustomColor, cbPrettyNames]
+          ItemHeight = 16
+          TabOrder = 5
+        end
+        object PM: TColorBox
+          Left = 92
+          Height = 22
+          Top = 184
+          Width = 145
+          Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbCustomColor, cbPrettyNames]
+          ItemHeight = 16
+          TabOrder = 8
+        end
+        object AdminChat: TColorBox
+          Left = 92
+          Height = 22
+          Top = 160
+          Width = 145
+          Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbCustomColor, cbPrettyNames]
+          ItemHeight = 16
+          TabOrder = 7
+        end
+        object FontButton: TButton
+          Left = 304
+          Height = 22
+          Top = 16
+          Width = 145
+          Caption = 'Font: '
+          OnClick = FontButtonClick
+          TabOrder = 1
+        end
+        object clientlist: TColorBox
+          Left = 306
+          Height = 22
+          Top = 40
+          Width = 145
+          Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbCustomColor, cbPrettyNames]
+          ItemHeight = 16
+          TabOrder = 9
+        end
+      end
+      object CustomColorList: TListView
+        Left = 0
+        Height = 111
+        Top = 232
+        Width = 457
+        Columns = <        
+          item
+            Caption = 'Message'
+            Width = 294
+          end        
+          item
+            Caption = 'Color'
+            Width = 145
+          end>
+        ColumnClick = False
+        GridLines = True
+        PopupMenu = ColorPopup
+        ReadOnly = True
+        RowSelect = True
+        TabOrder = 1
+        ViewStyle = vsReport
+        OnDblClick = CustomColorListDblClick
+        OnMouseDown = CustomColorListMouseDown
+      end
+      object AddCustomColor: TButton
+        Left = 0
+        Height = 21
+        Top = 344
+        Width = 97
+        Caption = 'Add Custom Line'
+        OnClick = AddCustomColorClick
+        TabOrder = 2
+      end
+      object DeleteCustomColor: TButton
+        Left = 112
+        Height = 21
+        Top = 344
+        Width = 113
+        Caption = 'Delete Custom Line'
+        OnClick = DeleteCustomColorClick
+        TabOrder = 3
+      end
+      object ColorPicker: TColorBox
+        Left = 272
+        Height = 22
+        Top = 232
+        Width = 145
+        Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbCustomColor, cbPrettyNames]
+        DropDownCount = 10
+        ItemHeight = 16
+        OnChange = ColorPickerExit
+        OnExit = ColorPickerExit
+        TabOrder = 4
+        Visible = False
+      end
+      object LineEdit: TEdit
+        Left = 272
+        Height = 13
+        Top = 272
+        Width = 121
+        BorderStyle = bsNone
+        OnExit = LineEditExit
+        OnKeyDown = FormKeyDown
+        OnKeyPress = LineEditKeyPress
+        TabOrder = 5
+        Text = 'LineEdit'
+        Visible = False
+      end
+      object DefaultColors: TButton
+        Left = 320
+        Height = 21
+        Top = 344
+        Width = 135
+        Caption = 'Default Colors and Font'
+        OnClick = DefaultColorsClick
+        TabOrder = 6
+      end
+    end
+    object TabSheet7: TTabSheet
+      Caption = 'Hotkeys'
+      ClientHeight = 402
+      ClientWidth = 456
+      ImageIndex = 7
+      object Label27: TLabel
+        Left = 8
+        Height = 13
+        Top = 0
+        Width = 106
+        Caption = 'Current list of Hotkeys.'
+        ParentColor = False
+      end
+      object HotkeyList: TListView
+        Left = 0
+        Height = 337
+        Top = 24
+        Width = 457
+        Columns = <        
+          item
+            Caption = 'Hotkey'
+            Width = 155
+          end        
+          item
+            Caption = 'Action'
+            Width = 274
+          end>
+        GridLines = True
+        Items.LazData = {
+          2C0400001200000000000000FFFFFFFFFFFFFFFF01000000060000004374726C
+          2B622400000042616E2073656C656374656420706C617965722028696E20706C
+          61796572206C6973742900000000FFFFFFFFFFFFFFFF01000000060000004374
+          726C2B6319000000436F6E6E65637420746F2063757272656E74207365727665
+          7200000000FFFFFFFFFFFFFFFF01000000060000004374726C2B641E00000044
+          6973636F6E6E6563742066726F6D2063757272656E7420736572766572000000
+          00FFFFFFFFFFFFFFFF01000000060000004374726C2B6510000000546F67676C
+          652043686174206D6F646500000000FFFFFFFFFFFFFFFF010000000800000043
+          74726C2B456E64180000005363726F6C6C20636F6E736F6C6520746F20626F74
+          746F6D00000000FFFFFFFFFFFFFFFF01000000060000004374726C2B66060000
+          0053656172636800000000FFFFFFFFFFFFFFFF01000000090000004374726C2B
+          486F6D65150000005363726F6C6C20636F6E736F6C6520746F20746F70000000
+          00FFFFFFFFFFFFFFFF01000000060000004374726C2B6916000000457870616E
+          642073657276657220696E666F2D62617200000000FFFFFFFFFFFFFFFF010000
+          00060000004374726C2B6B250000004B69636B2073656C656374656420706C61
+          7965722028696E20706C61796572206C6973742900000000FFFFFFFFFFFFFFFF
+          01000000060000004374726C2B6E15000000546F67676C65204E69636B204368
+          6174206D6F646500000000FFFFFFFFFFFFFFFF01000000060000004374726C2B
+          7013000000536574207365727665722070617373776F726400000000FFFFFFFF
+          FFFFFFFF01000000090000004374726C2B5067446E130000005363726F6C6C20
+          636F6E736F6C6520646F776E00000000FFFFFFFFFFFFFFFF0100000009000000
+          4374726C2B50675570110000005363726F6C6C20636F6E736F6C652075700000
+          0000FFFFFFFFFFFFFFFF01000000060000004374726C2B722500000050657266
+          6F726D20736372697074207265636F6D70696C6520282F7265636F6D70696C65
+          2900000000FFFFFFFFFFFFFFFF01000000060000004374726C2B741300000053
+          656E6420736572766572206D65737361676500000000FFFFFFFFFFFFFFFF0100
+          0000060000004374726C2B7716000000546F67676C652041646D696E20636861
+          74206D6F646500000000FFFFFFFFFFFFFFFF01000000060000004374726C2B7A
+          2B00000053656E6420504D20746F2073656C656374656420706C617965722028
+          696E20706C61796572206C6973742900000000FFFFFFFFFFFFFFFF0100000006
+          0000004374726C2B6C1700000053656E6420436C69656E746C69737420636F6D
+          6D616E64FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFF
+        }
+        ReadOnly = True
+        RowSelect = True
+        TabOrder = 0
+        ViewStyle = vsReport
+        OnDblClick = HotkeyListDblClick
+        OnMouseDown = HotkeyListMouseDown
+      end
+      object HotKeyShortcutEdit: TEdit
+        Left = 8
+        Height = 13
+        Top = 336
+        Width = 121
+        BorderStyle = bsNone
+        OnExit = HotKeyShortcutEditExit
+        OnKeyDown = HotKeyShortcutEditKeyDown
+        OnKeyPress = HotKeyShortcutEditKeyPress
+        OnKeyUp = HotKeyShortcutEditKeyUp
+        ReadOnly = True
+        TabOrder = 1
+        Visible = False
+      end
+    end
+    object TabSheet5: TTabSheet
+      Caption = 'About'
+      ClientHeight = 0
+      ClientWidth = 0
+      ImageIndex = 4
+      object Label9: TLabel
+        Left = 64
+        Height = 19
+        Top = 8
+        Width = 330
+        Caption = 'Advanced Remote Soldat Server Enchanter'
+        Font.CharSet = EASTEUROPE_CHARSET
+        Font.Color = clNavy
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
+      object AboutBox: TMemo
+        Cursor = crArrow
+        Left = 16
+        Height = 313
+        Top = 40
+        Width = 425
+        BorderStyle = bsNone
+        Color = clBtnFace
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Lines.Strings = (
+          'The purpose of this project is to create the ultimate Soldat Server '
+          'Administrator Tool. You are free to distribute it for free in any way.'
+          'Just send me an email to let me know. If you find any kind '
+          'of bug please email me. '
+          'Disassembling and modifying the main executable is prohibited.'
+          ''
+          'Thanks to those who tested it and helped me to create this application.'
+          'Special thanks to Michal Marcinkowski for releasing the source of the '
+          'original Soldat Admin.'
+          ''
+          'Programmed by KeFear and Shoozza.'
+          ''
+          'Contact:'
+          'KeFear:    E-mail/MSN:    hlaki@freemail.hu'
+          'Shoozza: E-mail/Jabber: gregor.a.cieslak@gmail.com'
+          ''
+          'IRC: #Shoozza @ irc.quakenet.org'
+          ''
+          ''
+          ''
+          'Copyright © 2005-2008 Harsányi László.'
+          'Copyright © 2007-2011 Gregor A. Cieslak. All rights reserved.'
+        )
+        OnMouseDown = AboutBoxMouseDown
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 0
+        TabStop = False
+      end
+    end
+  end
+  object BitBtn1: TBitBtn
+    Left = 128
+    Height = 25
+    Top = 396
+    Width = 75
+    Caption = 'OK'
+    Glyph.Data = {
+      DE010000424DDE01000000000000760000002800000024000000120000000100
+      0400000000006801000000000000000000001000000000000000000000000000
+      80000080000000808000800000008000800080800000C0C0C000808080000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+      3333333333333333333333330000333333333333333333333333F33333333333
+      00003333344333333333333333388F3333333333000033334224333333333333
+      338338F3333333330000333422224333333333333833338F3333333300003342
+      222224333333333383333338F3333333000034222A22224333333338F338F333
+      8F33333300003222A3A2224333333338F3838F338F33333300003A2A333A2224
+      33333338F83338F338F33333000033A33333A222433333338333338F338F3333
+      0000333333333A222433333333333338F338F33300003333333333A222433333
+      333333338F338F33000033333333333A222433333333333338F338F300003333
+      33333333A222433333333333338F338F00003333333333333A22433333333333
+      3338F38F000033333333333333A223333333333333338F830000333333333333
+      333A333333333333333338330000333333333333333333333333333333333333
+      0000
+    }
+    ModalResult = 1
+    NumGlyphs = 2
+    OnClick = BitBtn1Click
+    TabOrder = 0
+  end
+  object BitBtn2: TBitBtn
+    Left = 248
+    Height = 25
+    Top = 396
+    Width = 75
+    Cancel = True
+    Caption = 'Cancel'
+    Glyph.Data = {
+      DE010000424DDE01000000000000760000002800000024000000120000000100
+      0400000000006801000000000000000000001000000000000000000000000000
+      80000080000000808000800000008000800080800000C0C0C000808080000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+      333333333333333333333333000033338833333333333333333F333333333333
+      0000333911833333983333333388F333333F3333000033391118333911833333
+      38F38F333F88F33300003339111183911118333338F338F3F8338F3300003333
+      911118111118333338F3338F833338F3000033333911111111833333338F3338
+      3333F8330000333333911111183333333338F333333F83330000333333311111
+      8333333333338F3333383333000033333339111183333333333338F333833333
+      00003333339111118333333333333833338F3333000033333911181118333333
+      33338333338F333300003333911183911183333333383338F338F33300003333
+      9118333911183333338F33838F338F33000033333913333391113333338FF833
+      38F338F300003333333333333919333333388333338FFF830000333333333333
+      3333333333333333333888330000333333333333333333333333333333333333
+      0000
+    }
+    ModalResult = 2
+    NumGlyphs = 2
+    OnClick = BitBtn2Click
+    TabOrder = 1
+  end
+  object EventPopup: TPopupMenu
+    AutoPopup = False
+    left = 8
+    top = 400
+    object LoadScript1: TMenuItem
+      Caption = 'Load Script'
+      OnClick = LoadScript1Click
+    end
+    object EditScript1: TMenuItem
+      Caption = 'Edit Script'
+      OnClick = EditScript1Click
+    end
+    object ClearScript1: TMenuItem
+      Caption = 'Clear Script'
+      OnClick = ClearScript1Click
+    end
+  end
+  object OpenDialog: TOpenDialog
+    DefaultExt = '.txt'
+    left = 40
+    top = 400
+  end
+  object SaveDialog: TSaveDialog
+    left = 72
+    top = 400
+  end
+  object TimerPopup: TPopupMenu
+    AutoPopup = False
+    left = 348
+    top = 395
+    object NewTimer1: TMenuItem
+      Caption = 'New Timer'
+      OnClick = AddTimerClick
+    end
+    object DeleteTimer1: TMenuItem
+      Caption = 'Delete Timer'
+      OnClick = DeleteTimerClick
+    end
+    object EditScript2: TMenuItem
+      Caption = 'Edit Script'
+      OnClick = EditTimerClick
+    end
+    object LoadScriptfromfile1: TMenuItem
+      Caption = 'Load Script'
+      OnClick = LoadScriptfromfile1Click
+    end
+  end
+  object ColorPopup: TPopupMenu
+    AutoPopup = False
+    left = 388
+    top = 395
+    object NewColorLine1: TMenuItem
+      Caption = 'Add Line'
+      OnClick = AddCustomColorClick
+    end
+    object DeleteLine1: TMenuItem
+      Caption = 'Delete Line'
+      OnClick = DeleteCustomColorClick
+    end
+    object EditText1: TMenuItem
+      Caption = 'Edit Text'
+      Enabled = False
+    end
+    object ModifyColod1: TMenuItem
+      Caption = 'Modify Color'
+      Enabled = False
+    end
+  end
+  object FontDialog1: TFontDialog
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    MinFontSize = 0
+    MaxFontSize = 0
+    left = 428
+    top = 395
+  end
+end

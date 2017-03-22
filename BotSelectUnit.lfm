@@ -1,0 +1,64 @@
+object BotHelp: TBotHelp
+  Left = 639
+  Height = 260
+  Top = 279
+  Width = 127
+  AlphaBlendValue = 200
+  BorderIcons = []
+  BorderStyle = bsDialog
+  Caption = 'Default Bot Names'
+  ClientHeight = 260
+  ClientWidth = 127
+  Color = clBtnFace
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  OnClose = FormClose
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '1.6.4.0'
+  object Label1: TLabel
+    Left = 8
+    Height = 13
+    Top = 240
+    Width = 101
+    Caption = 'Double Click to Insert'
+    ParentColor = False
+  end
+  object BotList: TListBox
+    Left = 8
+    Height = 217
+    Top = 8
+    Width = 105
+    Items.Strings = (
+      'Admiral'
+      'Billy'
+      'Blain'
+      'Boogie Man'
+      'Commando'
+      'D Dave'
+      'Danko'
+      'Dutch'
+      'John'
+      'Kruger'
+      'Poncho'
+      'Roach'
+      'Sniper'
+      'Srg Mac'
+      'Stevie'
+      'Terminator'
+    )
+    ItemHeight = 13
+    OnDblClick = BotListDblClick
+    OnKeyPress = BotListKeyPress
+    Sorted = True
+    TabOrder = 0
+  end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = Timer1Timer
+    left = 96
+    top = 232
+  end
+end

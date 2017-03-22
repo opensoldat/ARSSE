@@ -3,7 +3,7 @@
 {       Adminbox unit                                                  }
 {         for ARSSE                                                    }
 {                                                                      }
-{       Copyright (c) 2005-2008 Hars·nyi L·szlÛ (a.k.a. KeFear)        }
+{       Copyright (c) 2005-2008 Hars√°nyi L√°szl√≥ (a.k.a. KeFear)        }
 {       Copyright (c) 2010 Gregor A. Cieslak (a.k.a. Shoozza)          }
 {       All rights reserved                                            }
 {                                                                      }
@@ -12,6 +12,8 @@
 {**********************************************************************}
 
 unit Adminbox;
+
+{$MODE Delphi}
 
 interface
 
@@ -37,9 +39,9 @@ var
 
 implementation
 
-uses Unit1;
+uses MainProgramUnit;
 
-{$R *.dfm}
+{$R *.lfm}
 
 procedure TAdminReq.BitBtn1Click(Sender: TObject);
 begin

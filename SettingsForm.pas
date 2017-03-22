@@ -3,7 +3,7 @@
 {       Settings window unit                                           }
 {         for ARSSE                                                    }
 {                                                                      }
-{       Copyright (c) 2005-2008 Hars�nyi L�szl� (a.k.a. KeFear)        }
+{       Copyright (c) 2005-2008 Harsányi László (a.k.a. KeFear)        }
 {       Copyright (c) 2007-2010 Gregor A. Cieslak (a.k.a. Shoozza)     }
 {       All rights reserved                                            }
 {                                                                      }
@@ -13,12 +13,15 @@
 
 unit SettingsForm;
 
+{$MODE Delphi}
+
 interface
 
 uses
   // System libs
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, ComCtrls, Menus, ExtCtrls, ShellApi,
+  Dialogs, StdCtrls, Buttons, ComCtrls, Menus, ExtCtrls, ShellApi, ColorBox,
+  lclintf,
   
   // network libs
   IdHTTP;
@@ -41,7 +44,7 @@ type
     ScriptFile: TEdit;
     Label2: TLabel;
     Label4: TLabel;
-    ScriptEditor: TRichEdit;
+    ScriptEditor: TMemo;//RichEdit;
     CommandList: TComboBox;
     Label5: TLabel;
     LoadScript: TButton;
@@ -76,7 +79,7 @@ type
     QNetCmd: TEdit;
     Label8: TLabel;
     TabSheet5: TTabSheet;
-    AboutBox: TRichEdit;
+    AboutBox: TMemo;//TRichEdit;
     Label9: TLabel;
     GlobalSettings: TGroupBox;
     Auto: TCheckBox;
@@ -234,11 +237,11 @@ var
 implementation
 
 uses
-  Unit1, Hotkey;
+  MainProgramUnit, Hotkey;
 
 //procedure TForm1.SaveConfig(filename : string);
 
-{$R *.dfm}
+{$R *.lfm}
 
 function GetCharFromVirtualKey(Key: Word): string;
 var
@@ -290,10 +293,10 @@ begin
   Result := False;
   if not FileExists(Path) then Exit;
 
-  hFile := CreateFile(pchar(Path), GENERIC_READ or GENERIC_WRITE or GENERIC_EXECUTE,
+  hFile := CreateFile(pchar(Path), GENERIC_READ or GENERIC_WRITE or $20000000,
                       0, nil, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
   Result := hFile = INVALID_HANDLE_VALUE;
-  if not Result then CloseHandle(hFile);
+  if not Result then FileClose(hFile); { *Átlalakítva ebből: CloseHandle* }
 
 end;
 
@@ -528,7 +531,7 @@ end;
 procedure TSettings1.AboutBoxMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
- HideCaret((Sender as TRichEdit).Handle);
+ HideCaret((Sender as TMemo).Handle);
  BitBtn1.SetFocus;
 end;
 
@@ -559,7 +562,7 @@ begin
  begin
    Timer:= TTimer.Create(Form1);
    Timer.OnTimer:= Form1.ARSSETimerTimer;
-   ServerList[Form1.ServerTab.TabIndex].TimerName.Add('Pr�ba Timer');
+   ServerList[Form1.ServerTab.TabIndex].TimerName.Add('Próba Timer');
 
    Timer.Enabled:= true;
    Timer.Interval:= 60;
@@ -873,7 +876,7 @@ end;
 
 procedure TSettings1.OpenLogsClick(Sender: TObject);
 begin
- ShellExecute(0,'open',PChar(ExtractFilePath(Application.ExeName)+'\logs'),PChar(0),PChar(0),SW_SHOWNORMAL);
+  OpenDocument(PChar(ExtractFilePath(Application.ExeName)+'\logs')); { *Átlalakítva ebből: ShellExecute* }
 end;
 
 procedure TSettings1.FormKeyDown(Sender: TObject; var Key: Word;
@@ -882,7 +885,7 @@ begin
  if Ctrl and (Key = 65) then
   if (Sender.ClassType=TEdit) then (Sender as TEdit).SelectAll
              else if (Sender.ClassType=TComboBox) then (Sender as TComboBox).SelectAll
-             else if (Sender.ClassType=TRichEdit) then (Sender as TRichEdit).SelectAll
+             else if (Sender.ClassType=TMemo) then (Sender as TMemo).SelectAll
              else if (Sender.ClassType=TMemo) then (Sender as TMemo).SelectAll;
 
 end;

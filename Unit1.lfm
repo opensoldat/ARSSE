@@ -1,0 +1,1292 @@
+object Form1: TForm1
+  Left = 295
+  Height = 573
+  Top = 133
+  Width = 725
+  HorzScrollBar.Visible = False
+  VertScrollBar.Visible = False
+  Caption = 'Advanced Remote Soldat Server Enchanter'
+  ClientHeight = 573
+  ClientWidth = 725
+  Color = clBtnFace
+  Constraints.MinHeight = 424
+  Constraints.MinWidth = 722
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnKeyDown = HotKeyDown
+  OnKeyPress = HotKeyPress
+  OnMouseUp = ServerTabMouseUp
+  OnMouseWheelDown = FormMouseWheelDown
+  OnMouseWheelUp = FormMouseWheelUp
+  OnResize = FormConstrainedResize
+  OnShortCut = FormShortCut
+  OnShow = FormShow
+  LCLVersion = '1.6.4.0'
+  object ServerTab: TTabControl
+    Left = 20
+    Height = 25
+    Top = 0
+    Width = 589
+    TabStop = False
+    OnChange = ServerTabChange
+    OnChanging = ServerTabChanging
+    OnDrawTab = ServerTabDrawTab
+    OwnerDraw = True
+    Align = alCustom
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    OnEnter = ServerTabEnter
+    OnMouseDown = ServerTabMouseDown
+    OnMouseUp = ServerTabMouseUp
+    ParentBiDiMode = False
+    ParentFont = False
+    PopupMenu = TabPopup
+    TabOrder = 6
+    object ServerName: TEdit
+      Left = 128
+      Height = 13
+      Top = 0
+      Width = 89
+      BorderStyle = bsNone
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      OnExit = ServerNameExit
+      OnKeyDown = HotKeyDown
+      OnKeyPress = ServerNameKeyPress
+      ParentFont = False
+      TabOrder = 0
+      Text = 'ServerName'
+      Visible = False
+    end
+  end
+  object AddServer: TButton
+    Left = 672
+    Height = 17
+    Top = 3
+    Width = 33
+    Caption = 'Add'
+    OnClick = AddServerClick
+    OnKeyDown = HotKeyDown
+    OnKeyPress = HotKeyPress
+    TabOrder = 0
+    TabStop = False
+  end
+  object RemoveServer: TButton
+    Left = 616
+    Height = 17
+    Top = 3
+    Width = 51
+    Caption = 'Remove'
+    OnClick = RemoveServerClick
+    OnKeyDown = HotKeyDown
+    OnKeyPress = HotKeyPress
+    TabOrder = 1
+    TabStop = False
+  end
+  object PageControl: TPageControl
+    Left = 0
+    Height = 544
+    Top = 24
+    Width = 713
+    TabStop = False
+    ActivePage = ServerConsole
+    MultiLine = True
+    ParentBiDiMode = False
+    TabIndex = 0
+    TabOrder = 2
+    TabPosition = tpLeft
+    Options = [nboMultiLine]
+    object ServerConsole: TTabSheet
+      Caption = 'Soldat Server Console'
+      ClientHeight = 536
+      ClientWidth = 686
+      OnEnter = SetFocusToCmd
+      object Label1: TLabel
+        Left = 0
+        Height = 13
+        Top = 488
+        Width = 69
+        Caption = 'Command line:'
+        ParentColor = False
+      end
+      object Label6: TLabel
+        Left = 0
+        Height = 13
+        Top = 48
+        Width = 67
+        Caption = 'Average Ping:'
+        ParentColor = False
+      end
+      object AvgPing: TLabel
+        Left = 72
+        Height = 13
+        Top = 36
+        Width = 6
+        Caption = '?'
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        ParentColor = False
+        ParentFont = False
+      end
+      object Label7: TLabel
+        Left = 152
+        Height = 13
+        Top = 48
+        Width = 103
+        Caption = 'Average/Total Score:'
+        ParentColor = False
+      end
+      object TotalScore: TLabel
+        Left = 261
+        Height = 13
+        Top = 36
+        Width = 6
+        Caption = '?'
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        ParentColor = False
+        ParentFont = False
+      end
+      object Label8: TLabel
+        Left = 360
+        Height = 13
+        Top = 48
+        Width = 109
+        Caption = 'Average/Total Deaths:'
+        ParentColor = False
+      end
+      object TotalDeaths: TLabel
+        Left = 472
+        Height = 13
+        Top = 36
+        Width = 6
+        Caption = '?'
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        ParentColor = False
+        ParentFont = False
+      end
+      object Cmd: TComboBox
+        Left = 0
+        Height = 21
+        Top = 508
+        Width = 545
+        Enabled = False
+        ItemHeight = 13
+        OnChange = CmdChange
+        OnEnter = CmdEnter
+        OnKeyDown = CmdKeyDown
+        OnKeyPress = CmdKeyPress
+        TabOrder = 9
+      end
+      object PlayerList: TListView
+        Left = 4
+        Height = 177
+        Top = 64
+        Width = 545
+        Columns = <        
+          item
+            Caption = '#'
+            MinWidth = 20
+            Width = 20
+          end        
+          item
+            Caption = 'Player Name'
+            MinWidth = 160
+            Tag = 1
+            Width = 160
+          end        
+          item
+            Caption = 'Hardware ID'
+            MinWidth = 102
+            Tag = 2
+            Width = 102
+          end        
+          item
+            Caption = 'Score'
+            MinWidth = 40
+            Tag = 3
+            Width = 40
+          end        
+          item
+            Caption = 'Caps'
+            MinWidth = 40
+            Tag = 4
+            Width = 40
+          end        
+          item
+            Caption = 'Deaths'
+            MinWidth = 46
+            Tag = 5
+            Width = 46
+          end        
+          item
+            Caption = 'Ratio'
+            MinWidth = 38
+            Tag = 6
+            Width = 38
+          end        
+          item
+            Caption = 'Ping'
+            MinWidth = 35
+            Tag = 7
+            Width = 35
+          end        
+          item
+            Caption = 'Team'
+            MinWidth = 58
+            Tag = 8
+            Width = 58
+          end        
+          item
+            Caption = 'IP'
+            MinWidth = 93
+            Tag = 9
+            Width = 93
+          end>
+        Constraints.MinHeight = 100
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        GridLines = True
+        HideSelection = False
+        IconOptions.Arrangement = iaLeft
+        ParentFont = False
+        ParentShowHint = False
+        PopupMenu = PlayerPopup
+        ReadOnly = True
+        RowSelect = True
+        ShowHint = True
+        TabOrder = 2
+        ViewStyle = vsReport
+        OnColumnClick = PlayerListColumnClick
+        OnCompare = PlayerListCompare
+        OnCustomDrawItem = PlayerListCustomDrawItem
+        OnCustomDrawSubItem = PlayerListCustomDrawSubItem
+        OnKeyDown = HotKeyDown
+        OnKeyPress = HotKeyPress
+        OnMouseDown = PlayerListMouseDown
+        OnMouseMove = Panel1MouseMove
+        OnMouseUp = Panel1MouseUp
+      end
+      object Memo: TMemo
+        Left = 4
+        Height = 233
+        Top = 247
+        Width = 545
+        Color = clBlack
+        Constraints.MinHeight = 84
+        Font.Color = clLime
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        HideSelection = False
+        OnChange = MemoChange
+        OnKeyDown = HotKeyDown
+        OnKeyPress = HotKeyPress
+        OnMouseDown = MemoMouseDown
+        OnMouseUp = MemoMouseUp
+        ParentFont = False
+        ReadOnly = True
+        ScrollBars = ssVertical
+        TabOrder = 8
+        TabStop = False
+        Visible = False
+      end
+      object Panel1: TPanel
+        Cursor = crSizeNS
+        Left = 0
+        Height = 3
+        Top = 225
+        Width = 544
+        TabOrder = 3
+        OnMouseDown = Panel1MouseDown
+        OnMouseMove = Panel1MouseMove
+        OnMouseUp = Panel1MouseUp
+      end
+      object GroupBox2: TGroupBox
+        Left = 0
+        Height = 51
+        Top = -2
+        Width = 686
+        ClientHeight = 33
+        ClientWidth = 682
+        TabOrder = 0
+        object Label3: TLabel
+          Left = 8
+          Height = 13
+          Top = 13
+          Width = 25
+          Caption = 'Host:'
+          ParentColor = False
+        end
+        object Label4: TLabel
+          Left = 152
+          Height = 13
+          Top = 13
+          Width = 22
+          Caption = 'Port:'
+          ParentColor = False
+        end
+        object Label2: TLabel
+          Left = 224
+          Height = 13
+          Top = 13
+          Width = 49
+          Caption = 'Password:'
+          ParentColor = False
+        end
+        object SpeedButton: TSpeedButton
+          Left = 410
+          Height = 21
+          Top = 9
+          Width = 10
+          Caption = '»'
+          Layout = blGlyphTop
+          Margin = 0
+          Spacing = 0
+          OnClick = SpeedButtonClick
+          ShowHint = True
+          ParentBidiMode = False
+          ParentShowHint = False
+        end
+        object Port: TEdit
+          Left = 176
+          Height = 21
+          Top = 9
+          Width = 41
+          OnChange = PortChange
+          OnKeyDown = HotKeyDown
+          OnKeyPress = ConnectIt
+          TabOrder = 1
+          Text = '23073'
+        end
+        object Pass: TEdit
+          Left = 280
+          Height = 21
+          Top = 9
+          Width = 65
+          EchoMode = emPassword
+          OnChange = PassChange
+          OnExit = PassExit
+          OnKeyDown = PassKeyDown
+          OnKeyPress = ConnectIt
+          OnKeyUp = PassKeyDown
+          PasswordChar = '*'
+          TabOrder = 2
+        end
+        object Host: TComboBox
+          Left = 40
+          Height = 21
+          Top = 9
+          Width = 105
+          ItemHeight = 13
+          OnChange = HostChange
+          OnKeyDown = HotKeyDown
+          OnKeyPress = ConnectIt
+          OnSelect = HostSelect
+          TabOrder = 0
+          Text = '127.0.0.1'
+        end
+        object AddFavServ: TButton
+          Left = 423
+          Height = 21
+          Top = 9
+          Width = 105
+          Caption = 'Manage Favourites'
+          OnClick = SetFocusToCmd
+          OnKeyDown = HotKeyDown
+          OnKeyPress = HotKeyPress
+          OnMouseDown = AddFavServMouseDown
+          PopupMenu = FavoritesPopup
+          TabOrder = 4
+          TabStop = False
+        end
+        object Refresh: TBitBtn
+          Left = 610
+          Height = 21
+          Top = 9
+          Width = 21
+          Enabled = False
+          Kind = bkRetry
+          Layout = blGlyphBottom
+          Margin = 1
+          OnClick = RefreshClick
+          OnKeyDown = HotKeyDown
+          OnKeyPress = HotKeyPress
+          TabOrder = 6
+          TabStop = False
+        end
+        object Settings: TButton
+          Left = 531
+          Height = 21
+          Top = 9
+          Width = 76
+          Caption = 'Configuration'
+          ModalResult = 8
+          OnClick = SettingsClick
+          OnKeyDown = HotKeyDown
+          OnKeyPress = HotKeyPress
+          TabOrder = 5
+          TabStop = False
+        end
+        object Connect: TButton
+          Left = 347
+          Height = 21
+          Top = 9
+          Width = 63
+          Caption = 'Connect'
+          OnClick = ConnectClick
+          OnKeyDown = HotKeyDown
+          OnKeyPress = HotKeyPress
+          OnMouseDown = ConnectMouseDown
+          TabOrder = 3
+          TabStop = False
+        end
+      end
+      object Action: TGroupBox
+        Left = 549
+        Height = 232
+        Top = 296
+        Width = 136
+        Caption = 'Command Box'
+        ClientHeight = 214
+        ClientWidth = 132
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        ParentFont = False
+        TabOrder = 10
+        object ActionList: TListBox
+          Left = 0
+          Height = 214
+          Hint = 'command box'
+          Top = 0
+          Width = 132
+          Align = alClient
+          Enabled = False
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Items.Strings = (
+            'Make Private'
+            'Send server message'
+            'Shutdown server'
+            'Add bot'
+            'Kick last player'
+            'Ban IP'
+            'Unban IP'
+            'Ban Name'
+            'Unban Name'
+            'Ban last player'
+            'Unban last player'
+            'Change map'
+            'Load next map'
+            'Restart Match'
+            'Add remote admin'
+            'Remove remote admin'
+            'Set respawn time'
+            'Set max respawn time'
+            'Set time limit'
+            'Set kill/point/cap limit'
+            'Set game password'
+            'Set friendly fire'
+            'Set vote percentage'
+            'Set bonus frequency'
+            'Set maximum players'
+            'Change Game Mode'
+            'Set Advance Mode'
+            'Set Realistic Mode'
+            'Set Survival Mode'
+            'Load Settings File'
+            'Load Weapons Mod'
+            'Load Maplist File'
+            'Register in Lobby'
+          )
+          ItemHeight = 13
+          OnDblClick = PerformActionClick
+          OnDrawItem = ActionListDrawItem
+          OnKeyPress = HotKeyPress
+          OnKeyDown = HotKeyDown
+          OnMouseDown = ActionListMouseDown
+          ParentFont = False
+          PopupMenu = CommandPopup
+          Style = lbOwnerDrawFixed
+          TabOrder = 0
+        end
+      end
+      object InfoBox: TGroupBox
+        Left = 549
+        Height = 120
+        Top = 176
+        Width = 136
+        ClientHeight = 102
+        ClientWidth = 132
+        TabOrder = 5
+        object GameMode: TLabel
+          Left = 40
+          Height = 1
+          Top = 16
+          Width = 1
+          Font.Color = clNavy
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          ParentColor = False
+          ParentFont = False
+        end
+        object TimeLeft: TLabel
+          Left = 58
+          Height = 1
+          Top = 64
+          Width = 1
+          Font.Color = clNavy
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          ParentColor = False
+          ParentFont = False
+        end
+        object Limit: TLabel
+          Left = 68
+          Height = 1
+          Top = 30
+          Width = 1
+          Font.Color = clNavy
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          ParentColor = False
+          ParentFont = False
+        end
+        object MapName: TLabel
+          Left = 38
+          Height = 1
+          Top = 0
+          Width = 1
+          Font.Color = clNavy
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          ParentColor = False
+          ParentFont = False
+        end
+        object Time: TLabel
+          Left = 58
+          Height = 1
+          Top = 48
+          Width = 1
+          Font.Color = clNavy
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          ParentColor = False
+          ParentFont = False
+        end
+        object TimeLabel: TLabel
+          Left = 6
+          Height = 13
+          Top = 48
+          Width = 46
+          Caption = 'Time limit:'
+          ParentColor = False
+        end
+        object MapNameLabel: TLabel
+          Left = 6
+          Height = 13
+          Top = 0
+          Width = 24
+          Caption = 'Map:'
+          ParentColor = False
+        end
+        object TimeLeftLabel: TLabel
+          Left = 6
+          Height = 13
+          Top = 64
+          Width = 43
+          Caption = 'Time left:'
+          ParentColor = False
+        end
+        object LimitLabel: TLabel
+          Left = 6
+          Height = 13
+          Top = 30
+          Width = 55
+          Caption = 'Score Limit:'
+          ParentColor = False
+        end
+        object GameModeLabel: TLabel
+          Left = 6
+          Height = 13
+          Top = 16
+          Width = 30
+          Caption = 'Mode:'
+          ParentColor = False
+        end
+        object PlayerCountLabel: TLabel
+          Left = 6
+          Height = 13
+          Top = 80
+          Width = 37
+          Caption = 'Players:'
+          ParentColor = False
+        end
+        object PlayerCount: TLabel
+          Left = 53
+          Height = 1
+          Top = 80
+          Width = 1
+          Font.Color = clNavy
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          ParentColor = False
+          ParentFont = False
+        end
+        object MoreInfo: TLabel
+          Cursor = crHandPoint
+          Left = 104
+          Height = 13
+          Top = 88
+          Width = 29
+          Caption = 'more..'
+          Font.Color = clBlue
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          ParentColor = False
+          ParentFont = False
+          OnClick = MoreInfoClick
+          OnMouseEnter = MoreInfoMouseEnter
+          OnMouseLeave = MoreInfoMouseLeave
+        end
+        object botsCountLabel: TLabel
+          Left = 6
+          Height = 13
+          Top = 114
+          Width = 24
+          Caption = 'Bots:'
+          ParentColor = False
+        end
+        object botsCount: TLabel
+          Left = 38
+          Height = 1
+          Top = 114
+          Width = 1
+          Font.Color = clNavy
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          ParentColor = False
+          ParentFont = False
+        end
+        object SpectCountLabel: TLabel
+          Left = 6
+          Height = 13
+          Top = 130
+          Width = 54
+          Caption = 'Spectators:'
+          ParentColor = False
+        end
+        object SpectCount: TLabel
+          Left = 70
+          Height = 1
+          Top = 130
+          Width = 1
+          Font.Color = clNavy
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          ParentColor = False
+          ParentFont = False
+        end
+        object RespawnLabel: TLabel
+          Left = 6
+          Height = 13
+          Top = 154
+          Width = 70
+          Caption = 'Respawn time:'
+          ParentColor = False
+        end
+        object Respawn: TLabel
+          Left = 81
+          Height = 1
+          Top = 154
+          Width = 1
+          Font.Color = clNavy
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          ParentColor = False
+          ParentFont = False
+        end
+        object FFLabel: TLabel
+          Left = 6
+          Height = 13
+          Top = 170
+          Width = 59
+          Caption = 'Friendly Fire:'
+          ParentColor = False
+        end
+        object FF: TLabel
+          Left = 70
+          Height = 1
+          Top = 170
+          Width = 1
+          Font.Color = clNavy
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          ParentColor = False
+          ParentFont = False
+        end
+        object BonusLabel: TLabel
+          Left = 6
+          Height = 13
+          Top = 186
+          Width = 83
+          Caption = 'Bonus frequency:'
+          ParentColor = False
+        end
+        object Bonus: TLabel
+          Left = 94
+          Height = 1
+          Top = 186
+          Width = 1
+          Font.Color = clNavy
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          ParentColor = False
+          ParentFont = False
+        end
+        object VotingLabel: TLabel
+          Left = 6
+          Height = 13
+          Top = 202
+          Width = 72
+          Caption = 'Voting percent:'
+          ParentColor = False
+        end
+        object Voting: TLabel
+          Left = 86
+          Height = 1
+          Top = 202
+          Width = 1
+          Font.Color = clNavy
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          ParentColor = False
+          ParentFont = False
+        end
+      end
+      object TeamList: TListView
+        Left = 549
+        Height = 112
+        Top = 64
+        Width = 139
+        BorderWidth = 1
+        Color = clBtnFace
+        Columns = <        
+          item
+            Caption = 'Team'
+            MaxWidth = 43
+            MinWidth = 43
+            Width = 43
+          end        
+          item
+            Caption = 'Score'
+            MaxWidth = 42
+            MinWidth = 42
+            Width = 42
+          end        
+          item
+            Caption = 'Players'
+            MaxWidth = 50
+            MinWidth = 50
+          end>
+        ColumnClick = False
+        Font.CharSet = EASTEUROPE_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Items.LazData = {
+          FF00000006000000FFFFFFFFFFFFFFFFFFFFFFFF0200000005000000416C7068
+          610000000000000000FFFFFFFFFFFFFFFFFFFFFFFF0200000005000000427261
+          766F0000000000000000FFFFFFFFFFFFFFFFFFFFFFFF02000000070000004368
+          61726C69650000000000000000FFFFFFFFFFFFFFFFFFFFFFFF02000000050000
+          0044656C74610000000000000000FFFFFFFFFFFFFFFFFFFFFFFF020000000400
+          0000537065630000000000000000FFFFFFFFFFFFFFFFFFFFFFFF020000000500
+          0000546F74616C0000000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        }
+        ParentFont = False
+        ReadOnly = True
+        RowSelect = True
+        TabStop = False
+        TabOrder = 4
+        ViewStyle = vsReport
+        OnClick = SetFocusToCmd
+        OnCustomDrawItem = TeamListCustomDrawItem
+        OnCustomDrawSubItem = TeamListCustomDrawSubItem
+        OnKeyDown = HotKeyDown
+        OnKeyPress = HotKeyPress
+      end
+      object ClearConsole: TButton
+        Cursor = crArrow
+        Left = 634
+        Height = 21
+        Top = 24
+        Width = 21
+        HelpType = htKeyword
+        HelpKeyword = 'Disable autoscorll'
+        Caption = 'cls'
+        OnClick = ClearConsoleClick
+        TabOrder = 1
+        TabStop = False
+        Visible = False
+      end
+      object SayBox: TCheckBox
+        Left = 445
+        Height = 19
+        Top = 489
+        Width = 71
+        Anchors = [akRight, akBottom]
+        Caption = 'Chat mode'
+        Enabled = False
+        OnClick = SayBoxClick
+        TabOrder = 7
+        TabStop = False
+      end
+      object AdminBox: TCheckBox
+        Left = 232
+        Height = 19
+        Top = 488
+        Width = 103
+        Anchors = [akRight, akBottom]
+        Caption = 'Admin Chat mode'
+        Enabled = False
+        OnClick = AdminBoxClick
+        TabOrder = 6
+        TabStop = False
+      end
+      object NickSayBox: TCheckBox
+        Left = 342
+        Height = 19
+        Top = 489
+        Width = 96
+        Anchors = [akRight, akBottom]
+        Caption = 'Nick Chat mode'
+        Enabled = False
+        OnClick = NickSayBoxClick
+        TabOrder = 11
+        TabStop = False
+      end
+    end
+    object BotConsole: TTabSheet
+      Caption = 'IRC Bot Console'
+      ClientHeight = 492
+      ClientWidth = 686
+      ImageIndex = 1
+      object Label10: TLabel
+        Left = 0
+        Height = 13
+        Top = 448
+        Width = 69
+        Caption = 'Command line:'
+        ParentColor = False
+      end
+      object Label18: TLabel
+        Left = 0
+        Height = 13
+        Top = 36
+        Width = 62
+        Caption = 'IRC Console:'
+        ParentColor = False
+      end
+      object IRCConsole: TMemo
+        Left = 0
+        Height = 398
+        Top = 51
+        Width = 545
+        Color = clBlack
+        Font.Color = clLime
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        OnChange = IRCConsoleChange
+        OnKeyDown = IRCConsoleKeyDown
+        OnMouseDown = IRCConsoleMouseDown
+        OnMouseUp = IRCConsoleMouseUp
+        ParentFont = False
+        ReadOnly = True
+        ScrollBars = ssVertical
+        TabOrder = 0
+        TabStop = False
+      end
+      object IRCCmd: TComboBox
+        Left = 0
+        Height = 21
+        Top = 461
+        Width = 518
+        Anchors = [akTop, akLeft, akRight]
+        ItemHeight = 13
+        OnKeyDown = HotKeyDown
+        OnKeyPress = IRCCmdKeyPress
+        TabOrder = 1
+        TabStop = False
+      end
+      object UserBox: TListBox
+        Left = 546
+        Height = 398
+        Top = 51
+        Width = 131
+        ItemHeight = 0
+        OnKeyDown = HotKeyDown
+        Sorted = True
+        TabOrder = 2
+      end
+      object IRCConnect: TButton
+        Left = 3
+        Height = 25
+        Top = 3
+        Width = 83
+        Caption = 'Connect'
+        OnClick = IRCConnectClick
+        OnKeyDown = HotKeyDown
+        TabOrder = 3
+      end
+      object IrcSettings: TBitBtn
+        Left = 93
+        Height = 25
+        Top = 3
+        Width = 75
+        Caption = 'Settings'
+        Glyph.Data = {
+          F2010000424DF201000000000000760000002800000024000000130000000100
+          0400000000007C01000000000000000000001000000000000000000000000000
+          80000080000000808000800000008000800080800000C0C0C000808080000000
+          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333334433333
+          3333333333388F3333333333000033334224333333333333338338F333333333
+          0000333422224333333333333833338F33333333000033422222243333333333
+          83333338F3333333000034222A22224333333338F33F33338F33333300003222
+          A2A2224333333338F383F3338F33333300003A2A222A222433333338F8333F33
+          38F33333000034A22222A22243333338833333F3338F333300004222A2222A22
+          2433338F338F333F3338F3330000222A3A2224A22243338F3838F338F3338F33
+          0000A2A333A2224A2224338F83338F338F3338F300003A33333A2224A2224338
+          333338F338F3338F000033333333A2224A2243333333338F338F338F00003333
+          33333A2224A2233333333338F338F83300003333333333A2224A333333333333
+          8F338F33000033333333333A222433333333333338F338F30000333333333333
+          A224333333333333338F38F300003333333333333A223333333333333338F8F3
+          000033333333333333A3333333333333333383330000
+        }
+        ModalResult = 8
+        NumGlyphs = 2
+        OnClick = SettingsClick
+        OnKeyDown = HotKeyDown
+        OnKeyPress = HotKeyPress
+        TabOrder = 4
+      end
+    end
+  end
+  object Panel2: TPanel
+    Left = 20
+    Height = 4
+    Top = 20
+    Width = 689
+    BevelOuter = bvNone
+    TabOrder = 3
+    OnMouseMove = Panel2MouseMove
+  end
+  object Panel3: TPanel
+    Left = 21
+    Height = 4
+    Top = 560
+    Width = 689
+    BevelOuter = bvNone
+    TabOrder = 4
+  end
+  object Panel4: TPanel
+    Left = 711
+    Height = 509
+    Top = 20
+    Width = 3
+    BevelOuter = bvNone
+    TabOrder = 5
+  end
+  object Timer: TTimer
+    Interval = 100
+    OnTimer = TimerTimer
+    left = 32
+    top = 440
+  end
+  object PlayerPopup: TPopupMenu
+    AutoPopup = False
+    left = 32
+    top = 408
+    object Kick1: TMenuItem
+      Caption = 'Kick'
+      OnClick = Kick1Click
+    end
+    object Ban1: TMenuItem
+      Caption = 'Ban'
+      object Name1: TMenuItem
+        Caption = 'Name'
+        OnClick = Name1Click
+      end
+      object IP1: TMenuItem
+        Caption = 'IP (Permanent)'
+        OnClick = Ban1Click
+      end
+      object IP30days1: TMenuItem
+        Caption = 'IP (30 days)'
+        OnClick = IP30days1Click
+      end
+      object TimedIP1: TMenuItem
+        Caption = 'Timed IP'
+        OnClick = TimedIP1Click
+      end
+      object HWID1: TMenuItem
+        Caption = 'Hardware ID'
+        OnClick = HWID1Click
+      end
+    end
+    object Admin1: TMenuItem
+      Caption = 'Admin'
+      object Add1: TMenuItem
+        Caption = 'Add'
+        OnClick = Admin1Click
+      end
+      object Remove1: TMenuItem
+        Caption = 'Remove'
+        OnClick = Remove1Click
+      end
+    end
+    object Movetoteam1: TMenuItem
+      Caption = 'Move to team ->'
+      object MoveToAlpha1: TMenuItem
+        Caption = 'Alpha'
+        Visible = False
+        OnClick = MoveToAlpha1Click
+      end
+      object MoveToBravo1: TMenuItem
+        Caption = 'Bravo'
+        Visible = False
+        OnClick = MoveToBravo1Click
+      end
+      object MoveToCharlie1: TMenuItem
+        Caption = 'Charlie'
+        Visible = False
+        OnClick = MoveToCharlie1Click
+      end
+      object MoveToDelta1: TMenuItem
+        Caption = 'Delta'
+        Visible = False
+        OnClick = MoveToDelta1Click
+      end
+      object MoveToNone1: TMenuItem
+        Caption = 'None'
+        OnClick = MoveToNone1Click
+      end
+      object Spectator1: TMenuItem
+        Caption = 'Spectator'
+        OnClick = MoveToSpectator1Click
+      end
+    end
+    object Kill1: TMenuItem
+      Caption = 'Kill :)'
+      OnClick = Kill1Click
+    end
+    object PrivateMessage1: TMenuItem
+      Caption = 'Private Message'
+      OnClick = PrivateMessage1Click
+    end
+    object GlobalMute1: TMenuItem
+      Caption = 'Global Mute'
+      object Mute1: TMenuItem
+        Caption = 'Mute'
+        OnClick = Mute1Click
+      end
+      object Unmute1: TMenuItem
+        Caption = 'Unmute'
+        OnClick = Unmute1Click
+      end
+    end
+    object N1: TMenuItem
+      Caption = '-'
+    end
+    object Copytoclipboard1: TMenuItem
+      Caption = 'Copy to Clipboard'
+      object PlayerName1: TMenuItem
+        Caption = 'Player''s Name'
+        OnClick = PlayerName1Click
+      end
+      object PlayerIP1: TMenuItem
+        Caption = 'Player''s IP'
+        OnClick = PlayerIP1Click
+      end
+      object PlayerTagID1: TMenuItem
+        Caption = 'Player''s Tag ID'
+        OnClick = PlayerTagID1Click
+      end
+    end
+  end
+  object RefreshTimer: TTimer
+    Interval = 5000
+    OnTimer = RefreshTimerTimer
+    left = 64
+    top = 440
+  end
+  object TimerLeft: TTimer
+    Enabled = False
+    OnTimer = TimerLeftTimer
+    left = 96
+    top = 440
+  end
+  object PopupMenu1: TPopupMenu
+    AutoPopup = False
+    left = 128
+    top = 408
+    object Restore1: TMenuItem
+      Caption = 'Restore'
+      Default = True
+      OnClick = Restore1Click
+    end
+    object Exit1: TMenuItem
+      Caption = 'Exit'
+      OnClick = Exit1Click
+    end
+  end
+  object AutoSay: TTimer
+    Enabled = False
+    Interval = 60000
+    OnTimer = AutoSayTimer
+    left = 160
+    top = 440
+  end
+  object IdEncoderUUE1: TIdEncoderUUE
+    FillChar = '`'
+    left = 288
+    top = 408
+  end
+  object IdDecoderUUE1: TIdDecoderUUE
+    FillChar = '~'
+    left = 256
+    top = 408
+  end
+  object SwapTimer: TTimer
+    Enabled = False
+    Interval = 5500
+    OnTimer = SwapTimerTimer
+    left = 128
+    top = 440
+  end
+  object TabPopup: TPopupMenu
+    left = 64
+    top = 408
+    object New1: TMenuItem
+      Caption = 'New Tab'
+      OnClick = AddServerClick
+    end
+    object Remove2: TMenuItem
+      Caption = 'Close Tab'
+      OnClick = RemoveServerClick
+    end
+    object Rename1: TMenuItem
+      Caption = 'Rename Server'
+      OnClick = Rename1Click
+    end
+    object DuplicateServer1: TMenuItem
+      Caption = 'Duplicate Server'
+      OnClick = DuplicateServer1Click
+    end
+  end
+  object FavoritesPopup: TPopupMenu
+    AutoPopup = False
+    left = 96
+    top = 408
+    object AddServer1: TMenuItem
+      Caption = 'Add Server'
+      OnClick = AddFavServClick
+    end
+    object DeleteServer1: TMenuItem
+      Caption = 'Remove Server'
+      OnClick = DeleteServer1Click
+    end
+    object UpdateData1: TMenuItem
+      Caption = 'Update Data'
+      OnClick = UpdateData1Click
+    end
+  end
+  object IRC: TIdIRC
+    OnDisconnected = IRCDisconnected
+    OnConnected = IRCConnected
+    ConnectTimeout = 0
+    IPVersion = Id_IPv4
+    ReadTimeout = -1
+    CommandHandlers = <>
+    ExceptionReply.Code = '500'
+    ExceptionReply.Text.Strings = (
+      'Unknown Internal Error'
+    )
+    Username = 'arsse'
+    RealName = 'ARSSE Bot'
+    Replies.Finger = 'ouch :S don''t PIITB'
+    Replies.Version = 'ARSSE Bot Version 1.1b by ::RiA::KeFear'
+    Replies.ClientInfo = 'ARSSE Server Commander Bot by ::RiA::KeFear'
+    UserMode = []
+    left = 223
+    top = 408
+  end
+  object BalanceTimer: TTimer
+    Enabled = False
+    Interval = 5500
+    OnTimer = BalanceTimerTimer
+    left = 191
+    top = 440
+  end
+  object ConnectPopup: TPopupMenu
+    AutoPopup = False
+    left = 159
+    top = 408
+    object ConnectAll1: TMenuItem
+      Caption = 'Connect All'
+      OnClick = ConnectAll1Click
+    end
+    object DisconnectAll1: TMenuItem
+      Caption = 'Disconnect All'
+      OnClick = DisconnectAll1Click
+    end
+    object N2: TMenuItem
+      Caption = '-'
+    end
+    object AutoRetry: TMenuItem
+      Caption = 'Auto-reconnect'
+      OnClick = AutoRetryClick
+    end
+    object AutoConnect: TMenuItem
+      Caption = 'Connect on startup'
+      OnClick = AutoConnectClick
+    end
+  end
+  object CommandPopup: TPopupMenu
+    AutoPopup = False
+    left = 191
+    top = 408
+    object Perform1: TMenuItem
+      Caption = 'Perform'
+      Default = True
+      OnClick = PerformActionClick
+    end
+    object Reloadlist1: TMenuItem
+      Caption = 'Reload list'
+      OnClick = Reloadlist1Click
+    end
+    object Edit: TMenuItem
+      Caption = 'Edit'
+      OnClick = EditClick
+    end
+    object Add2: TMenuItem
+      Caption = 'Add'
+      OnClick = Add2Click
+    end
+    object Remove3: TMenuItem
+      Caption = 'Remove'
+      OnClick = Remove3Click
+    end
+  end
+end

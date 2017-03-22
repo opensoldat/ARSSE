@@ -12,6 +12,8 @@
 
 unit SearchForm;
 
+{$MODE Delphi}
+
 interface
 
 uses
@@ -20,6 +22,8 @@ uses
   Dialogs, StdCtrls, ComCtrls;
 
 type
+  TSearchType = (stWholeWord, stMatchCase);
+  TSearchTypes = set of TSearchType;
   TSearchForm1 = class(TForm)
     Label1: TLabel;
     Input: TEdit;
@@ -46,9 +50,9 @@ var
 
 implementation
 
-uses Unit1;
+uses MainProgramUnit;
 
-{$R *.dfm}
+{$R *.lfm}
 
 function TSearchForm1.MemoSearchDown(SearchText: string; StartPos: LongInt; Options: TSearchTypes): integer;
 var
@@ -58,7 +62,7 @@ begin
   Screen.Cursor := crHourglass; //show that we are searching
   with ServerList[Form1.ServerTab.TabIndex].Memo do
   begin
-    Result := FindText(Input.Text, StartPos, Length(Text), Options);
+//    Result := FindText(Input.Text, StartPos, Length(Text), Options);
     if Result <> -1 then //when found
     begin
       SetFocus;
@@ -112,10 +116,10 @@ begin
       StartPos := 0;
       if not WrapAround.Checked then
       begin
-        MessageBox(Application.Handle,
-          PAnsiChar('Cannot find "' + Input.Text + '"'),
-          PAnsiChar('ARSSE Finder'),
-          MB_OK or MB_ICONINFORMATION);
+//        MessageBox(Application.Handle,
+//          PAnsiChar('Cannot find "' + Input.Text + '"'),
+//          PAnsiChar('ARSSE Finder'),
+//          MB_OK or MB_ICONINFORMATION);
         if SearchForm1.Visible then
           SearchForm1.Input.SetFocus;
       end;

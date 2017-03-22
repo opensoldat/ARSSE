@@ -12,6 +12,8 @@
 
 unit FlagDB;
 
+{$MODE Delphi}
+
 interface
 
 uses

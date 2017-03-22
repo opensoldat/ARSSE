@@ -12,6 +12,8 @@
 
 unit Refreshx;
 
+{$MODE Delphi}
+
 interface
 
 const

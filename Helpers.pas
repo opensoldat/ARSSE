@@ -12,6 +12,8 @@
 
 unit Helpers;
 
+{$MODE Delphi}
+
 interface
 
 uses

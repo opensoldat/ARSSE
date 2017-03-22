@@ -12,6 +12,8 @@
 
 unit VersionInfo;
 
+{$MODE Delphi}
+
 interface
 
 const

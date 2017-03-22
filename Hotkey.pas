@@ -1,5 +1,7 @@
 unit Hotkey;
 
+{$MODE Delphi}
+
 interface
 
 uses

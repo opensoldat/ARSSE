@@ -12,6 +12,8 @@
 
 unit Mutex;
 
+{$MODE Delphi}
+
 interface
 
 implementation
