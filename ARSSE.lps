@@ -18,7 +18,6 @@
         <ComponentName Value="Form1"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="3561"/>
         <CursorPos X="6" Y="3580"/>
@@ -193,6 +192,7 @@
       </Unit19>
       <Unit20>
         <Filename Value="SettingsForm.lfm"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="7"/>
         <TopLine Value="451"/>
         <CursorPos X="58" Y="472"/>
