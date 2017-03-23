@@ -9,7 +9,7 @@ uses
   BotSelectUnit {BotHelp},
   SettingsForm in 'SettingsForm.pas' {Settings1},
   Adminbox in 'Adminbox.pas' {AdminReq},
-  CmdEdig in 'CmdEdig.pas' {EditCmd},
+  CMDedit {EditCmd},
   Mutex in 'Mutex.pas',
   UpdateThread in 'UpdateThread.pas',
   UpdatePopup in 'UpdatePopup.pas' {UpdatePopup1},

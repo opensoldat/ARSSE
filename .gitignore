@@ -1,5 +1,6 @@
-# ARSSE generated ini, safe to delete
+# ARSSE generated stuff, safe to delete
 arsse.ini
+logs/*.*
 
 # git-generated backup
 backup/*.*

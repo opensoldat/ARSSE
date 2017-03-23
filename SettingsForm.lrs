@@ -1,0 +1,401 @@
+{ This is an automatically generated lazarus resource file }
+
+LazarusResources.Add('TSettings1','FORMDATA',[
+  'TPF0'#10'TSettings1'#9'Settings1'#4'Left'#3'i'#1#6'Height'#3#172#1#3'Top'#3
+  +#201#0#5'Width'#3#208#1#11'BorderStyle'#7#8'bsDialog'#7'Caption'#6#26'Config'
+  +'uration of Localhost'#12'ClientHeight'#3#172#1#11'ClientWidth'#3#208#1#5'Co'
+  +'lor'#7#9'clBtnFace'#10'Font.Color'#7#12'clWindowText'#11'Font.Height'#2#245
+  +#9'Font.Name'#6#13'MS Sans Serif'#8'OnCreate'#7#10'FormCreate'#9'OnKeyDown'#7
+  +#11'FormKeyDown'#8'Position'#7#16'poMainFormCenter'#10'LCLVersion'#6#7'1.6.4'
+  +'.0'#0#12'TPageControl'#12'PageControl1'#4'Left'#2#0#6'Height'#3#172#1#3'Top'
+  +#2#0#5'Width'#3#208#1#10'ActivePage'#7#6'Colors'#5'Align'#7#8'alClient'#8'Ta'
+  +'bIndex'#2#5#8'TabOrder'#2#2#0#9'TTabSheet'#9'TabSheet1'#7'Caption'#6#7'Gene'
+  +'ral'#12'ClientHeight'#3#146#1#11'ClientWidth'#3#200#1#0#9'TGroupBox'#13'Loc'
+  +'alSettings'#4'Left'#2#0#6'Height'#3#201#0#3'Top'#3#153#0#5'Width'#3#201#1#7
+  +'Caption'#6#24'Server-Specific Settings'#12'ClientHeight'#3#183#0#11'ClientW'
+  +'idth'#3#197#1#8'TabOrder'#2#0#0#6'TLabel'#6'Label3'#4'Left'#3#16#1#6'Height'
+  +#2#13#3'Top'#2'q'#5'Width'#2'+'#7'Caption'#6#8'seconds:'#11'ParentColor'#8#0
+  +#0#9'TCheckBox'#8'savepass'#4'Left'#2#8#6'Height'#2#19#3'Top'#2#16#5'Width'#2
+  +'{'#7'Caption'#6#20'save server password'#8'TabOrder'#2#0#0#0#9'TCheckBox'#7
+  +'savelog'#4'Left'#2#8#6'Height'#2#19#3'Top'#2' '#5'Width'#2'i'#7'Caption'#6
+  +#16'save message log'#8'TabOrder'#2#1#0#0#9'TCheckBox'#14'hideRegistered'#4
+  +'Left'#2#8#6'Height'#2#19#3'Top'#2'0'#5'Width'#3#190#0#7'Caption'#6'"hide "R'
+  +'egistering Server" messages'#8'TabOrder'#2#3#0#0#9'TCheckBox'#9'hideKills'#4
+  +'Left'#2#8#6'Height'#2#19#3'Top'#2'@'#5'Width'#2'i'#7'Caption'#6#18'hide kil'
+  +'l messages'#8'TabOrder'#2#4#0#0#9'TCheckBox'#8'autoswap'#4'Left'#2#8#6'Heig'
+  +'ht'#2#19#3'Top'#2'P'#5'Width'#3#255#0#7'Caption'#6'/automatically swap team'
+  +'s after every map change'#8'TabOrder'#2#5#0#0#9'TCheckBox'#11'autobalance'#4
+  +'Left'#2#8#6'Height'#2#19#3'Top'#2'`'#5'Width'#3#15#1#7'Caption'#6'6automati'
+  +'cally balance teams if difference is more than'#8'TabOrder'#2#6#0#0#5'TEdit'
+  +#11'balancediff'#4'Left'#3#24#1#6'Height'#2#21#3'Top'#2'\'#5'Width'#2#20#8'T'
+  +'abOrder'#2#7#4'Text'#6#1'2'#0#0#5'TEdit'#11'AutoMsgTime'#4'Left'#3#240#0#6
+  +'Height'#2#21#3'Top'#2'q'#5'Width'#2#25#8'TabOrder'#2#9#4'Text'#6#2'60'#0#0#9
+  +'TCheckBox'#7'autosay'#4'Left'#2#8#6'Height'#2#19#3'Top'#2'p'#5'Width'#3#224
+  +#0#7'Caption'#6'*automatically send server message(s) every'#8'TabOrder'#2#8
+  +#0#0#5'TMemo'#11'AutoMsgList'#4'Left'#2' '#6'Height'#2'1'#3'Top'#3#136#0#5'W'
+  +'idth'#3#137#1#9'OnKeyDown'#7#11'FormKeyDown'#10'ScrollBars'#7#10'ssVertical'
+  +#8'TabOrder'#2#10#0#0#7'TButton'#8'OpenLogs'#4'Left'#3'8'#1#6'Height'#2#17#3
+  +'Top'#2' '#5'Width'#3#131#0#7'Caption'#6#16'open logs folder'#7'OnClick'#7#13
+  +'OpenLogsClick'#8'TabOrder'#2#2#0#0#0#9'TGroupBox'#14'GlobalSettings'#4'Left'
+  +#2#0#6'Height'#3#150#0#3'Top'#2#0#5'Width'#3#201#1#7'Caption'#6#15'Global Se'
+  +'ttings'#12'ClientHeight'#3#132#0#11'ClientWidth'#3#197#1#8'TabOrder'#2#1#0#6
+  +'TLabel'#6'Label1'#4'Left'#3#196#0#6'Height'#2#13#3'Top'#2#18#5'Width'#2'+'#7
+  +'Caption'#6#8'seconds.'#11'ParentColor'#8#0#0#6'TLabel'#7'Label26'#4'Left'#2
+  +#8#6'Height'#2#13#3'Top'#2'c'#5'Width'#2'U'#7'Caption'#6#16'Admin chat name:'
+  +#11'ParentColor'#8#0#0#6'TLabel'#7'Label29'#4'Left'#2#8#6'Height'#2#13#3'Top'
+  +#2'z'#5'Width'#2'p'#7'Caption'#6#20'Admin-Message-Sound:'#11'ParentColor'#8#0
+  +#0#9'TCheckBox'#4'Auto'#4'Left'#2#8#6'Height'#2#19#3'Top'#2#16#5'Width'#3#145
+  +#0#7'Caption'#6#27'automatically refresh every'#8'TabOrder'#2#0#0#0#9'TCheck'
+  +'Box'#9'mintotray'#4'Left'#2#8#6'Height'#2#19#3'Top'#2' '#5'Width'#2'~'#7'Ca'
+  +'ption'#6#23'minimize to system tray'#8'TabOrder'#2#2#0#0#9'TCheckBox'#11'so'
+  +'rtrefresh'#4'Left'#2#8#6'Height'#2#19#3'Top'#2'@'#5'Width'#3#151#0#7'Captio'
+  +'n'#6#29'automatically sort on refresh'#8'TabOrder'#2#4#0#0#5'TEdit'#7'refre'
+  +'sh'#4'Left'#3#160#0#6'Height'#2#21#3'Top'#2#16#5'Width'#2'!'#9'OnKeyDown'#7
+  +#11'FormKeyDown'#8'TabOrder'#2#1#0#0#9'TCheckBox'#10'autoupdate'#4'Left'#2#8
+  +#6'Height'#2#19#3'Top'#2'P'#5'Width'#3#199#0#7'Caption'#6'%automatically che'
+  +'ck for updates every'#8'TabOrder'#2#5#0#0#7'TButton'#12'ManualUpdate'#4'Lef'
+  +'t'#3'8'#1#6'Height'#2#17#3'Top'#2'P'#5'Width'#3#131#0#7'Caption'#6#17'check'
+  +' updates now'#8'TabOrder'#2#7#0#0#9'TComboBox'#10'updatefreq'#4'Left'#3#216
+  +#0#6'Height'#2#21#3'Top'#2'M'#5'Width'#2'I'#10'ItemHeight'#2#13#9'ItemIndex'
+  +#2#0#13'Items.Strings'#1#6#5'month'#6#4'week'#6#3'day'#0#5'Style'#7#14'csDro'
+  +'pDownList'#8'TabOrder'#2#6#4'Text'#6#5'month'#0#0#9'TCheckBox'#12'PlayersOn'
+  +'Tab'#4'Left'#2#8#6'Height'#2#19#3'Top'#2'0'#5'Width'#3#238#0#7'Caption'#6'+'
+  +'show player numbers on tabs while connected'#8'TabOrder'#2#3#0#0#5'TEdit'#9
+  +'AdminName'#4'Left'#2'`'#6'Height'#2#21#3'Top'#2'`'#5'Width'#2'q'#9'OnKeyDow'
+  +'n'#7#11'FormKeyDown'#8'TabOrder'#2#8#0#0#5'TEdit'#13'SoundfileName'#4'Left'
+  +#2'|'#6'Height'#2#21#3'Top'#2'w'#5'Width'#3#29#1#8'TabOrder'#2#9#0#0#7'TButt'
+  +'on'#15'ButtonOpenSound'#4'Left'#3#152#1#6'Height'#2#21#3'Top'#2'w'#5'Width'
+  ,#2'#'#7'Caption'#6#3'...'#7'OnClick'#7#20'ButtonOpenSoundClick'#8'TabOrder'#2
+  +#10#0#0#0#0#9'TTabSheet'#9'TabSheet4'#7'Caption'#6#3'IRC'#12'ClientHeight'#2
+  +#0#11'ClientWidth'#2#0#10'ImageIndex'#2#3#0#6'TLabel'#7'Label11'#4'Left'#2'/'
+  +#6'Height'#2#13#3'Top'#2#4#5'Width'#2'7'#7'Caption'#6#11'IRC Server:'#11'Par'
+  +'entColor'#8#0#0#6'TLabel'#7'Label12'#4'Left'#3#16#1#6'Height'#2#13#3'Top'#2
+  +#4#5'Width'#2#22#7'Caption'#6#5'Port:'#11'ParentColor'#8#0#0#6'TLabel'#7'Lab'
+  +'el13'#4'Left'#2'0'#6'Height'#2#13#3'Top'#2#29#5'Width'#2'3'#7'Caption'#6#9
+  +'Nickname:'#11'ParentColor'#8#0#0#6'TLabel'#7'Label14'#4'Left'#2'8'#6'Height'
+  +#2#13#3'Top'#2'e'#5'Width'#2'*'#7'Caption'#6#8'Channel:'#11'ParentColor'#8#0
+  +#0#6'TLabel'#7'Label15'#4'Left'#2'"'#6'Height'#2#13#3'Top'#2'}'#5'Width'#2'?'
+  +#7'Caption'#6#12'Channel Key:'#11'ParentColor'#8#0#0#6'TLabel'#7'Label17'#4
+  +'Left'#2#16#6'Height'#2#13#3'Top'#3#245#0#5'Width'#2'R'#7'Caption'#6#14'AUTH'
+  +' Password:'#11'ParentColor'#8#0#0#6'TLabel'#7'Label16'#4'Left'#2#16#6'Heigh'
+  +'t'#2#13#3'Top'#3#221#0#5'Width'#2'T'#7'Caption'#6#14'AUTH Username:'#11'Par'
+  +'entColor'#8#0#0#6'TLabel'#6'Label6'#4'Left'#2'0'#6'Height'#2#13#3'Top'#2'5'
+  +#5'Width'#2'5'#7'Caption'#6#12'Alternative:'#11'ParentColor'#8#0#0#6'TLabel'
+  +#6'Label7'#4'Left'#2'0'#6'Height'#2#13#3'Top'#3#174#0#5'Width'#2'4'#7'Captio'
+  +'n'#6#9'AUTH Bot:'#11'ParentColor'#8#0#0#6'TLabel'#7'Label19'#4'Left'#3#16#1
+  +#6'Height'#2#13#3'Top'#2'e'#5'Width'#2'N'#7'Caption'#6#15'Command prefix:'#11
+  +'ParentColor'#8#0#0#6'TLabel'#6'Label8'#4'Left'#2#16#6'Height'#2#13#3'Top'#3
+  +#198#0#5'Width'#2'S'#7'Caption'#6#13'AUTH Command:'#11'ParentColor'#8#0#0#6
+  +'TLabel'#7'Label32'#4'Left'#2'1'#6'Height'#2#13#3'Top'#2'M'#5'Width'#2'3'#7
+  +'Caption'#6#9'Username:'#11'ParentColor'#8#0#0#5'TEdit'#9'IRCServer'#4'Left'
+  +#2'h'#6'Height'#2#21#3'Top'#2#0#5'Width'#3#165#0#9'OnKeyDown'#7#11'FormKeyDo'
+  +'wn'#8'TabOrder'#2#0#0#0#5'TEdit'#7'IRCPort'#4'Left'#3'-'#1#6'Height'#2#21#3
+  +'Top'#2#0#5'Width'#2'#'#9'OnKeyDown'#7#11'FormKeyDown'#8'TabOrder'#2#1#4'Tex'
+  +'t'#6#4'6667'#0#0#5'TEdit'#7'IRCNick'#4'Left'#2'h'#6'Height'#2#21#3'Top'#2#25
+  +#5'Width'#3#165#0#9'OnKeyDown'#7#11'FormKeyDown'#8'TabOrder'#2#2#0#0#5'TEdit'
+  +#10'IRCChannel'#4'Left'#2'h'#6'Height'#2#21#3'Top'#2'a'#5'Width'#3#165#0#9'O'
+  +'nKeyDown'#7#11'FormKeyDown'#8'TabOrder'#2#5#0#0#5'TEdit'#6'IRCKey'#4'Left'#2
+  +'h'#6'Height'#2#21#3'Top'#2'y'#5'Width'#3#165#0#8'EchoMode'#7#10'emPassword'
+  +#9'OnKeyDown'#7#11'FormKeyDown'#12'PasswordChar'#6#1'*'#8'TabOrder'#2#7#0#0#5
+  +'TEdit'#8'QNetPass'#4'Left'#2'h'#6'Height'#2#21#3'Top'#3#242#0#5'Width'#3#165
+  +#0#8'EchoMode'#7#10'emPassword'#9'OnKeyDown'#7#11'FormKeyDown'#12'PasswordCh'
+  +'ar'#6#1'*'#8'TabOrder'#2#12#0#0#5'TEdit'#8'QNetUser'#4'Left'#2'h'#6'Height'
+  +#2#21#3'Top'#3#218#0#5'Width'#3#165#0#9'OnKeyDown'#7#11'FormKeyDown'#8'TabOr'
+  +'der'#2#11#0#0#9'TCheckBox'#8'QNetAuth'#4'Left'#2#18#6'Height'#2#17#3'Top'#3
+  +#149#0#5'Width'#2'w'#7'Caption'#6#17'enable AUTH/Login'#8'TabOrder'#2#8#0#0#5
+  +'TEdit'#10'IRCAltNick'#4'Left'#2'h'#6'Height'#2#21#3'Top'#2'1'#5'Width'#3#165
+  +#0#9'OnKeyDown'#7#11'FormKeyDown'#8'TabOrder'#2#3#0#0#5'TEdit'#7'QNetBot'#4
+  +'Left'#2'h'#6'Height'#2#21#3'Top'#3#170#0#5'Width'#3#165#0#9'OnKeyDown'#7#11
+  +'FormKeyDown'#8'TabOrder'#2#9#0#0#5'TEdit'#6'prefix'#4'Left'#3'`'#1#6'Height'
+  +#2#21#3'Top'#2'b'#5'Width'#2#17#9'OnKeyDown'#7#11'FormKeyDown'#8'TabOrder'#2
+  +#6#4'Text'#6#1'!'#0#0#5'TEdit'#7'QNetCmd'#4'Left'#2'h'#6'Height'#2#21#3'Top'
+  +#3#194#0#5'Width'#3#165#0#9'OnKeyDown'#7#11'FormKeyDown'#8'TabOrder'#2#10#0#0
+  +#5'TEdit'#11'IRCUsername'#4'Left'#2'h'#6'Height'#2#21#3'Top'#2'I'#5'Width'#3
+  +#165#0#9'OnKeyDown'#7#11'FormKeyDown'#8'TabOrder'#2#4#0#0#0#9'TTabSheet'#9'T'
+  +'abSheet2'#7'Caption'#6#6'Events'#12'ClientHeight'#3#146#1#11'ClientWidth'#3
+  +#200#1#10'ImageIndex'#2#1#0#9'TListView'#9'EventList'#4'Left'#2#0#6'Height'#3
+  +'9'#1#3'Top'#2#0#5'Width'#3#201#1#10'Checkboxes'#9#7'Columns'#14#1#7'Caption'
+  +#6#5'Event'#5'Width'#3#145#0#0#1#7'Caption'#6#11'Script file'#5'Width'#3'!'#1
+  +#0#0#9'GridLines'#9#13'Items.LazData'#10#234#2#0#0#234#2#0#0#18#0#0#0#0#0#0#0
+  +#255#255#255#255#255#255#255#255#1#0#0#0#6#0#0#0'OnLoad'#0#0#0#0#0#0#0#0#255
+  +#255#255#255#255#255#255#255#1#0#0#0#6#0#0#0'OnExit'#0#0#0#0#0#0#0#0#255#255
+  +#255#255#255#255#255#255#1#0#0#0#9#0#0#0'OnConnect'#0#0#0#0#0#0#0#0#255#255
+  +#255#255#255#255#255#255#1#0#0#0#12#0#0#0'OnDisconnect'#0#0#0#0#0#0#0#0#255
+  +#255#255#255#255#255#255#255#1#0#0#0#13#0#0#0'OnJoinRequest'#0#0#0#0#0#0#0#0
+  +#255#255#255#255#255#255#255#255#1#0#0#0#12#0#0#0'OnPlayerJoin'#0#0#0#0#0#0#0
+  +#0#255#255#255#255#255#255#255#255#1#0#0#0#13#0#0#0'OnPlayerLeave'#0#0#0#0#0
+  +#0#0#0#255#255#255#255#255#255#255#255#1#0#0#0#13#0#0#0'OnPlayerSpeak'#24#0#0
+  +#0'script\OnPlayerSpeak.txt'#0#0#0#0#255#255#255#255#255#255#255#255#1#0#0#0
+  +#14#0#0#0'OnAdminConnect'#0#0#0#0#0#0#0#0#255#255#255#255#255#255#255#255#1#0
+  +#0#0#17#0#0#0'OnAdminDisconnect'#0#0#0#0#0#0#0#0#255#255#255#255#255#255#255
+  +#255#1#0#0#0#10#0#0#0'OnTimeLeft'#0#0#0#0#0#0#0#0#255#255#255#255#255#255#255
+  ,#255#1#0#0#0#6#0#0#0'OnData'#17#0#0#0'script\OnData.txt'#0#0#0#0#255#255#255
+  +#255#255#255#255#255#1#0#0#0#9#0#0#0'OnRefresh'#0#0#0#0#0#0#0#0#255#255#255
+  +#255#255#255#255#255#1#0#0#0#8#0#0#0'OnIRCMsg'#0#0#0#0#0#0#0#0#255#255#255
+  +#255#255#255#255#255#1#0#0#0#9#0#0#0'OnIRCJoin'#0#0#0#0#0#0#0#0#255#255#255
+  +#255#255#255#255#255#1#0#0#0#9#0#0#0'OnIRCPart'#0#0#0#0#0#0#0#0#255#255#255
+  +#255#255#255#255#255#1#0#0#0#12#0#0#0'OnIRCConnect'#0#0#0#0#0#0#0#0#255#255
+  +#255#255#255#255#255#255#1#0#0#0#15#0#0#0'OnIRCDisconnect'#0#0#0#0#255#255
+  +#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255
+  +#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255
+  +#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255
+  +#255#255#255#255#255#255#255#255#255#255#255#255#255#9'PopupMenu'#7#10'Event'
+  +'Popup'#8'ReadOnly'#9#9'RowSelect'#9#8'TabOrder'#2#0#9'ViewStyle'#7#8'vsRepo'
+  +'rt'#10'OnDblClick'#7#17'EventListDblClick'#11'OnMouseDown'#7#18'EventListMo'
+  +'useDown'#12'OnSelectItem'#7#19'EventListSelectItem'#0#0#5'TMemo'#9'EventDes'
+  +'c'#4'Left'#2#1#6'Height'#2','#3'Top'#3'>'#1#5'Width'#3#192#1#11'BorderStyle'
+  +#7#6'bsNone'#5'Color'#7#9'clBtnFace'#8'ReadOnly'#9#8'TabOrder'#2#1#0#0#5'TEd'
+  +'it'#14'ScriptFileEdit'#4'Left'#3#6#1#6'Height'#2#13#3'Top'#2'6'#5'Width'#2
+  +'y'#11'BorderStyle'#7#6'bsNone'#8'OnChange'#7#20'ScriptFileEditChange'#6'OnE'
+  +'xit'#7#18'ScriptFileEditExit'#9'OnKeyDown'#7#11'FormKeyDown'#10'OnKeyPress'
+  +#7#22'ScriptFileEditKeyPress'#8'TabOrder'#2#2#4'Text'#6#14'ScriptFileEdit'#7
+  +'Visible'#8#0#0#0#9'TTabSheet'#9'TabSheet6'#7'Caption'#6#6'Timers'#12'Client'
+  +'Height'#3#146#1#11'ClientWidth'#3#200#1#10'ImageIndex'#2#5#0#9'TListView'#9
+  +'TimerList'#4'Left'#2#0#6'Height'#3'I'#1#3'Top'#2#0#5'Width'#3#201#1#10'Chec'
+  +'kboxes'#9#7'Columns'#14#1#7'Caption'#6#5'Timer'#8'MinWidth'#3#145#0#5'Width'
+  +#3#145#0#0#1#7'Caption'#6#6'Repeat'#8'MinWidth'#2'/'#5'Width'#2'/'#0#1#7'Cap'
+  +'tion'#6#8'Interval'#8'MinWidth'#2'/'#5'Width'#2'/'#0#1#7'Caption'#6#11'Scri'
+  +'pt File'#8'MinWidth'#3#180#0#5'Width'#3#180#0#0#0#9'GridLines'#9#9'PopupMen'
+  +'u'#7#10'TimerPopup'#8'ReadOnly'#9#9'RowSelect'#9#8'TabOrder'#2#0#9'ViewStyl'
+  +'e'#7#8'vsReport'#10'OnDblClick'#7#17'TimerListDblClick'#11'OnMouseDown'#7#18
+  +'TimerListMouseDown'#0#0#7'TButton'#8'AddTimer'#4'Left'#2#0#6'Height'#2#21#3
+  +'Top'#3'L'#1#5'Width'#2'Y'#7'Caption'#6#9'Add Timer'#7'OnClick'#7#13'AddTime'
+  +'rClick'#8'TabOrder'#2#1#0#0#7'TButton'#9'EditTimer'#4'Left'#3#200#0#6'Heigh'
+  +'t'#2#21#3'Top'#3'L'#1#5'Width'#2'K'#7'Caption'#6#10'Edit Timer'#7'OnClick'#7
+  +#14'EditTimerClick'#8'TabOrder'#2#3#0#0#7'TButton'#11'DeleteTimer'#4'Left'#2
+  +'h'#6'Height'#2#21#3'Top'#3'L'#1#5'Width'#2'Q'#7'Caption'#6#12'Delete Timer'
+  +#7'OnClick'#7#16'DeleteTimerClick'#8'TabOrder'#2#2#0#0#5'TEdit'#9'TimerEdit'
+  +#4'Left'#3#248#0#6'Height'#2#13#3'Top'#2'0'#5'Width'#2'y'#11'BorderStyle'#7#6
+  +'bsNone'#6'OnExit'#7#13'TimerEditExit'#9'OnKeyDown'#7#11'FormKeyDown'#10'OnK'
+  +'eyPress'#7#17'TimerEditKeyPress'#8'TabOrder'#2#4#4'Text'#6#9'TimerEdit'#7'V'
+  +'isible'#8#0#0#0#9'TTabSheet'#9'TabSheet3'#7'Caption'#6#13'Script Editor'#12
+  +'ClientHeight'#3#146#1#11'ClientWidth'#3#200#1#10'ImageIndex'#2#2#0#6'TLabel'
+  +#6'Label2'#4'Left'#2#0#6'Height'#2#13#3'Top'#2#0#5'Width'#2'1'#7'Caption'#6
+  +#12'Script File:'#11'ParentColor'#8#0#0#6'TLabel'#6'Label4'#4'Left'#2#0#6'He'
+  +'ight'#2#13#3'Top'#2'('#5'Width'#2'F'#7'Caption'#6#15'Script Content:'#11'Pa'
+  +'rentColor'#8#0#0#6'TLabel'#6'Label5'#4'Left'#3#240#0#6'Height'#2#13#3'Top'#2
+  +#0#5'Width'#2'z'#7'Caption'#6#23'Commands and Variables:'#11'ParentColor'#8#0
+  +#0#5'TEdit'#10'ScriptFile'#4'Left'#2#0#6'Height'#2#21#3'Top'#2#16#5'Width'#3
+  +#233#0#9'OnKeyDown'#7#11'FormKeyDown'#8'TabOrder'#2#0#0#0#5'TMemo'#12'Script'
+  +'Editor'#4'Left'#2#0#6'Height'#3#31#1#3'Top'#2'8'#5'Width'#3#199#1#9'OnKeyDo'
+  +'wn'#7#11'FormKeyDown'#10'ScrollBars'#7#6'ssBoth'#8'TabOrder'#2#3#8'WantTabs'
+  +#9#8'WordWrap'#8#0#0#9'TComboBox'#11'CommandList'#4'Left'#3#240#0#6'Height'#2
+  +#21#3'Top'#2#16#5'Width'#3#177#0#13'DropDownCount'#2#25#10'ItemHeight'#2#13#9
+  +'ItemIndex'#2#0#13'Items.Strings'#1#6#4'/say'#6#9'/shutdown'#6#7'/addbot'#6#5
+  +'/kick'#6#9'/kicklast'#6#9'/kickall '#6#4'/ban'#6#6'/banip'#6#8'/banname'#6#8
+  +'/unbanip'#6#10'/unbanname'#6#4'/map'#6#8'/nextmap'#6#8'/restart'#6#4'/adm'#6
+  +#6'/admip'#6#6'/unadm'#6#12'/respawntime'#6#15'/maxrespawntime'#6#6'/limit'#6
+  +#10'/timelimit'#6#9'/password'#6#8'/setteam'#6#11'/setteamall'#6#9'/spectall'
+  +#6#10'/swapteams'#6#13'/friendlyfire'#6#6'/vote%'#6#6'/bonus'#6#11'/maxplaye'
+  +'rs'#6#5'/load'#6#9'/loadwep '#6#9'/loadconf'#6#5'/kill'#6#8'/advance'#6#10
+  +'/realistic'#6#9'/survival'#6#9'/gamemode'#6#0#6#3'if '#6#5'endif'#6#4'else'
+  +#6#3' = '#6#4' <> '#6#6'write '#6#7'IRCmsg '#6#9'ADMINmsg '#6#0#6#12'$PLAYER'
+  +'_NAME'#6#10'$PLAYER_IP'#6#11'$PLAYER_NUM'#6#13'$PLAYER_SCORE'#6#14'$PLAYER_'
+  +'DEATHS'#6#12'$PLAYER_RATE'#6#12'$PLAYER_PING'#6#10'$PLAYER_IP'#6#12'$PLAYER'
+  +'_PORT'#6#12'$PLAYER_TEAM'#6#10'$SERVER_IP'#6#12'$SERVER_PORT'#6#12'$SERVER_'
+  ,'NAME'#6#11'$SERVER_NUM'#6#13'$SERVER_COUNT'#6#8'$MESSAGE'#6#9'$TEAMCHAT'#6
+  +#10'$TIME_LEFT'#6#5'$DATA'#6#9'$ADMIN_IP'#6#6'$CLOCK'#6#5'$DATE'#6#8'$VERSIO'
+  +'N'#6#14'$LOGIN_SUCCESS'#6#14'$ALPHA_PLAYERS'#6#14'$BRAVO_PLAYERS'#6#16'$CHA'
+  +'RLIE_PLAYERS'#6#14'$DELTA_PLAYERS'#6#12'$ALPHA_SCORE'#6#12'$BRAVO_SCORE'#6
+  +#14'$CHARLIE_SCORE'#6#12'$DELTA_SCORE'#6#11'$MAXPLAYERS'#6#4'$MAP'#6#8'$NEXT'
+  +'MAP'#0#9'OnKeyDown'#7#11'FormKeyDown'#8'TabOrder'#2#1#4'Text'#6#4'/say'#0#0
+  +#7'TButton'#10'LoadScript'#4'Left'#2'S'#6'Height'#2#21#3'Top'#3'X'#1#5'Width'
+  +#2'V'#7'Caption'#6#11'Load Script'#7'OnClick'#7#15'LoadScriptClick'#8'TabOrd'
+  +'er'#2#5#0#0#7'TButton'#9'InsertCmd'#4'Left'#3#163#1#6'Height'#2#21#3'Top'#2
+  +#16#5'Width'#2'$'#7'Caption'#6#6'Insert'#7'OnClick'#7#14'InsertCmdClick'#8'T'
+  +'abOrder'#2#2#0#0#7'TButton'#10'SaveScript'#4'Left'#2#0#6'Height'#2#21#3'Top'
+  +#3'X'#1#5'Width'#2'K'#7'Caption'#6#11'Save Script'#7'OnClick'#7#15'SaveScrip'
+  +'tClick'#8'TabOrder'#2#4#0#0#7'TButton'#9'NewScript'#4'Left'#3#176#0#6'Heigh'
+  +'t'#2#21#3'Top'#3'X'#1#5'Width'#2'K'#7'Caption'#6#10'New Script'#7'OnClick'#7
+  +#14'NewScriptClick'#8'TabOrder'#2#6#0#0#7'TButton'#10'ScriptHelp'#4'Left'#3
+  +'`'#1#6'Height'#2#21#3'Top'#3'X'#1#5'Width'#2'c'#7'Caption'#6#13'Documentati'
+  +'on'#7'OnClick'#7#15'ScriptHelpClick'#8'TabOrder'#2#7#0#0#0#9'TTabSheet'#6'C'
+  +'olors'#7'Caption'#6#6'Colors'#12'ClientHeight'#3#146#1#11'ClientWidth'#3#200
+  +#1#10'ImageIndex'#2#6#0#9'TGroupBox'#10'ItemColors'#4'Left'#2#0#6'Height'#3
+  +#225#0#3'Top'#2#0#5'Width'#3#201#1#7'Caption'#6#22'Colors of main console'#12
+  +'ClientHeight'#3#207#0#11'ClientWidth'#3#197#1#8'TabOrder'#2#0#0#6'TLabel'#7
+  +'Label10'#4'Left'#2#20#6'Height'#2#13#3'Top'#2#20#5'Width'#2'C'#7'Caption'#6
+  +#13'Main Console:'#11'ParentColor'#8#0#0#6'TLabel'#7'Label18'#4'Left'#2#31#6
+  +'Height'#2#13#3'Top'#2','#5'Width'#2'8'#7'Caption'#6#12'Normal text:'#11'Par'
+  +'entColor'#8#0#0#6'TLabel'#7'Label20'#4'Left'#2'='#6'Height'#2#13#3'Top'#2'D'
+  +#5'Width'#2#25#7'Caption'#6#5'Chat:'#11'ParentColor'#8#0#0#6'TLabel'#7'Label'
+  +'21'#4'Left'#2'!'#6'Height'#2#13#3'Top'#2'\'#5'Width'#2'6'#7'Caption'#6#10'T'
+  +'eam chat:'#11'ParentColor'#8#0#0#6'TLabel'#7'Label22'#4'Left'#2'!'#6'Height'
+  +#2#13#3'Top'#3#140#0#5'Width'#2'5'#7'Caption'#6#10'Admin Say:'#11'ParentColo'
+  +'r'#8#0#0#6'TLabel'#7'Label23'#4'Left'#2#29#6'Height'#2#13#3'Top'#2't'#5'Wid'
+  +'th'#2'9'#7'Caption'#6#11'Muted chat:'#11'ParentColor'#8#0#0#6'TLabel'#7'Lab'
+  +'el24'#4'Left'#2#4#6'Height'#2#13#3'Top'#3#188#0#5'Width'#2'R'#7'Caption'#6
+  +#16'Private Message:'#11'ParentColor'#8#0#0#6'TLabel'#7'Label25'#4'Left'#2#29
+  +#6'Height'#2#13#3'Top'#3#164#0#5'Width'#2'8'#7'Caption'#6#11'Admin chat:'#11
+  +'ParentColor'#8#0#0#6'TLabel'#7'Label28'#4'Left'#3#16#1#6'Height'#2#13#3'Top'
+  +#2#20#5'Width'#2#24#7'Caption'#6#5'Font:'#11'ParentColor'#8#0#0#6'TLabel'#7
+  +'Label30'#4'Left'#3#4#1#6'Height'#2#13#3'Top'#2','#5'Width'#2')'#7'Caption'#6
+  +#11'Clientlist:'#11'ParentColor'#8#0#0#9'TColorBox'#11'mainConsole'#4'Left'#2
+  +'\'#6'Height'#2#22#3'Top'#2#16#5'Width'#3#145#0#5'Style'#11#16'cbStandardCol'
+  +'ors'#16'cbExtendedColors'#14'cbSystemColors'#13'cbCustomColor'#13'cbPrettyN'
+  +'ames'#0#10'ItemHeight'#2#16#8'TabOrder'#2#0#0#0#9'TColorBox'#10'normalText'
+  +#4'Left'#2'\'#6'Height'#2#22#3'Top'#2'('#5'Width'#3#145#0#5'Style'#11#16'cbS'
+  +'tandardColors'#16'cbExtendedColors'#14'cbSystemColors'#13'cbCustomColor'#13
+  +'cbPrettyNames'#0#10'ItemHeight'#2#16#8'TabOrder'#2#2#0#0#9'TColorBox'#4'Cha'
+  +'t'#4'Left'#2'\'#6'Height'#2#22#3'Top'#2'@'#5'Width'#3#145#0#5'Style'#11#16
+  +'cbStandardColors'#16'cbExtendedColors'#14'cbSystemColors'#13'cbCustomColor'
+  +#13'cbPrettyNames'#0#10'ItemHeight'#2#16#8'TabOrder'#2#3#0#0#9'TColorBox'#8
+  +'teamChat'#4'Left'#2'\'#6'Height'#2#22#3'Top'#2'X'#5'Width'#3#145#0#5'Style'
+  +#11#16'cbStandardColors'#16'cbExtendedColors'#14'cbSystemColors'#13'cbCustom'
+  +'Color'#13'cbPrettyNames'#0#10'ItemHeight'#2#16#8'TabOrder'#2#4#0#0#9'TColor'
+  +'Box'#3'Say'#4'Left'#2'\'#6'Height'#2#22#3'Top'#3#136#0#5'Width'#3#145#0#5'S'
+  +'tyle'#11#16'cbStandardColors'#16'cbExtendedColors'#14'cbSystemColors'#13'cb'
+  +'CustomColor'#13'cbPrettyNames'#0#10'ItemHeight'#2#16#8'TabOrder'#2#6#0#0#9
+  +'TColorBox'#9'mutedChat'#4'Left'#2'\'#6'Height'#2#22#3'Top'#2'p'#5'Width'#3
+  +#145#0#5'Style'#11#16'cbStandardColors'#16'cbExtendedColors'#14'cbSystemColo'
+  +'rs'#13'cbCustomColor'#13'cbPrettyNames'#0#10'ItemHeight'#2#16#8'TabOrder'#2
+  +#5#0#0#9'TColorBox'#2'PM'#4'Left'#2'\'#6'Height'#2#22#3'Top'#3#184#0#5'Width'
+  +#3#145#0#5'Style'#11#16'cbStandardColors'#16'cbExtendedColors'#14'cbSystemCo'
+  +'lors'#13'cbCustomColor'#13'cbPrettyNames'#0#10'ItemHeight'#2#16#8'TabOrder'
+  +#2#8#0#0#9'TColorBox'#9'AdminChat'#4'Left'#2'\'#6'Height'#2#22#3'Top'#3#160#0
+  +#5'Width'#3#145#0#5'Style'#11#16'cbStandardColors'#16'cbExtendedColors'#14'c'
+  +'bSystemColors'#13'cbCustomColor'#13'cbPrettyNames'#0#10'ItemHeight'#2#16#8
+  +'TabOrder'#2#7#0#0#7'TButton'#10'FontButton'#4'Left'#3'0'#1#6'Height'#2#22#3
+  +'Top'#2#16#5'Width'#3#145#0#7'Caption'#6#6'Font: '#7'OnClick'#7#15'FontButto'
+  ,'nClick'#8'TabOrder'#2#1#0#0#9'TColorBox'#10'clientlist'#4'Left'#3'2'#1#6'He'
+  +'ight'#2#22#3'Top'#2'('#5'Width'#3#145#0#5'Style'#11#16'cbStandardColors'#16
+  +'cbExtendedColors'#14'cbSystemColors'#13'cbCustomColor'#13'cbPrettyNames'#0
+  +#10'ItemHeight'#2#16#8'TabOrder'#2#9#0#0#0#9'TListView'#15'CustomColorList'#4
+  +'Left'#2#0#6'Height'#2'o'#3'Top'#3#232#0#5'Width'#3#201#1#7'Columns'#14#1#7
+  +'Caption'#6#7'Message'#5'Width'#3'&'#1#0#1#7'Caption'#6#5'Color'#5'Width'#3
+  +#145#0#0#0#11'ColumnClick'#8#9'GridLines'#9#9'PopupMenu'#7#10'ColorPopup'#8
+  +'ReadOnly'#9#9'RowSelect'#9#8'TabOrder'#2#1#9'ViewStyle'#7#8'vsReport'#10'On'
+  +'DblClick'#7#23'CustomColorListDblClick'#11'OnMouseDown'#7#24'CustomColorLis'
+  +'tMouseDown'#0#0#7'TButton'#14'AddCustomColor'#4'Left'#2#0#6'Height'#2#21#3
+  +'Top'#3'X'#1#5'Width'#2'a'#7'Caption'#6#15'Add Custom Line'#7'OnClick'#7#19
+  +'AddCustomColorClick'#8'TabOrder'#2#2#0#0#7'TButton'#17'DeleteCustomColor'#4
+  +'Left'#2'p'#6'Height'#2#21#3'Top'#3'X'#1#5'Width'#2'q'#7'Caption'#6#18'Delet'
+  +'e Custom Line'#7'OnClick'#7#22'DeleteCustomColorClick'#8'TabOrder'#2#3#0#0#9
+  +'TColorBox'#11'ColorPicker'#4'Left'#3#16#1#6'Height'#2#22#3'Top'#3#232#0#5'W'
+  +'idth'#3#145#0#5'Style'#11#16'cbStandardColors'#16'cbExtendedColors'#14'cbSy'
+  +'stemColors'#13'cbCustomColor'#13'cbPrettyNames'#0#13'DropDownCount'#2#10#10
+  +'ItemHeight'#2#16#8'OnChange'#7#15'ColorPickerExit'#6'OnExit'#7#15'ColorPick'
+  +'erExit'#8'TabOrder'#2#4#7'Visible'#8#0#0#5'TEdit'#8'LineEdit'#4'Left'#3#16#1
+  +#6'Height'#2#13#3'Top'#3#16#1#5'Width'#2'y'#11'BorderStyle'#7#6'bsNone'#6'On'
+  +'Exit'#7#12'LineEditExit'#9'OnKeyDown'#7#11'FormKeyDown'#10'OnKeyPress'#7#16
+  +'LineEditKeyPress'#8'TabOrder'#2#5#4'Text'#6#8'LineEdit'#7'Visible'#8#0#0#7
+  +'TButton'#13'DefaultColors'#4'Left'#3'@'#1#6'Height'#2#21#3'Top'#3'X'#1#5'Wi'
+  +'dth'#3#135#0#7'Caption'#6#23'Default Colors and Font'#7'OnClick'#7#18'Defau'
+  +'ltColorsClick'#8'TabOrder'#2#6#0#0#0#9'TTabSheet'#9'TabSheet7'#7'Caption'#6
+  +#7'Hotkeys'#12'ClientHeight'#3#146#1#11'ClientWidth'#3#200#1#10'ImageIndex'#2
+  +#7#0#6'TLabel'#7'Label27'#4'Left'#2#8#6'Height'#2#13#3'Top'#2#0#5'Width'#2'j'
+  +#7'Caption'#6#24'Current list of Hotkeys.'#11'ParentColor'#8#0#0#9'TListView'
+  +#10'HotkeyList'#4'Left'#2#0#6'Height'#3'Q'#1#3'Top'#2#24#5'Width'#3#201#1#7
+  +'Columns'#14#1#7'Caption'#6#6'Hotkey'#5'Width'#3#155#0#0#1#7'Caption'#6#6'Ac'
+  +'tion'#5'Width'#3#18#1#0#0#9'GridLines'#9#13'Items.LazData'#10','#4#0#0','#4
+  +#0#0#18#0#0#0#0#0#0#0#255#255#255#255#255#255#255#255#1#0#0#0#6#0#0#0'Ctrl+b'
+  +'$'#0#0#0'Ban selected player (in player list)'#0#0#0#0#255#255#255#255#255
+  +#255#255#255#1#0#0#0#6#0#0#0'Ctrl+c'#25#0#0#0'Connect to current server'#0#0
+  +#0#0#255#255#255#255#255#255#255#255#1#0#0#0#6#0#0#0'Ctrl+d'#30#0#0#0'Discon'
+  +'nect from current server'#0#0#0#0#255#255#255#255#255#255#255#255#1#0#0#0#6
+  +#0#0#0'Ctrl+e'#16#0#0#0'Toggle Chat mode'#0#0#0#0#255#255#255#255#255#255#255
+  +#255#1#0#0#0#8#0#0#0'Ctrl+End'#24#0#0#0'Scroll console to bottom'#0#0#0#0#255
+  +#255#255#255#255#255#255#255#1#0#0#0#6#0#0#0'Ctrl+f'#6#0#0#0'Search'#0#0#0#0
+  +#255#255#255#255#255#255#255#255#1#0#0#0#9#0#0#0'Ctrl+Home'#21#0#0#0'Scroll '
+  +'console to top'#0#0#0#0#255#255#255#255#255#255#255#255#1#0#0#0#6#0#0#0'Ctr'
+  +'l+i'#22#0#0#0'Expand server info-bar'#0#0#0#0#255#255#255#255#255#255#255
+  +#255#1#0#0#0#6#0#0#0'Ctrl+k%'#0#0#0'Kick selected player (in player list)'#0
+  +#0#0#0#255#255#255#255#255#255#255#255#1#0#0#0#6#0#0#0'Ctrl+n'#21#0#0#0'Togg'
+  +'le Nick Chat mode'#0#0#0#0#255#255#255#255#255#255#255#255#1#0#0#0#6#0#0#0
+  +'Ctrl+p'#19#0#0#0'Set server password'#0#0#0#0#255#255#255#255#255#255#255
+  +#255#1#0#0#0#9#0#0#0'Ctrl+PgDn'#19#0#0#0'Scroll console down'#0#0#0#0#255#255
+  +#255#255#255#255#255#255#1#0#0#0#9#0#0#0'Ctrl+PgUp'#17#0#0#0'Scroll console '
+  +'up'#0#0#0#0#255#255#255#255#255#255#255#255#1#0#0#0#6#0#0#0'Ctrl+r%'#0#0#0
+  +'Perform script recompile (/recompile)'#0#0#0#0#255#255#255#255#255#255#255
+  +#255#1#0#0#0#6#0#0#0'Ctrl+t'#19#0#0#0'Send server message'#0#0#0#0#255#255
+  +#255#255#255#255#255#255#1#0#0#0#6#0#0#0'Ctrl+w'#22#0#0#0'Toggle Admin chat '
+  +'mode'#0#0#0#0#255#255#255#255#255#255#255#255#1#0#0#0#6#0#0#0'Ctrl+z+'#0#0#0
+  +'Send PM to selected player (in player list)'#0#0#0#0#255#255#255#255#255#255
+  +#255#255#1#0#0#0#6#0#0#0'Ctrl+l'#23#0#0#0'Send Clientlist command'#255#255
+  +#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255
+  +#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255
+  +#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255
+  +#255#255#255#255#255#255#255#255#255#255#255#255#255#8'ReadOnly'#9#9'RowSele'
+  +'ct'#9#8'TabOrder'#2#0#9'ViewStyle'#7#8'vsReport'#10'OnDblClick'#7#18'Hotkey'
+  +'ListDblClick'#11'OnMouseDown'#7#19'HotkeyListMouseDown'#0#0#5'TEdit'#18'Hot'
+  +'KeyShortcutEdit'#4'Left'#2#8#6'Height'#2#13#3'Top'#3'P'#1#5'Width'#2'y'#11
+  +'BorderStyle'#7#6'bsNone'#6'OnExit'#7#22'HotKeyShortcutEditExit'#9'OnKeyDown'
+  +#7#25'HotKeyShortcutEditKeyDown'#10'OnKeyPress'#7#26'HotKeyShortcutEditKeyPr'
+  ,'ess'#7'OnKeyUp'#7#23'HotKeyShortcutEditKeyUp'#8'ReadOnly'#9#8'TabOrder'#2#1
+  +#7'Visible'#8#0#0#0#9'TTabSheet'#9'TabSheet5'#7'Caption'#6#5'About'#12'Clien'
+  +'tHeight'#2#0#11'ClientWidth'#2#0#10'ImageIndex'#2#4#0#6'TLabel'#6'Label9'#4
+  +'Left'#2'@'#6'Height'#2#19#3'Top'#2#8#5'Width'#3'J'#1#7'Caption'#6'''Advance'
+  +'d Remote Soldat Server Enchanter'#12'Font.CharSet'#7#18'EASTEUROPE_CHARSET'
+  +#10'Font.Color'#7#6'clNavy'#11'Font.Height'#2#240#9'Font.Name'#6#5'Arial'#10
+  +'Font.Style'#11#6'fsBold'#0#11'ParentColor'#8#10'ParentFont'#8#0#0#5'TMemo'#8
+  +'AboutBox'#6'Cursor'#7#7'crArrow'#4'Left'#2#16#6'Height'#3'9'#1#3'Top'#2'('#5
+  +'Width'#3#169#1#11'BorderStyle'#7#6'bsNone'#5'Color'#7#9'clBtnFace'#10'Font.'
+  +'Color'#7#12'clWindowText'#11'Font.Height'#2#245#9'Font.Name'#6#5'Arial'#13
+  +'Lines.Strings'#1#6'DThe purpose of this project is to create the ultimate S'
+  +'oldat Server '#6'FAdministrator Tool. You are free to distribute it for fre'
+  +'e in any way.'#6';Just send me an email to let me know. If you find any kin'
+  +'d '#6#24'of bug please email me. '#6'>Disassembling and modifying the main '
+  +'executable is prohibited.'#6#0#6'GThanks to those who tested it and helped '
+  +'me to create this application.'#6'FSpecial thanks to Michal Marcinkowski fo'
+  +'r releasing the source of the '#6#22'original Soldat Admin.'#6#0#6'!Program'
+  +'med by KeFear and Shoozza.'#6#0#6#8'Contact:'#6'+KeFear:    E-mail/MSN:    '
+  +'hlaki@freemail.hu'#6'2Shoozza: E-mail/Jabber: gregor.a.cieslak@gmail.com'#6
+  +#0#6' IRC: #Shoozza @ irc.quakenet.org'#6#0#6#0#6#0#6'*Copyright '#194#169' '
+  +'2005-2008 Hars'#195#161'nyi L'#195#161'szl'#195#179'.'#6'>Copyright '#194
+  +#169' 2007-2011 Gregor A. Cieslak. All rights reserved.'#0#11'OnMouseDown'#7
+  +#17'AboutBoxMouseDown'#10'ParentFont'#8#8'ReadOnly'#9#8'TabOrder'#2#0#7'TabS'
+  +'top'#8#0#0#0#0#7'TBitBtn'#7'BitBtn1'#4'Left'#3#128#0#6'Height'#2#25#3'Top'#3
+  +#140#1#5'Width'#2'K'#7'Caption'#6#2'OK'#10'Glyph.Data'#10#226#1#0#0#222#1#0#0
+  +'BM'#222#1#0#0#0#0#0#0'v'#0#0#0'('#0#0#0'$'#0#0#0#18#0#0#0#1#0#4#0#0#0#0#0'h'
+  +#1#0#0#0#0#0#0#0#0#0#0#16#0#0#0#0#0#0#0#0#0#0#0#0#0#128#0#0#128#0#0#0#128#128
+  +#0#128#0#0#0#128#0#128#0#128#128#0#0#192#192#192#0#128#128#128#0#0#0#255#0#0
+  +#255#0#0#0#255#255#0#255#0#0#0#255#0#255#0#255#255#0#0#255#255#255#0'3333333'
+  +'33333333333'#0#0'333333333333'#243'33333'#0#0'334C33333338'#143'33333'#0#0
+  +'33B$3333333'#131'8'#243'3333'#0#0'34""C33333833'#143'3333'#0#0'3B""$33333'
+  +#131'338'#243'333'#0#0'4"*""C3338'#243'8'#243'3'#143'333'#0#0'2"'#163#162'"C'
+  +'3338'#243#131#143'3'#143'333'#0#0':*3:"$3338'#248'38'#243'8'#243'33'#0#0'3'
+  +#163'33'#162'"C333'#131'33'#143'3'#143'33'#0#0'3333:"$3333338'#243'8'#243'3'
+  +#0#0'33333'#162'"C333333'#143'3'#143'3'#0#0'33333:"$3333338'#243'8'#243#0#0
+  +'333333'#162'"C333333'#143'3'#143#0#0'333333:"C3333338'#243#143#0#0'3333333'
+  +#162'#3333333'#143#131#0#0'3333333:3333333383'#0#0'333333333333333333'#0#0#11
+  +'ModalResult'#2#1#9'NumGlyphs'#2#2#7'OnClick'#7#12'BitBtn1Click'#8'TabOrder'
+  +#2#0#0#0#7'TBitBtn'#7'BitBtn2'#4'Left'#3#248#0#6'Height'#2#25#3'Top'#3#140#1
+  +#5'Width'#2'K'#6'Cancel'#9#7'Caption'#6#6'Cancel'#10'Glyph.Data'#10#226#1#0#0
+  +#222#1#0#0'BM'#222#1#0#0#0#0#0#0'v'#0#0#0'('#0#0#0'$'#0#0#0#18#0#0#0#1#0#4#0
+  +#0#0#0#0'h'#1#0#0#0#0#0#0#0#0#0#0#16#0#0#0#0#0#0#0#0#0#0#0#0#0#128#0#0#128#0
+  +#0#0#128#128#0#128#0#0#0#128#0#128#0#128#128#0#0#192#192#192#0#128#128#128#0
+  +#0#0#255#0#0#255#0#0#0#255#255#0#255#0#0#0#255#0#255#0#255#255#0#0#255#255
+  +#255#0'333333333333333333'#0#0'33'#136'33333333?333333'#0#0'39'#17#131'33'
+  +#152'3333'#136#243'33?33'#0#0'39'#17#24'39'#17#131'338'#243#143'3?'#136#243
+  +'3'#0#0'39'#17#17#131#145#17#24'338'#243'8'#243#248'3'#143'3'#0#0'33'#145#17
+  +#24#17#17#24'338'#243'3'#143#131'38'#243#0#0'339'#17#17#17#17#131'333'#143'3'
+  +'833'#248'3'#0#0'333'#145#17#17#24'33338'#243'33?'#131'3'#0#0'3331'#17#17#131
+  +'33333'#143'33833'#0#0'3339'#17#17#131'333338'#243'3'#131'33'#0#0'333'#145#17
+  +#17#131'33333833'#143'33'#0#0'339'#17#24#17#24'33333'#131'33'#143'33'#0#0'33'
+  +#145#17#131#145#17#131'333838'#243'8'#243'3'#0#0'33'#145#24'39'#17#24'333'
+  +#143'3'#131#143'3'#143'3'#0#0'339'#19'33'#145#17'333'#143#248'38'#243'8'#243
+  +#0#0'3333339'#25'3338'#131'33'#143#255#131#0#0'3333333333333338'#136'3'#0#0
+  +'333333333333333333'#0#0#11'ModalResult'#2#2#9'NumGlyphs'#2#2#7'OnClick'#7#12
+  +'BitBtn2Click'#8'TabOrder'#2#1#0#0#10'TPopupMenu'#10'EventPopup'#9'AutoPopup'
+  +#8#4'left'#2#8#3'top'#3#144#1#0#9'TMenuItem'#11'LoadScript1'#7'Caption'#6#11
+  +'Load Script'#7'OnClick'#7#16'LoadScript1Click'#0#0#9'TMenuItem'#11'EditScri'
+  +'pt1'#7'Caption'#6#11'Edit Script'#7'OnClick'#7#16'EditScript1Click'#0#0#9'T'
+  +'MenuItem'#12'ClearScript1'#7'Caption'#6#12'Clear Script'#7'OnClick'#7#17'Cl'
+  +'earScript1Click'#0#0#0#11'TOpenDialog'#10'OpenDialog'#10'DefaultExt'#6#4'.t'
+  +'xt'#4'left'#2'('#3'top'#3#144#1#0#0#11'TSaveDialog'#10'SaveDialog'#4'left'#2
+  +'H'#3'top'#3#144#1#0#0#10'TPopupMenu'#10'TimerPopup'#9'AutoPopup'#8#4'left'#3
+  +'\'#1#3'top'#3#139#1#0#9'TMenuItem'#9'NewTimer1'#7'Caption'#6#9'New Timer'#7
+  ,'OnClick'#7#13'AddTimerClick'#0#0#9'TMenuItem'#12'DeleteTimer1'#7'Caption'#6
+  +#12'Delete Timer'#7'OnClick'#7#16'DeleteTimerClick'#0#0#9'TMenuItem'#11'Edit'
+  +'Script2'#7'Caption'#6#11'Edit Script'#7'OnClick'#7#14'EditTimerClick'#0#0#9
+  +'TMenuItem'#19'LoadScriptfromfile1'#7'Caption'#6#11'Load Script'#7'OnClick'#7
+  +#24'LoadScriptfromfile1Click'#0#0#0#10'TPopupMenu'#10'ColorPopup'#9'AutoPopu'
+  +'p'#8#4'left'#3#132#1#3'top'#3#139#1#0#9'TMenuItem'#13'NewColorLine1'#7'Capt'
+  +'ion'#6#8'Add Line'#7'OnClick'#7#19'AddCustomColorClick'#0#0#9'TMenuItem'#11
+  +'DeleteLine1'#7'Caption'#6#11'Delete Line'#7'OnClick'#7#22'DeleteCustomColor'
+  +'Click'#0#0#9'TMenuItem'#9'EditText1'#7'Caption'#6#9'Edit Text'#7'Enabled'#8
+  +#0#0#9'TMenuItem'#12'ModifyColod1'#7'Caption'#6#12'Modify Color'#7'Enabled'#8
+  +#0#0#0#11'TFontDialog'#11'FontDialog1'#10'Font.Color'#7#12'clWindowText'#11
+  +'Font.Height'#2#245#9'Font.Name'#6#13'MS Sans Serif'#11'MinFontSize'#2#0#11
+  +'MaxFontSize'#2#0#4'left'#3#172#1#3'top'#3#139#1#0#0#0
+]);

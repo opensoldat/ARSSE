@@ -15,16 +15,16 @@ object Settings1: TSettings1
   OnKeyDown = FormKeyDown
   Position = poMainFormCenter
   LCLVersion = '1.6.4.0'
-  object PageControl1: TPageControl
+  object SettingsPage: TPageControl
     Left = 0
     Height = 428
     Top = 0
     Width = 464
-    ActivePage = Colors
+    ActivePage = GeneralSettingsTab
     Align = alClient
-    TabIndex = 5
+    TabIndex = 0
     TabOrder = 2
-    object TabSheet1: TTabSheet
+    object GeneralSettingsTab: TTabSheet
       Caption = 'General'
       ClientHeight = 402
       ClientWidth = 456
@@ -267,10 +267,10 @@ object Settings1: TSettings1
         end
       end
     end
-    object TabSheet4: TTabSheet
+    object IRCSettingsTab: TTabSheet
       Caption = 'IRC'
-      ClientHeight = 0
-      ClientWidth = 0
+      ClientHeight = 402
+      ClientWidth = 456
       ImageIndex = 3
       object Label11: TLabel
         Left = 47
@@ -431,9 +431,9 @@ object Settings1: TSettings1
       end
       object QNetAuth: TCheckBox
         Left = 18
-        Height = 17
+        Height = 19
         Top = 149
-        Width = 119
+        Width = 116
         Caption = 'enable AUTH/Login'
         TabOrder = 8
       end
@@ -479,7 +479,7 @@ object Settings1: TSettings1
         TabOrder = 4
       end
     end
-    object TabSheet2: TTabSheet
+    object EventsSettingsTab: TTabSheet
       Caption = 'Events'
       ClientHeight = 402
       ClientWidth = 456
@@ -560,7 +560,7 @@ object Settings1: TSettings1
         Visible = False
       end
     end
-    object TabSheet6: TTabSheet
+    object TimersSettingsTab: TTabSheet
       Caption = 'Timers'
       ClientHeight = 402
       ClientWidth = 456
@@ -642,7 +642,7 @@ object Settings1: TSettings1
         Visible = False
       end
     end
-    object TabSheet3: TTabSheet
+    object ScriptEditorTab: TTabSheet
       Caption = 'Script Editor'
       ClientHeight = 402
       ClientWidth = 456
@@ -833,8 +833,8 @@ object Settings1: TSettings1
         TabOrder = 7
       end
     end
-    object Colors: TTabSheet
-      Caption = 'Colors'
+    object ColorsTab: TTabSheet
+      Caption = 'ColorsTab'
       ClientHeight = 402
       ClientWidth = 456
       ImageIndex = 6
@@ -1096,7 +1096,7 @@ object Settings1: TSettings1
         TabOrder = 6
       end
     end
-    object TabSheet7: TTabSheet
+    object HotkeysTab: TTabSheet
       Caption = 'Hotkeys'
       ClientHeight = 402
       ClientWidth = 456
@@ -1182,10 +1182,10 @@ object Settings1: TSettings1
         Visible = False
       end
     end
-    object TabSheet5: TTabSheet
+    object AboutTab: TTabSheet
       Caption = 'About'
-      ClientHeight = 0
-      ClientWidth = 0
+      ClientHeight = 402
+      ClientWidth = 456
       ImageIndex = 4
       object Label9: TLabel
         Left = 64
@@ -1244,7 +1244,7 @@ object Settings1: TSettings1
       end
     end
   end
-  object BitBtn1: TBitBtn
+  object SettingsOKButton: TBitBtn
     Left = 128
     Height = 25
     Top = 396
@@ -1270,10 +1270,10 @@ object Settings1: TSettings1
     }
     ModalResult = 1
     NumGlyphs = 2
-    OnClick = BitBtn1Click
+    OnClick = SettingsOKButtonClick
     TabOrder = 0
   end
-  object BitBtn2: TBitBtn
+  object SettingsCancelButton: TBitBtn
     Left = 248
     Height = 25
     Top = 396
@@ -1300,7 +1300,7 @@ object Settings1: TSettings1
     }
     ModalResult = 2
     NumGlyphs = 2
-    OnClick = BitBtn2Click
+    OnClick = SettingsCancelButtonClick
     TabOrder = 1
   end
   object EventPopup: TPopupMenu

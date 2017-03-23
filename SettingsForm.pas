@@ -28,11 +28,11 @@ uses
 
 type
   TSettings1 = class(TForm)
-    BitBtn1: TBitBtn;
-    BitBtn2: TBitBtn;
-    PageControl1: TPageControl;
-    TabSheet1: TTabSheet;
-    TabSheet2: TTabSheet;
+    SettingsOKButton: TBitBtn;
+    SettingsCancelButton: TBitBtn;
+    SettingsPage: TPageControl;
+    GeneralSettingsTab: TTabSheet;
+    EventsSettingsTab: TTabSheet;
     EventList: TListView;
     EventDesc: TMemo;
     EventPopup: TPopupMenu;
@@ -40,7 +40,7 @@ type
     EditScript1: TMenuItem;
     OpenDialog: TOpenDialog;
     ScriptFileEdit: TEdit;
-    TabSheet3: TTabSheet;
+    ScriptEditorTab: TTabSheet;
     ScriptFile: TEdit;
     Label2: TLabel;
     Label4: TLabel;
@@ -54,7 +54,7 @@ type
     ScriptHelp: TButton;
     SaveDialog: TSaveDialog;
     ClearScript1: TMenuItem;
-    TabSheet4: TTabSheet;
+    IRCSettingsTab: TTabSheet;
     Label11: TLabel;
     IRCServer: TEdit;
     Label12: TLabel;
@@ -78,7 +78,7 @@ type
     prefix: TEdit;
     QNetCmd: TEdit;
     Label8: TLabel;
-    TabSheet5: TTabSheet;
+    AboutTab: TTabSheet;
     AboutBox: TMemo;//TRichEdit;
     Label9: TLabel;
     GlobalSettings: TGroupBox;
@@ -99,7 +99,7 @@ type
     AutoMsgTime: TEdit;
     autosay: TCheckBox;
     AutoMsgList: TMemo;
-    TabSheet6: TTabSheet;
+    TimersSettingsTab: TTabSheet;
     TimerList: TListView;
     AddTimer: TButton;
     EditTimer: TButton;
@@ -114,7 +114,7 @@ type
     autoupdate: TCheckBox;
     updatefreq: TComboBox;
     PlayersOnTab: TCheckBox;
-    Colors: TTabSheet;
+    ColorsTab: TTabSheet;
     ItemColors: TGroupBox;
     mainConsole: TColorBox;
     Label10: TLabel;
@@ -145,7 +145,7 @@ type
     ColorPicker: TColorBox;
     LineEdit: TEdit;
     DefaultColors: TButton;
-    TabSheet7: TTabSheet;
+    HotkeysTab: TTabSheet;
     HotkeyList: TListView;
     Label27: TLabel;
     FontDialog1: TFontDialog;
@@ -160,8 +160,8 @@ type
     HotKeyShortcutEdit: TEdit;
     IRCUsername: TEdit;
     Label32: TLabel;
-    procedure BitBtn1Click(Sender: TObject);
-    procedure BitBtn2Click(Sender: TObject);
+    procedure SettingsOKButtonClick(Sender: TObject);
+    procedure SettingsCancelButtonClick(Sender: TObject);
     procedure EventListSelectItem(Sender: TObject; Item: TListItem;
       Selected: Boolean);
     procedure EventListMouseDown(Sender: TObject; Button: TMouseButton;
@@ -300,18 +300,18 @@ begin
 
 end;
 
-procedure TSettings1.BitBtn1Click(Sender: TObject);
+procedure TSettings1.SettingsOKButtonClick(Sender: TObject);
 begin
- BitBtn1.Enabled:= false;
- BitBtn2.Enabled:= false;
- SaveScriptClick(BitBtn1);
+ SettingsOKButton.Enabled:= false;
+ SettingsCancelButton.Enabled:= false;
+ SaveScriptClick(SettingsOKButton);
  Form1.SaveConfig(ExtractFilePath(Application.ExeName)+'arsse.ini');
  ModalResult := mrOK;
- BitBtn1.Enabled:= true;
- BitBtn2.Enabled:= true; 
+ SettingsOKButton.Enabled:= true;
+ SettingsCancelButton.Enabled:= true;
 end;
 
-procedure TSettings1.BitBtn2Click(Sender: TObject);
+procedure TSettings1.SettingsCancelButtonClick(Sender: TObject);
 begin
  ModalResult := mrCancel;
 end;
@@ -389,8 +389,8 @@ procedure TSettings1.EventListDblClick(Sender: TObject);
 var Rect: TRect;
 begin
   Rect:= item.DisplayRect(drBounds);
-//  Rect.Top:= Rect.Top + TabSheet1.Top;
-//  Rect.Left:= Rect.Left + TabSheet1.Left;
+//  Rect.Top:= Rect.Top + GeneralSettingsTab.Top;
+//  Rect.Left:= Rect.Left + GeneralSettingsTab.Left;
   ScriptFileEdit.Left:= Rect.Left + EventList.Column[0].Width +2;
   ScriptFileEdit.Top:= Rect.Top;
   ScriptFileEdit.Width:= 287;
@@ -498,7 +498,7 @@ begin
  else ScriptEditor.Clear;
  ScriptFile.Text:= item.SubItems[0];
  item.Checked:= true;
- PageControl1.ActivePage:= TabSheet3;
+ SettingsPage.ActivePage:= ScriptEditorTab;
 end;
 
 procedure TSettings1.ClearScript1Click(Sender: TObject);
@@ -532,14 +532,14 @@ procedure TSettings1.AboutBoxMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
  HideCaret((Sender as TMemo).Handle);
- BitBtn1.SetFocus;
+ SettingsOKButton.SetFocus;
 end;
 
 {
 procedure TSettings1.AboutBoxKeyPress(Sender: TObject; var Key: Char);
 begin
  HideCaret((Sender as TRichEdit).Handle);
- BitBtn1.SetFocus;
+ SettingsOKButton.SetFocus;
 end;
 }
 
@@ -636,8 +636,8 @@ begin
   if (item = nil) or (TimerList.Selected=nil)then exit;
 
   Rect:= item.DisplayRect(drBounds);
-//  Rect.Top:= Rect.Top + TabSheet1.Top;
-//  Rect.Left:= Rect.Left + TabSheet1.Left;
+//  Rect.Top:= Rect.Top + GeneralSettingsTab.Top;
+//  Rect.Left:= Rect.Left + GeneralSettingsTab.Left;
   TimerEdit.Left:= Rect.Left + 2 + pt.X; //TimerList.Columns[pt.Y].Width; // + EventList.Column[0].Width;
   TimerEdit.Top:= Rect.Top;
   TimerEdit.Width:= TimerList.Columns[pt.Y].Width;
@@ -717,7 +717,7 @@ item:= TimerList.Selected;
  else ScriptEditor.Clear;
  ScriptFile.Text:= item.SubItems[2];
 // item.Checked:= true;
- PageControl1.ActivePage:= TabSheet3;
+ SettingsPage.ActivePage:= ScriptEditorTab;
 end;
 
 procedure TSettings1.LoadScriptfromfile1Click(Sender: TObject);
@@ -742,8 +742,8 @@ begin
   if CustomColorList.Selected = nil then exit;
 
   Rect:= CustomColorList.Selected.DisplayRect(drBounds);
-//  Rect.Top:= Rect.Top + TabSheet1.Top;
-//  Rect.Left:= Rect.Left + TabSheet1.Left;
+//  Rect.Top:= Rect.Top + GeneralSettingsTab.Top;
+//  Rect.Left:= Rect.Left + GeneralSettingsTab.Left;
   ColorPicker.Left:= Rect.Left + 24 + pt.X; //TimerList.Columns[pt.Y].Width; // + EventList.Column[0].Width;
   ColorPicker.Top:= Rect.Top + CustomColorList.Top - 2;
   ColorPicker.Width:= CustomColorList.Columns[pt.Y].Width;

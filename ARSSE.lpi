@@ -76,9 +76,10 @@
         <HasResources Value="True"/>
       </Unit5>
       <Unit6>
-        <Filename Value="CmdEdig.pas"/>
+        <Filename Value="cmdedit.pas"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
+        <UnitName Value="CMDedit"/>
       </Unit6>
       <Unit7>
         <Filename Value="Mutex.pas"/>

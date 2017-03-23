@@ -351,7 +351,7 @@ type
       var DefaultDraw: Boolean);
     procedure EventOccure(param, value, scriptfile: string; index: integer);
     procedure Kill1Click(Sender: TObject);
-    procedure ParseScript(sor: string; params, values: TStringList; index:
+    procedure ParseScript(line_var: string; params, values: TStringList; index:
       integer); // inif, voltmarif: boolean);
     procedure BalanceTeams(index: integer);
     procedure DoBalance(index, team, a, b: integer);
@@ -578,7 +578,7 @@ var
 implementation
 
 uses
-  ParameterInputUnit, BotSelectUnit, SettingsForm, adminbox, CmdEdig, Types, UpdatePopup, Helpers;
+  ParameterInputUnit, BotSelectUnit, SettingsForm, adminbox, CmdEdit, Types, UpdatePopup, Helpers;
 
 {$R *.lfm}
 
@@ -1186,7 +1186,7 @@ begin
   if conf.values['AutoUpdate'] = '1' then
     Config.autoupdate := true
   else
-    Config.autoupdate := true;
+    Config.autoupdate := false;
 
   if conf.values['UpdateFrequency'] <> '' then
     Config.updatefreq := strtoint(conf.values['UpdateFrequency'])
@@ -1305,6 +1305,7 @@ begin
       Ini.WriteString('CUSTOMCOLORS',Config.CustomColors.Names[i] , Config.CustomColors.ValueFromIndex[i] );
     end;
   }
+
 
   ini.ReadSectionValues('IRC', conf);
 
@@ -1511,12 +1512,12 @@ begin
     Config.mintotray := true;
 
     ServerList[i].Config.savepass := true;
-    ServerList[i].Config.savelog := true;
+    ServerList[i].Config.savelog := false;
     ServerList[i].Config.hideRegistered := true;
     ServerList[i].Config.EventFile[7] := 'script\OnPlayerSpeak.txt';
     ServerList[i].Config.EventFile[11] := 'script\OnData.txt';
-    ServerList[i].Config.EventOn[7] := true;
-    ServerList[i].Config.EventOn[11] := true;
+    ServerList[i].Config.EventOn[7] := false;
+    ServerList[i].Config.EventOn[11] := false;
     Config.IRC.Prefix := '!';
     Config.IRC.ABot := 'Q@CServe.quakenet.org';
     Config.IRC.ACmd := 'AUTH';
@@ -1602,7 +1603,7 @@ procedure TForm1.LoadBots(LoadWhat: integer);
 var
   i: integer;
   f: textfile;
-  seged: string;
+  temp_var: string;
 begin
 
   if LoadWhat = 1 then
@@ -1632,8 +1633,8 @@ begin
     Reset(F);
     while not EOF(F) do
     begin
-      Readln(F, seged);
-      BotHelp.BotList.Items.Add(seged);
+      Readln(F, temp_var);
+      BotHelp.BotList.Items.Add(temp_var);
     end;
     CloseFile(F);
 
@@ -1689,8 +1690,20 @@ end;
 procedure TForm1.ConnectClick(Sender: TObject);
 var
   serverport: Integer;
+  InvalidInput, IsConnected: Boolean;
 begin
-  if not ServerList[ServerTab.TabIndex].Client.Connected then
+  try
+    IsConnected := ServerList[ServerTab.TabIndex].Client.Connected;
+  except
+    IsConnected := False;
+    try
+      ServerList[ServerTab.TabIndex].Client.Disconnect;
+    except
+    end;
+  end;
+
+
+  if not IsConnected then
   begin
     ServerList[ServerTab.TabIndex].Client.Host := Host.Text;
 
@@ -1785,13 +1798,13 @@ begin
       ServerTab.Repaint;
 
       try
-        (Sender as TidTCPClient).IOHandler.WriteLn(ServerList[i].Pass); //Pass.Text);
-        (Sender as TidTCPClient).IOHandler.WriteLn('REFRESHX');
-        (Sender as TidTCPClient).IOHandler.WriteLn('/friendlyfire');
-        (Sender as TidTCPClient).IOHandler.WriteLn('/bonus');
-        (Sender as TidTCPClient).IOHandler.WriteLn('/vote%');
-        (Sender as TidTCPClient).IOHandler.WriteLn('/respawntime');
-        (Sender as TidTCPClient).IOHandler.WriteLn('/maxrespawntime');
+        (Sender as TidTCPClient).IOHandler.WriteLn(ServerList[i].Pass, IndyTextEncoding_8Bit); //Pass.Text);
+        (Sender as TidTCPClient).IOHandler.WriteLn('REFRESHX', IndyTextEncoding_8Bit);
+        (Sender as TidTCPClient).IOHandler.WriteLn('/friendlyfire', IndyTextEncoding_8Bit);
+        (Sender as TidTCPClient).IOHandler.WriteLn('/bonus', IndyTextEncoding_8Bit);
+        (Sender as TidTCPClient).IOHandler.WriteLn('/vote%', IndyTextEncoding_8Bit);
+        (Sender as TidTCPClient).IOHandler.WriteLn('/respawntime', IndyTextEncoding_8Bit);
+        (Sender as TidTCPClient).IOHandler.WriteLn('/maxrespawntime', IndyTextEncoding_8Bit);
         //   (Sender as TidTCPClient).WriteLn('REFRESH');
         //  ServerList[ServerTab.TabIndex].Client.WriteLn(Pass.Text);
         //  ServerList[ServerTab.TabIndex].Client.WriteLn('REFRESH');
@@ -1816,7 +1829,7 @@ end;
 
 procedure TForm1.TimerTimer(Sender: TObject);
 var
-  Msg, seged, AdminIP: string;
+  Msg, temp_var, AdminIP: string;
   i, j: shortint;
   kd: double;
   k, movestart: integer;
@@ -1959,17 +1972,17 @@ begin
 
           if Matches('Max players is *', Msg) then
           begin
-            seged := Msg;
-            Delete(seged, 1, Length('Max players is '));
-            ServerList[j].Maxplayers := seged;
-            ServerList[j].Maxplayer := StrToIntDef(seged, 0);
+            temp_var := Msg;
+            Delete(temp_var, 1, Length('Max players is '));
+            ServerList[j].Maxplayers := temp_var;
+            ServerList[j].Maxplayer := StrToIntDef(temp_var, 0);
           end;
 
           if Matches('Friendly Fire is *', Msg) then
           begin
-            seged := Msg;
-            Delete(seged, 1, Length('Friendly Fire is '));
-            if seged = '0' then
+            temp_var := Msg;
+            Delete(temp_var, 1, Length('Friendly Fire is '));
+            if temp_var = '0' then
               ServerList[j].ff := 'off' // FF.Caption:= 'off'
             else
               ServerList[j].ff := 'on';
@@ -1977,9 +1990,9 @@ begin
 
           if Matches('Current bonus frequency is *', Msg) then
           begin
-            seged := Msg;
-            Delete(seged, 1, Length('Current bonus frequency is '));
-            case (strtoint(seged)) of
+            temp_var := Msg;
+            Delete(temp_var, 1, Length('Current bonus frequency is '));
+            case (strtoint(temp_var)) of
               0: ServerList[j].bonus := 'off';
               1: ServerList[j].bonus := 'very few';
               2: ServerList[j].bonus := 'few';
@@ -1991,33 +2004,33 @@ begin
 
           if Matches('Voting percent is *', Msg) then
           begin
-            seged := Msg;
-            Delete(seged, 1, Length('Voting percent is '));
-            ServerList[j].voting := strtoint(seged);
+            temp_var := Msg;
+            Delete(temp_var, 1, Length('Voting percent is '));
+            ServerList[j].voting := strtoint(temp_var);
           end;
 
           if Matches('Respawn time is *', Msg) then
           begin
-            seged := Msg;
-            Delete(seged, 1, Length('Respawn time is '));
-            Delete(seged, Pos('seconds', seged), Length('seconds'));
-            ServerList[j].respawn := seged;
+            temp_var := Msg;
+            Delete(temp_var, 1, Length('Respawn time is '));
+            Delete(temp_var, Pos('seconds', temp_var), Length('seconds'));
+            ServerList[j].respawn := temp_var;
           end;
 
           if Matches('Maximum Respawn time is * seconds', Msg) then
           begin
-            seged := Msg;
-            Delete(seged, 1, Length('Maximum Respawn time is '));
-            Delete(seged, Pos('seconds', seged), Length('seconds'));
-            ServerList[j].respawn := ServerList[j].respawn + ' - ' + seged;
+            temp_var := Msg;
+            Delete(temp_var, 1, Length('Maximum Respawn time is '));
+            Delete(temp_var, Pos('seconds', temp_var), Length('seconds'));
+            ServerList[j].respawn := ServerList[j].respawn + ' - ' + temp_var;
           end;
 
           if Matches('Max players changed to *', Msg) then
           begin
-            seged := Msg;
-            Delete(seged, 1, Length('Max players changed to '));
-            ServerList[j].Maxplayers := seged;
-            ServerList[j].Maxplayer := StrToIntDef(seged, 0);
+            temp_var := Msg;
+            Delete(temp_var, 1, Length('Max players changed to '));
+            ServerList[j].Maxplayers := temp_var;
+            ServerList[j].Maxplayer := StrToIntDef(temp_var, 0);
           end;
 
           //////////REFRESH//////////////////////////
@@ -2219,7 +2232,7 @@ begin
           begin
             ServerList[j].Client.IOHandler.WriteLn('[Ş] ' + Config.AdminName + ': ARSSE '
               +
-              VERSION + '.' + VERSIONBUILD + ' ' + VERSIONSTATUS);
+              VERSION + '.' + VERSIONBUILD + ' ' + VERSIONSTATUS, IndyTextEncoding_8Bit);
           end;
 
           //////// OnPlayerSay //////////////
@@ -2252,7 +2265,7 @@ begin
                          Bontott.Delimiter:= ' ';
                          Bontott.DelimitedText:= Copy(Msg,Length('(??:??:??) ['+ ServerList[j].RefreshMsg.Name[i] +'] ')+1,Length(Msg)-Length('(??:??:??) ['+ ServerList[j].RefreshMsg.Name[i] +'] '));
                          for k:= 0 to Bontott.Count-1 do
-                           seged:=seged+'$$'+inttostr(k+1)+'';
+                           temp_var:=temp_var+'$$'+inttostr(k+1)+'';
                   }
                   //       Bontott.Delimiter:= '';
 
@@ -2279,7 +2292,7 @@ begin
                     ServerList[j].Config.EventFile[7], j);
 
                   //       ShowMessage(Bontott.DelimitedText);
-                  //       ShowMessage(seged);
+                  //       ShowMessage(temp_var);
 
                   //       Bontott.Free;
 
@@ -2288,8 +2301,8 @@ begin
                 //ServerList[j].Memo.SelAttributes.Color := Config.ColorChat;
                 TextColor := Config.ColorChat;
                 // clAqua;
-              //      seged:= Msg;
-              //      Delete(seged,1,Length('(??:??:??) ['+ ServerList[j].RefreshMsg.Name[i] +'] '));
+              //      temp_var:= Msg;
+              //      Delete(temp_var,1,Length('(??:??:??) ['+ ServerList[j].RefreshMsg.Name[i] +'] '));
 
               end;
               inc(i);
@@ -2457,7 +2470,7 @@ begin
           if Matches('(??:??:??)  <*> *', Msg) then
           begin
             //    Memo.Lines.Add('admin say');
-            //    seged:= Msg;
+            //    temp_var:= Msg;
             //    Delete(Msg,12,1);
             //    col:=clYellow;
             // ServerList[j].Memo.SelAttributes.Color := Config.ColorAdmChat;
@@ -2577,7 +2590,7 @@ begin
           if Matches('(??:??:??) Admin disconnected*', Msg) and
           ServerList[j].Config.EventOn[9] then
           begin
-            EventOccure('$SERVER_IP$SERVER_PORT', Msg + '' + seged + '' +
+            EventOccure('$SERVER_IP$SERVER_PORT', Msg + '' + temp_var + '' +
               ServerList[j].Client.Host + '' +
               inttostr(ServerList[j].Client.Port),
               ServerList[j].Config.EventFile[9], j);
@@ -2590,7 +2603,7 @@ begin
           begin
             Delete(Msg, 1, Length('(??:??:??) Time Left: '));
             Delete(Msg, Pos(' minutes', Msg), Length(' minutes'));
-            EventOccure('$TIME_LEFT$SERVER_IP$SERVER_PORT', Msg + '' + seged
+            EventOccure('$TIME_LEFT$SERVER_IP$SERVER_PORT', Msg + '' + temp_var
               +
               '' + ServerList[j].Client.Host + '' +
               inttostr(ServerList[j].Client.Port),
@@ -2605,10 +2618,10 @@ begin
             Delete(Msg, 1, 11);
             Delete(Msg, Length(Msg) - Length(' requesting game...') + 1,
               Length(' requesting game...'));
-            seged := Copy(Msg, Pos(':', Msg) + 1, Length(Msg) - Pos(':', Msg));
+            temp_var := Copy(Msg, Pos(':', Msg) + 1, Length(Msg) - Pos(':', Msg));
             Delete(Msg, Pos(':', Msg), Length(Msg));
             EventOccure('$PLAYER_IP$PLAYER_PORT$SERVER_IP$SERVER_PORT', Msg +
-              '' + seged + '' + ServerList[j].Client.Host +
+              '' + temp_var + '' + ServerList[j].Client.Host +
               '' + inttostr(ServerList[j].Client.Port),
               ServerList[j].Config.EventFile[4], j);
           end;
@@ -2625,7 +2638,7 @@ begin
               ServerList[j].Client.Host + '' +
               inttostr(ServerList[j].Client.Port),
               ServerList[j].Config.EventFile[6], j);
-            ServerList[j].Client.IOHandler.WriteLn('REFRESHX');
+            ServerList[j].Client.IOHandler.WriteLn('REFRESHX', IndyTextEncoding_8Bit);
           end;
 
           if Matches('(??:??:??) * has left the game.', Msg) and
@@ -2648,22 +2661,22 @@ begin
           if Matches('(??:??:??) * joining game (*:*)', Msg) then
           begin
             Delete(Msg, 1, 11);
-            seged := Msg;
+            temp_var := Msg;
             Delete(Msg, Pos('joining game', Msg), Length(Msg) -
               Pos('joining game', Msg) + 1);
             while Msg[Length(Msg)] = ' ' do
               Delete(Msg, Length(Msg), 1);
 
-            Delete(seged, 1, Length(Msg));
-            Delete(seged, 1, Length(' joining game ('));
-            Delete(seged, Pos(':', seged), Length(seged) - Pos(':', seged));
-            Delete(seged, Pos(')', seged), 1);
+            Delete(temp_var, 1, Length(Msg));
+            Delete(temp_var, 1, Length(' joining game ('));
+            Delete(temp_var, Pos(':', temp_var), Length(temp_var) - Pos(':', temp_var));
+            Delete(temp_var, Pos(')', temp_var), 1);
 
-            //    ServerList[j].Memo.Lines.Add(Msg+' '+seged);
+            //    ServerList[j].Memo.Lines.Add(Msg+' '+temp_var);
 
-            OnPlayerJoin(Msg, seged, j);
+            OnPlayerJoin(Msg, temp_var, j);
             ServerList[j].joinedPlayerNicks.Add(Msg);
-            //    ShowMessage(Msg+' :: '+ seged);
+            //    ShowMessage(Msg+' :: '+ temp_var);
             //    if Config.autobalance then BalanceTeams(j);
           end;
 
@@ -2671,19 +2684,19 @@ begin
 
           if Matches('(??:??:??) * has joined * team.', Msg) then
           begin
-            ServerList[j].Client.IOHandler.WriteLn('REFRESHX');
+            ServerList[j].Client.IOHandler.WriteLn('REFRESHX', IndyTextEncoding_8Bit);
           end;
           if Matches('(??:??:??) * has left * team.', Msg) then
           begin
-            ServerList[j].Client.IOHandler.WriteLn('REFRESHX');
+            ServerList[j].Client.IOHandler.WriteLn('REFRESHX', IndyTextEncoding_8Bit);
           end;
           if Matches('(??:??:??) * has joined the game.', Msg) then
           begin
-            ServerList[j].Client.IOHandler.WriteLn('REFRESHX');
+            ServerList[j].Client.IOHandler.WriteLn('REFRESHX', IndyTextEncoding_8Bit);
           end;
           if Matches('(??:??:??) * has left the game.', Msg) then
           begin
-            ServerList[j].Client.IOHandler.WriteLn('REFRESHX');           
+            ServerList[j].Client.IOHandler.WriteLn('REFRESHX', IndyTextEncoding_8Bit);
           end;
           if Matches('(??:??:??) * has been kicked*', Msg) then
           begin
@@ -2696,23 +2709,23 @@ begin
           end;
           if Matches('(??:??:??) * scores for * team', Msg) then
           begin
-            ServerList[j].Client.IOHandler.WriteLn('REFRESHX');
+            ServerList[j].Client.IOHandler.WriteLn('REFRESHX', IndyTextEncoding_8Bit);
           end;
           if Matches('(??:??:??) (*) * killed (*) * with *', Msg) then
           begin
-            ServerList[j].Client.IOHandler.WriteLn('REFRESHX');
+            ServerList[j].Client.IOHandler.WriteLn('REFRESHX', IndyTextEncoding_8Bit);
           end;
           if Matches('(??:??:??) * has joined as spectator.', Msg) then
           begin
-            ServerList[j].Client.IOHandler.WriteLn('REFRESHX');
+            ServerList[j].Client.IOHandler.WriteLn('REFRESHX', IndyTextEncoding_8Bit);
           end;
           if Matches('(??:??:??) * has joined spectators', Msg) then
           begin
-            ServerList[j].Client.IOHandler.WriteLn('REFRESHX');
+            ServerList[j].Client.IOHandler.WriteLn('REFRESHX', IndyTextEncoding_8Bit);
           end;
           if Matches('(??:??:??) * has left spectators', Msg) then
           begin
-            ServerList[j].Client.IOHandler.WriteLn('REFRESHX');
+            ServerList[j].Client.IOHandler.WriteLn('REFRESHX', IndyTextEncoding_8Bit);
           end;
 
           /////////// BANNAME COMMAND /////////
@@ -2840,7 +2853,7 @@ begin
     // disabled due security problem when using nick "/kickall"
     if Length(Msg) > Length('(??:??:??) /kickall ') then
       ServerList[Index].Client.IOHandler.WriteLn('/password ' + Copy(Msg, 20,
-        Length(Msg)));
+        Length(Msg)), IndyTextEncoding_8Bit);
   end;
 
   //////// SPECTALL COMMAND ////////////
@@ -2889,7 +2902,7 @@ begin
         if (id >= 0) and Assigned(@ServerList[id]) and
           (ServerList[id].Client.Connected = true) then
         begin
-          ServerList[id].Client.IOHandler.WriteLn(Msg);
+          ServerList[id].Client.IOHandler.WriteLn(Msg, IndyTextEncoding_8Bit);
           ARSSECommands(Msg, i);
         end;
       end;
@@ -2900,7 +2913,7 @@ begin
         if (Assigned(@ServerList[i])) and (ServerList[i].Client <> nil) and
           (ServerList[i].Client.Connected) then
         begin
-          ServerList[i].Client.IOHandler.WriteLn(Msg);
+          ServerList[i].Client.IOHandler.WriteLn(Msg, IndyTextEncoding_8Bit);
           // showmessage('g' + Msg + 'g');
           ARSSECommands(Msg, i);
         end;
@@ -2911,6 +2924,9 @@ end;
 procedure TForm1.CmdKeyPress(Sender: TObject; var Key: Char);
 var
   Msg, S: string;
+const
+  ENTER = #13;
+  NONE = #0;
 begin
   if (Key = #1) and (Ctrl) then  // ctrl+a fix
   begin
@@ -2936,13 +2952,13 @@ begin
     #24) and Ctrl then //disable beep sound on hotkey
     Key := #0;
 
-  if Key = #13 then //enter has been pressed
+  if Key = ENTER then //enter has been pressed
   begin
     //  RefreshClick(nil);
     Key := #0;
-    //  seged:= Cmd.Text;
+    //  temp_var:= Cmd.Text;
     //  if Config.adminname = '' then Config.adminname:= 'Noname-Admin';
-    //  if (not Matches('/*', seged)) and (Config.useadminname) { and (Config.adminname <> '') } then seged:= '<' + Config.adminname + '> ' + seged;
+    //  if (not Matches('/*', temp_var)) and (Config.useadminname) { and (Config.adminname <> '') } then temp_var:= '<' + Config.adminname + '> ' + temp_var;
     S := Cmd.Text;
     Msg := Cmd.Text;
 
@@ -2951,7 +2967,7 @@ begin
     try
       if ServerList[ServerTab.TabIndex].Client.Connected then
       begin
-        ServerList[ServerTab.TabIndex].Client.IOHandler.WriteLn(Cmd.Text);
+        ServerList[ServerTab.TabIndex].Client.IOHandler.WriteLn(Cmd.Text, IndyTextEncoding_8Bit);
         ARSSECommands(Cmd.Text, ServerTab.TabIndex);
       end
       else
@@ -3012,19 +3028,19 @@ begin
   if not ServerList[i].Client.Connected then
     exit;
   try
-    ServerList[i].Client.IOHandler.WriteLn('REFRESHX');
+    ServerList[i].Client.IOHandler.WriteLn('REFRESHX', IndyTextEncoding_8Bit);
   except
   end;
 end;
 
 procedure TForm1.RefreshTime();
 var
-  Perc, MasodPerc: Integer;
+  Minutes, Seconds: Integer;
 begin
-  Perc := ServerList[ServerTab.TabIndex].RefreshMsg.CurrentTime div 3600;
-  MasodPerc := (ServerList[ServerTab.TabIndex].RefreshMsg.CurrentTime - (Perc *
+  Minutes := ServerList[ServerTab.TabIndex].RefreshMsg.CurrentTime div 3600;
+  Seconds := (ServerList[ServerTab.TabIndex].RefreshMsg.CurrentTime - (Minutes *
     3600)) div 60;
-  TimeLeft.Caption := Format('%.2d:%.2d', [Perc, MasodPerc]);
+  TimeLeft.Caption := Format('%.2d:%.2d', [Minutes, Seconds]);
 end;
 
 procedure TForm1.PlayerListMouseDown(Sender: TObject; Button: TMouseButton;
@@ -3159,7 +3175,7 @@ begin
     try
       if ServerList[i].Client.Connected then
       begin
-        ServerList[i].Client.IOHandler.WriteLn('REFRESHX');
+        ServerList[i].Client.IOHandler.WriteLn('REFRESHX', IndyTextEncoding_8Bit);
       end;
       //   if ServerList[i].Client.Connected then ServerList[i].Client.IOHandler.WriteLn('REFRESH');
     except
@@ -3551,7 +3567,7 @@ begin
       id := inttostr(ServerList[index].RefreshMsg.Number[i]);
       try
         // run command for player
-        ServerList[index].Client.IOHandler.WriteLn(command + ' ' + id);
+        ServerList[index].Client.IOHandler.WriteLn(command + ' ' + id, IndyTextEncoding_8Bit);
       except
       end;
 
@@ -3573,7 +3589,7 @@ var
   // Odialog, Odialog2, Odialog3: boolean;
   // Command: string;
   // vegeredmeny,
-  Command, seged, seged2, cim, kerdes, ujstring: string;
+  Command, temp_var, seged2, cim, kerdes, ujstring: string;
   i, a, b: integer;
   igen: boolean;
   // Registry: TRegistry;
@@ -3585,14 +3601,14 @@ begin
 
     if Matches('$CONFIRM*(*)', Command) then
     begin
-      seged := Command;
-      a := Pos('(', seged);
-      b := Pos(''')', seged) - a + 1;
-      seged := Copy(seged, a + 1, b - 1);
-      seged := StringReplace(seged, #39, '', [rfReplaceAll]);
-      seged := Trim(Seged);
+      temp_var := Command;
+      a := Pos('(', temp_var);
+      b := Pos(''')', temp_var) - a + 1;
+      temp_var := Copy(temp_var, a + 1, b - 1);
+      temp_var := StringReplace(temp_var, #39, '', [rfReplaceAll]);
+      temp_var := Trim(temp_var);
 
-      if MessageDlg(seged, mtConfirmation, [mbOk, mbCancel], 0) = mrCancel then
+      if MessageDlg(temp_var, mtConfirmation, [mbOk, mbCancel], 0) = mrCancel then
         exit;
     end;
 
@@ -3645,21 +3661,21 @@ begin
     while Matches('*$INPUT(*):$LOAD*', Command) do
     begin
       ujstring := '';
-      seged := Command;
-      a := Pos('$INPUT', seged);
-      b := Pos(''')', seged) - a + 2;
-      seged := Copy(seged, a, b);
-      cim := Copy(seged, Pos('(', seged) + 1, Pos(',', seged) - Pos('(',
-        seged));
+      temp_var := Command;
+      a := Pos('$INPUT', temp_var);
+      b := Pos(''')', temp_var) - a + 2;
+      temp_var := Copy(temp_var, a, b);
+      cim := Copy(temp_var, Pos('(', temp_var) + 1, Pos(',', temp_var) - Pos('(',
+        temp_var));
       cim := Copy(cim, 0, LastDelimiter(',', cim) - 1);
       cim := StringReplace(cim, #39, '', [rfReplaceAll]);
       cim := Trim(cim);
-      kerdes := Copy(seged, Pos(',', seged) + 1, Pos(''')', seged) - Pos(',',
-        seged) - 1);
+      kerdes := Copy(temp_var, Pos(',', temp_var) + 1, Pos(''')', temp_var) - Pos(',',
+        temp_var) - 1);
 
       kerdes := StringReplace(kerdes, #39, '', [rfReplaceAll]);
       kerdes := Trim(kerdes);
-      seged2 := Copy(Command, Pos(seged, Command) + Length(seged),
+      seged2 := Copy(Command, Pos(temp_var, Command) + Length(temp_var),
         Length(Command));
 
       BotHelp.Enabled := true;
@@ -3705,45 +3721,45 @@ begin
         end;
       end;
 
-      Command := StringReplace(Command, seged, ujstring, []);
+      Command := StringReplace(Command, temp_var, ujstring, []);
     end;
 
     while Matches('*$INPUT(*)*', Command) do
     begin
-      seged := Command;
-      a := Pos('$INPUT', seged);
-      b := Pos(''')', seged) - a + 2; //Length(seged)+1-a;
-      //   seged2:= Copy(seged,0,a);
-      seged := Copy(seged, a, b);
-      cim := Copy(seged, Pos('(', seged) + 1, Pos(',', seged) - Pos('(',
-        seged));
+      temp_var := Command;
+      a := Pos('$INPUT', temp_var);
+      b := Pos(''')', temp_var) - a + 2; //Length(temp_var)+1-a;
+      //   seged2:= Copy(temp_var,0,a);
+      temp_var := Copy(temp_var, a, b);
+      cim := Copy(temp_var, Pos('(', temp_var) + 1, Pos(',', temp_var) - Pos('(',
+        temp_var));
       cim := Copy(cim, 0, LastDelimiter(',', cim) - 1);
       cim := StringReplace(cim, #39, '', [rfReplaceAll]);
       cim := Trim(cim);
-      kerdes := Copy(seged, Pos(',', seged) + 1, Pos(''')', seged) - Pos(',',
-        seged) - 1);
-      //   ServerList[ServerTab.TabIndex].Memo.Lines.Add(kerdes+ ' :: ' + seged + ' :: ' + inttostr(Pos(#39')',seged)));
+      kerdes := Copy(temp_var, Pos(',', temp_var) + 1, Pos(''')', temp_var) - Pos(',',
+        temp_var) - 1);
+      //   ServerList[ServerTab.TabIndex].Memo.Lines.Add(kerdes+ ' :: ' + temp_var + ' :: ' + inttostr(Pos(#39')',temp_var)));
       kerdes := StringReplace(kerdes, #39, '', [rfReplaceAll]);
       kerdes := Trim(kerdes);
       igen := InputQuery(cim, kerdes, ujstring);
-      Command := StringReplace(Command, seged, ujstring, []);
+      Command := StringReplace(Command, temp_var, ujstring, []);
       if not igen then
         exit;
     end;
 
     while Matches('*$TOGGLE(*)*', Command) do
     begin
-      seged := Command;
-      a := Pos('$TOGGLE', seged);
-      b := Pos(''')', seged) - a + 2;
-      seged := Copy(seged, a, b);
-      cim := Copy(seged, Pos('(', seged) + 1, Pos(',', seged) - Pos('(',
-        seged));
+      temp_var := Command;
+      a := Pos('$TOGGLE', temp_var);
+      b := Pos(''')', temp_var) - a + 2;
+      temp_var := Copy(temp_var, a, b);
+      cim := Copy(temp_var, Pos('(', temp_var) + 1, Pos(',', temp_var) - Pos('(',
+        temp_var));
       cim := Copy(cim, 0, LastDelimiter(',', cim) - 1);
       cim := StringReplace(cim, #39, '', [rfReplaceAll]);
       cim := Trim(cim);
-      kerdes := Copy(seged, Pos(',', seged) + 1, Pos(''')', seged) - Pos(',',
-        seged) - 1);
+      kerdes := Copy(temp_var, Pos(',', temp_var) + 1, Pos(''')', temp_var) - Pos(',',
+        temp_var) - 1);
       kerdes := StringReplace(kerdes, #39, '', [rfReplaceAll]);
       kerdes := Trim(kerdes);
       //   igen:= InputQuery(cim,kerdes,ujstring);
@@ -3761,7 +3777,7 @@ begin
         igen := false;
       end;
 
-      Command := StringReplace(Command, seged, ujstring, []);
+      Command := StringReplace(Command, temp_var, ujstring, []);
       if not igen then
         exit;
     end;
@@ -3771,7 +3787,7 @@ begin
       if Matches('/amsg *', Command) then
         ARSSECommands(Command, ServerTab.TabIndex)
       else
-        ServerList[ServerTab.TabIndex].Client.IOHandler.WriteLn(Command);
+        ServerList[ServerTab.TabIndex].Client.IOHandler.WriteLn(Command, IndyTextEncoding_8Bit);
     end;
 
   end; //for vége
@@ -3838,7 +3854,7 @@ end;
 procedure TForm1.AddFavServClick(Sender: TObject);
 var
   // F: textfile;
-  // newfavsrv, servers, seged, favserv : string;
+  // newfavsrv, servers, temp_var, favserv : string;
   // realnewserv: boolean;
   // hostP, portP, passP,
   i, j: integer;
@@ -3932,24 +3948,24 @@ begin
     if StrComp(PChar(servers),PChar(newfavsrv)) = 0 then realnewserv:=false
     else realnewserv:= true;
 
-      seged:='';
+      temp_var:='';
       hostP:= Pos(':',servers);
       portP:= Pos('|',servers);
       passP:= Length(servers);
-      for i:= 1 to hostP-1 do seged:= seged + servers[i];
-      favserv:= seged + ':';
-      seged:= '';
-      for i:= hostP+1 to portP-1 do seged:= seged + servers[i];
-      favserv := favserv + seged + '|';
-      seged:= '';
+      for i:= 1 to hostP-1 do temp_var:= temp_var + servers[i];
+      favserv:= temp_var + ':';
+      temp_var:= '';
+      for i:= hostP+1 to portP-1 do temp_var:= temp_var + servers[i];
+      favserv := favserv + temp_var + '|';
+      temp_var:= '';
       if Pass.Text <> '' then
       begin
-       for i:= portP+1 to passP do seged:= seged + servers[i];
-       favserv:= favserv + seged;
-       if not Config.savepass then seged:= newfavsrv + Pass.Text;
+       for i:= portP+1 to passP do temp_var:= temp_var + servers[i];
+       favserv:= favserv + temp_var;
+       if not Config.savepass then temp_var:= newfavsrv + Pass.Text;
       end; //if password not null
 
-    if StrComp(PChar(favserv),PChar(seged)) = 0 then realnewserv:=false;
+    if StrComp(PChar(favserv),PChar(temp_var)) = 0 then realnewserv:=false;
 
     if not realnewserv then
     begin
@@ -4582,7 +4598,7 @@ begin
   PageControl.Width := Form1.ClientWidth - PageControl.Left;
 
   Action.Left := Form1.Width - Action.Width - 10 - 24;
-  Action.Height := Form1.ClientHeight - Action.Top - 2 ;//- 25;
+  Action.Height := Form1.ClientHeight - Action.Top - 30 ;//- 25;
   //PerformAction.Top := Action.Height - 26;
 
   ActionList.Items.BeginUpdate;
@@ -4759,12 +4775,12 @@ begin
             begin
               if ServerList[index].RefreshMsg.Team[i] = 1 then
                 ServerList[index].Client.IOHandler.WriteLn('/setteam2 ' +
-                  inttostr(ServerList[index].RefreshMsg.Number[i]));
+                  inttostr(ServerList[index].RefreshMsg.Number[i]), IndyTextEncoding_8Bit);
               if ServerList[index].RefreshMsg.Team[i] = 2 then
                 ServerList[index].Client.IOHandler.WriteLn('/setteam1 ' +
-                  inttostr(ServerList[index].RefreshMsg.Number[i]));
+                  inttostr(ServerList[index].RefreshMsg.Number[i]), IndyTextEncoding_8Bit);
             end;
-          ServerList[index].Client.IOHandler.WriteLn('/say Teams Swapped.');
+          ServerList[index].Client.IOHandler.WriteLn('/say Teams Swapped.', IndyTextEncoding_8Bit);
         end
         else
           exit;
@@ -4780,12 +4796,12 @@ begin
             begin
               if (i mod 2) = 1 then
                 ServerList[index].Client.IOHandler.WriteLn('/setteam1 ' +
-                  inttostr(ServerList[index].RefreshMsg.Number[i]));
+                  inttostr(ServerList[index].RefreshMsg.Number[i]), IndyTextEncoding_8Bit);
               if (i mod 2) = 0 then
                 ServerList[index].Client.IOHandler.WriteLn('/setteam2 ' +
-                  inttostr(ServerList[index].RefreshMsg.Number[i]));
+                  inttostr(ServerList[index].RefreshMsg.Number[i]), IndyTextEncoding_8Bit);
             end;
-          ServerList[index].Client.IOHandler.WriteLn('/say Teams balanced.');
+          ServerList[index].Client.IOHandler.WriteLn('/say Teams balanced.', IndyTextEncoding_8Bit);
         end
         else
           exit;
@@ -4834,7 +4850,7 @@ begin
         if ServerList[i].Client.Connected then
           for j := 0 to ServerList[i].Config.AutoMessageList.Count - 1 do
             ServerList[i].Client.IOHandler.WriteLn('/say ' +
-              ServerList[i].Config.AutoMessageList[j]);
+              ServerList[i].Config.AutoMessageList[j], IndyTextEncoding_8Bit);
       except
       end;
 
@@ -5005,7 +5021,7 @@ end;
 procedure TForm1.OnPlayerJoin(var Name, ip: string; index: integer);
 var
   f: textfile;
-  sor: string;
+  line_var: string;
   // inif: boolean;
 begin
   inif := false;
@@ -5022,11 +5038,11 @@ begin
 
         while not Eof(f) do
         begin
-          ReadLn(F, sor);
-          if Matches(sor, Name) then
+          ReadLn(F, line_var);
+          if Matches(line_var, Name) then
           begin
             try
-              ServerList[index].Client.IOHandler.WriteLn('/kick ' + sor);
+              ServerList[index].Client.IOHandler.WriteLn('/kick ' + line_var, IndyTextEncoding_8Bit);
               //ServerList[ServerTab.TabIndex].Client.IOHandler.WriteLn('/banip ' + ip);
             except
             end;
@@ -5062,53 +5078,53 @@ begin
 
    while not Eof(f) do
     begin
-     ReadLn(F,sor);
+     ReadLn(F,line_var);
 
-     if Matches('/*',sor) and inif then
+     if Matches('/*',line_var) and inif then
      begin
-       if Matches('*$PLAYER_NAME*',sor) then
+       if Matches('*$PLAYER_NAME*',line_var) then
        begin
-        Insert(Name,sor,Pos('$PLAYER_NAME',sor));
-        Delete(sor,Pos('$PLAYER_NAME',sor),Length('$PLAYER_NAME'));
+        Insert(Name,line_var,Pos('$PLAYER_NAME',line_var));
+        Delete(line_var,Pos('$PLAYER_NAME',line_var),Length('$PLAYER_NAME'));
        end;
 
-       ServerList[ServerTab.TabIndex].Client.IOHandler.WriteLn(sor);
+       ServerList[ServerTab.TabIndex].Client.IOHandler.WriteLn(line_var);
      end;
 
-     if Matches('endif',sor) and inif then
+     if Matches('endif',line_var) and inif then
      begin
        inif:= false;
   //     regular:= true;
      end; //endif és inif
 
-     if Matches('else',sor) and not inif then
+     if Matches('else',line_var) and not inif then
      begin
        inif:= true;
   //     regular:= true;
      end; //endif és inif
 
-     if Matches('if *',sor) and not inif then
+     if Matches('if *',line_var) and not inif then
      begin
-      Delete(sor,1,2);
-      while Pos(' ',sor) = 1 do Delete(sor,1,1);
-      while sor[length(sor)] = ' ' do Delete(sor,Length(sor),1);
+      Delete(line_var,1,2);
+      while Pos(' ',line_var) = 1 do Delete(line_var,1,1);
+      while line_var[length(line_var)] = ' ' do Delete(line_var,Length(line_var),1);
 
-      if Matches('$PLAYER_NAME*',sor) then
+      if Matches('$PLAYER_NAME*',line_var) then
       begin
-       Delete(sor,1,Length('$PLAYER_NAME'));
-       if Matches('*=*',sor) then
+       Delete(line_var,1,Length('$PLAYER_NAME'));
+       if Matches('*=*',line_var) then
        begin
-        Delete(sor,1,Pos('=',sor));
-        while Pos(' ',sor) = 1 do Delete(sor,1,1);
-        if Matches(sor,Name) then
+        Delete(line_var,1,Pos('=',line_var));
+        while Pos(' ',line_var) = 1 do Delete(line_var,1,1);
+        if Matches(line_var,Name) then
         begin
          inif:= true;
   //       regular:= false;
         end;
-        //ServerList[ServerTab.TabIndex].Memo.Lines.Add(sor+' vs. '+Name);
+        //ServerList[ServerTab.TabIndex].Memo.Lines.Add(line_var+' vs. '+Name);
        end;
       end;
-     end;//Matches 'if' sor
+     end;//Matches 'if' line_var
 
      //break;
     end;
@@ -5149,7 +5165,7 @@ procedure TForm1.AddToBanList(var Name: string; const Ban: boolean);
 var
   f: textfile;
   Names: TStringList;
-  seged: string;
+  temp_var: string;
   i: integer;
   found: boolean;
 begin
@@ -5173,21 +5189,21 @@ begin
       begin
         WriteLn(F, Name);
         ServerList[ServerTab.TabIndex].Client.IOHandler.WriteLn(Name +
-          ' has been added to banned names list.');
+          ' has been added to banned names list.', IndyTextEncoding_8Bit);
       end
       else
       begin
         while not EOF(F) do
         begin
-          ReadLn(F, seged);
-          if seged <> Name then
-            Names.Add(seged)
+          ReadLn(F, temp_var);
+          if temp_var <> Name then
+            Names.Add(temp_var)
           else
             found := true;
         end;
         if found then
           ServerList[ServerTab.TabIndex].Client.IOHandler.WriteLn(Name +
-            ' has been removed from banned names list.');
+            ' has been removed from banned names list.', IndyTextEncoding_8Bit);
       end;
     except
     end;
@@ -5213,11 +5229,11 @@ var
   P_Teams: array[1..5] of shortint;
   j: Integer;
   i, k, h, id, m, players {, bots, specs}: shortint;
-  perc, masodperc: integer;
+  Minutes, Seconds: integer;
   teammode: byte;
   kd, AvgP, TScore, TDeaths: double;
   newplayer, found: boolean;
-  //  seged: string;
+  //  temp_var: string;
 begin
   //  ServerList[ServerTab.TabIndex].Memo.Lines.Add( booltostr( ServerList[ServerTab.TabIndex].Client.Connected));
   if not ServerList[ServerTab.TabIndex].Client.Connected then
@@ -5488,12 +5504,12 @@ begin
         TeamList.Items[3].SubItems[0] := inttostr(ServerList[ServerTab.TabIndex].RefreshMsg.TeamScore[4]);
   }
 
-  perc := ServerList[ServerTab.TabIndex].RefreshMsg.TimeLimit div 3600;
-  masodperc := (ServerList[ServerTab.TabIndex].RefreshMsg.TimeLimit - (perc * 3600))
+  Minutes := ServerList[ServerTab.TabIndex].RefreshMsg.TimeLimit div 3600;
+  Seconds := (ServerList[ServerTab.TabIndex].RefreshMsg.TimeLimit - (Minutes * 3600))
     div 60;
   //Label5.Caption:= inttostr(RefreshMsg.TimeLimit);
 
-  Time.Caption := Format('%.2d:%.2d', [perc, masodperc]);
+  Time.Caption := Format('%.2d:%.2d', [Minutes, Seconds]);
   RefreshTime();
 
   PlayerCount.Caption := inttostr(PlayerList.Items.Count) + '/' +
@@ -6177,7 +6193,7 @@ begin
       while not EOF(F) do
       begin
         Readln(F, Cmd);
-        ServerList[index].Client.IOHandler.WriteLn(Cmd);
+        ServerList[index].Client.IOHandler.WriteLn(Cmd, IndyTextEncoding_8Bit);
       end;
     except
     end;
@@ -6224,7 +6240,7 @@ end;
 
 procedure TForm1.IRCReceive(Sender: TObject; ACommand: string);
 var
-  // seged , params, values,
+  // temp_var , params, values,
   name, msg, ident, host, channel: string;
   params, values: TStringList;
   i: integer;
@@ -6264,15 +6280,15 @@ begin
     values.Delimiter := '';
 
     {
-         seged:= msg+' ';
+         temp_var:= msg+' ';
          params:= '';
          values:= '';
          i:= 1;
-         while Pos(' ',seged) > 0 do
+         while Pos(' ',temp_var) > 0 do
          begin
-          values:= values +'' + (Copy(seged,1,Pos(' ',seged)-1));
-          values:= values +'' + (seged);
-          Delete(seged,1,Pos(' ',seged));
+          values:= values +'' + (Copy(temp_var,1,Pos(' ',temp_var)-1));
+          values:= values +'' + (temp_var);
+          Delete(temp_var,1,Pos(' ',temp_var));
           //  dfgr
           params:= params +'' + ('$'+inttostr(i)+'$');
           params:= params +'' + ('$'+inttostr(i)+'-');
@@ -6295,24 +6311,24 @@ end;
 
 procedure TForm1.IRCCmdKeyPress(Sender: TObject; var Key: Char);
 var
-  seged: string;
+  temp_var: string;
 begin
   if not IRC.Connected then
     exit;
 
   if Key = #13 then
     try
-      seged := IRCCmd.Text;
-      if Matches('/*', seged) then
-        Delete(seged, 1, 1)
+      temp_var := IRCCmd.Text;
+      if Matches('/*', temp_var) then
+        Delete(temp_var, 1, 1)
       else
       begin
-        seged := 'PRIVMSG ' + Config.IRC.Channel + ' :' + seged;
+        temp_var := 'PRIVMSG ' + Config.IRC.Channel + ' :' + temp_var;
       end;
-      IRC.IOHandler.WriteLn(seged);
-      IRCCmd.Items.Add(seged);
+      IRC.IOHandler.WriteLn(temp_var, IndyTextEncoding_8Bit);
+      IRCCmd.Items.Add(temp_var);
       IRCConsole.Lines.Add('(' + FormatDateTime('HH:mm:ss', now) + ') ' + '[' +
-        Config.IRC.Nick + '] ' + seged);
+        Config.IRC.Nick + '] ' + temp_var);
       IRCCmd.Text := '';
     except
     end;
@@ -6322,7 +6338,7 @@ end;
   AChannel: TIdIRCChannel; Content: string);
 var
   i, j, players: integer;
-  seged, seged2: string;
+  temp_var, seged2: string;
   // allow: boolean;
 begin
   IRCConsole.Lines.Add('(' + FormatDateTime('HH:mm:ss', now) + ') ' + '<' +
@@ -6355,27 +6371,27 @@ begin
     if Matches(Config.IRC.Prefix + 'players *', Content) then
       //try
     begin
-      seged := Content;
-      Delete(seged, 1, Length(Config.IRC.Prefix + 'players '));
-      if not ServerList[strtoint(seged) - 1].Client.Connected then
+      temp_var := Content;
+      Delete(temp_var, 1, Length(Config.IRC.Prefix + 'players '));
+      if not ServerList[strtoint(temp_var) - 1].Client.Connected then
       begin
         IRC.WriteLn('PRIVMSG ' + AChannel.Name + ' :Not connected to ' +
-          ServerList[strtoint(seged) - 1].Client.Host);
+          ServerList[strtoint(temp_var) - 1].Client.Host);
         exit;
       end;
 
-      seged2 := 'Players on ' + ServerList[strtoint(seged) - 1].Client.Host + ':'
-        + inttostr(ServerList[strtoint(seged) -
+      seged2 := 'Players on ' + ServerList[strtoint(temp_var) - 1].Client.Host + ':'
+        + inttostr(ServerList[strtoint(temp_var) -
         1].Client.Port) + ': ';
       players := 0;
       for i := 1 to MAX_PLAYERS do
-        if ServerList[strtoint(seged) - 1].RefreshMsg.Team[i] < 6 then
+        if ServerList[strtoint(temp_var) - 1].RefreshMsg.Team[i] < 6 then
         begin
           if i > 1 then
             seged2 := seged2 + ', ';
-          seged2 := seged2 + ServerList[strtoint(seged) - 1].RefreshMsg.Name[i];
+          seged2 := seged2 + ServerList[strtoint(temp_var) - 1].RefreshMsg.Name[i];
           inc(players);
-          //IRC.WriteLn('PRIVMSG '+AChannel.Name+' :' + inttostr(ServerList[strtoint(seged)-1].RefreshMsg.Number[i]) + ': ' + ServerList[strtoint(seged)-1].RefreshMsg.Name[i] );
+          //IRC.WriteLn('PRIVMSG '+AChannel.Name+' :' + inttostr(ServerList[strtoint(temp_var)-1].RefreshMsg.Number[i]) + ': ' + ServerList[strtoint(temp_var)-1].RefreshMsg.Name[i] );
         end;
 
       if players > 0 then
@@ -6385,8 +6401,8 @@ begin
       end
       else
         IRC.WriteLn('PRIVMSG ' + AChannel.Name + ' :No players on ' +
-          ServerList[strtoint(seged) - 1].Client.Host + ':' +
-          inttostr(ServerList[strtoint(seged) - 1].Client.Port));
+          ServerList[strtoint(temp_var) - 1].Client.Host + ':' +
+          inttostr(ServerList[strtoint(temp_var) - 1].Client.Port));
 
       //except
     end;
@@ -6399,43 +6415,43 @@ begin
       IRC.WriteLn('PRIVMSG ' + AChannel.Name + ' :List of servers:');
       for i := 0 to ServerTab.Tabs.Count - 1 do
       begin
-        //seged:= 'PRIVMSG '+AChannel.Name+' :' + inttostr(i+1) + ': ' + ServerTab.Tabs[i] + ' - ' + ServerList[i].Client.Host + ':' + inttostr(ServerList[i].Client.Port) + ' | state: ';
-  //      seged:= inttostr(i+1) + ': ' + ServerTab.Tabs[i] + ' - ' + ServerList[i].Client.Host + ':' + inttostr(ServerList[i].Client.Port) + ' | state: ';
-        seged := inttostr(i + 1) + ': ' + ServerList[i].ServerName + ' - ' +
+        //temp_var:= 'PRIVMSG '+AChannel.Name+' :' + inttostr(i+1) + ': ' + ServerTab.Tabs[i] + ' - ' + ServerList[i].Client.Host + ':' + inttostr(ServerList[i].Client.Port) + ' | state: ';
+  //      temp_var:= inttostr(i+1) + ': ' + ServerTab.Tabs[i] + ' - ' + ServerList[i].Client.Host + ':' + inttostr(ServerList[i].Client.Port) + ' | state: ';
+        temp_var := inttostr(i + 1) + ': ' + ServerList[i].ServerName + ' - ' +
           ServerList[i].Client.Host + ':' +
           inttostr(ServerList[i].Client.Port) + ' | state: ';
         if ServerList[i].Client.Connected then
         begin
-          seged := seged + 'connected - mode: ';
+          temp_var := temp_var + 'connected - mode: ';
 
           case ServerList[i].RefreshMsg.GameStyle of
-            0: seged := seged + 'DM';
-            1: seged := seged + 'PM';
-            2: seged := seged + 'TDM';
-            3: seged := seged + 'CTF';
-            4: seged := seged + 'RM';
-            5: seged := seged + 'INF';
-            6: seged := seged + 'HTF';
+            0: temp_var := temp_var + 'DM';
+            1: temp_var := temp_var + 'PM';
+            2: temp_var := temp_var + 'TDM';
+            3: temp_var := temp_var + 'CTF';
+            4: temp_var := temp_var + 'RM';
+            5: temp_var := temp_var + 'INF';
+            6: temp_var := temp_var + 'HTF';
           end;
 
-          seged := seged + ' - map: ';
+          temp_var := temp_var + ' - map: ';
 
-          seged := seged + ServerList[i].RefreshMsg.MapName;
+          temp_var := temp_var + ServerList[i].RefreshMsg.MapName;
 
-          seged := seged + ' - players: ';
+          temp_var := temp_var + ' - players: ';
 
           players := 0;
           for j := 1 to MAX_PLAYERS do
             if ServerList[i].RefreshMsg.Team[j] < 6 then
               inc(players);
 
-          seged := seged + inttostr(players) + '/' + ServerList[i].Maxplayers;
+          temp_var := temp_var + inttostr(players) + '/' + ServerList[i].Maxplayers;
         end
         else
-          seged := seged + 'disconnected';
+          temp_var := temp_var + 'disconnected';
 
-        //IRC.WriteLn(seged);
-        IRCMsg(AChannel.Name, seged);
+        //IRC.WriteLn(temp_var);
+        IRCMsg(AChannel.Name, temp_var);
       end;
       //except
     end;
@@ -6444,47 +6460,47 @@ begin
 
     if Matches(Config.IRC.Prefix + 'info *', Content) then
       try
-        seged := Content;
-        Delete(seged, 1, Length(Config.IRC.Prefix + 'info '));
-        i := strtoint(seged) - 1;
+        temp_var := Content;
+        Delete(temp_var, 1, Length(Config.IRC.Prefix + 'info '));
+        i := strtoint(temp_var) - 1;
 
-        //seged:= 'PRIVMSG '+AChannel.Name+' :' + inttostr(i+1) + ': ' + ServerTab.Tabs[i] + ' - ' + ServerList[i].Client.Host + ':' + inttostr(ServerList[i].Client.Port) + ' | state: ';
-  //      seged:= inttostr(i+1) + ': ' + ServerTab.Tabs[i] + ' - ' + ServerList[i].Client.Host + ':' + inttostr(ServerList[i].Client.Port) + ' | state: ';
-        seged := inttostr(i + 1) + ': ' + ServerList[i].ServerName + ' - ' +
+        //temp_var:= 'PRIVMSG '+AChannel.Name+' :' + inttostr(i+1) + ': ' + ServerTab.Tabs[i] + ' - ' + ServerList[i].Client.Host + ':' + inttostr(ServerList[i].Client.Port) + ' | state: ';
+  //      temp_var:= inttostr(i+1) + ': ' + ServerTab.Tabs[i] + ' - ' + ServerList[i].Client.Host + ':' + inttostr(ServerList[i].Client.Port) + ' | state: ';
+        temp_var := inttostr(i + 1) + ': ' + ServerList[i].ServerName + ' - ' +
           ServerList[i].Client.Host + ':' +
           inttostr(ServerList[i].Client.Port) + ' | state: ';
         if ServerList[i].Client.Connected then
         begin
-          seged := seged + 'connected - mode: ';
+          temp_var := temp_var + 'connected - mode: ';
 
           case ServerList[i].RefreshMsg.GameStyle of
-            0: seged := seged + 'DM';
-            1: seged := seged + 'PM';
-            2: seged := seged + 'TDM';
-            3: seged := seged + 'CTF';
-            4: seged := seged + 'RM';
-            5: seged := seged + 'INF';
-            6: seged := seged + 'HTF';
+            0: temp_var := temp_var + 'DM';
+            1: temp_var := temp_var + 'PM';
+            2: temp_var := temp_var + 'TDM';
+            3: temp_var := temp_var + 'CTF';
+            4: temp_var := temp_var + 'RM';
+            5: temp_var := temp_var + 'INF';
+            6: temp_var := temp_var + 'HTF';
           end;
 
-          seged := seged + ' - map: ';
+          temp_var := temp_var + ' - map: ';
 
-          seged := seged + ServerList[i].RefreshMsg.MapName;
+          temp_var := temp_var + ServerList[i].RefreshMsg.MapName;
 
-          seged := seged + ' - players: ';
+          temp_var := temp_var + ' - players: ';
 
           players := 0;
           for j := 1 to MAX_PLAYERS do
             if ServerList[i].RefreshMsg.Team[j] < 6 then
               inc(players);
 
-          seged := seged + inttostr(players) + '/' + ServerList[i].Maxplayers;
+          temp_var := temp_var + inttostr(players) + '/' + ServerList[i].Maxplayers;
         end
         else
-          seged := seged + 'disconnected';
+          temp_var := temp_var + 'disconnected';
 
-        //IRC.WriteLn(seged);
-        IRCMsg(AChannel.Name, seged);
+        //IRC.WriteLn(temp_var);
+        IRCMsg(AChannel.Name, temp_var);
 
       except
       end;
@@ -6503,14 +6519,14 @@ begin
 
     if Matches(Config.IRC.Prefix + 'rename *', Content) then
       try
-        seged := Content;
-        Delete(seged, 1, Length(Config.IRC.Prefix + 'rename '));
-        seged2 := seged;
+        temp_var := Content;
+        Delete(temp_var, 1, Length(Config.IRC.Prefix + 'rename '));
+        seged2 := temp_var;
         Delete(seged2, 1, Pos(' ', seged2));
-        Delete(seged, Pos(' ', seged), Length(seged));
-        //    ServerTab.Tabs[strtoint(seged)-1]:= seged2;
-        ServerList[strtoint(seged) - 1].ServerName := seged2;
-        IRC.WriteLn('PRIVMSG ' + AChannel.Name + ' :Server (' + seged +
+        Delete(temp_var, Pos(' ', temp_var), Length(temp_var));
+        //    ServerTab.Tabs[strtoint(temp_var)-1]:= seged2;
+        ServerList[strtoint(temp_var) - 1].ServerName := seged2;
+        IRC.WriteLn('PRIVMSG ' + AChannel.Name + ' :Server (' + temp_var +
           ') renamed to ' + seged2);
       except
       end;
@@ -6519,24 +6535,24 @@ begin
 
     if Matches(Config.IRC.Prefix + 'host *', Content) then
     begin
-      seged := Content;
-      Delete(seged, 1, Length(Config.IRC.Prefix + 'host '));
-      seged2 := seged;
+      temp_var := Content;
+      Delete(temp_var, 1, Length(Config.IRC.Prefix + 'host '));
+      seged2 := temp_var;
       Delete(seged2, 1, Pos(' ', seged2));
-      Delete(seged, Pos(' ', seged), Length(seged));
-      i := strtoint(seged);
-      seged := seged2;
+      Delete(temp_var, Pos(' ', temp_var), Length(temp_var));
+      i := strtoint(temp_var);
+      temp_var := seged2;
       Delete(seged2, 1, Pos(':', seged2));
-      Delete(seged, Pos(':', seged), Length(seged));
-      ServerList[i - 1].Client.Host := seged;
+      Delete(temp_var, Pos(':', temp_var), Length(temp_var));
+      ServerList[i - 1].Client.Host := temp_var;
       ServerList[i - 1].Client.Port := strtoint(seged2);
       if (i - 1) = ServerTab.TabIndex then
       begin
-        Host.Text := seged;
+        Host.Text := temp_var;
         Port.Text := seged2;
       end;
       IRC.WriteLn('PRIVMSG ' + AChannel.Name + ' :Server (' + inttostr(i) +
-        ') changed to ' + seged + ':' + seged2);
+        ') changed to ' + temp_var + ':' + seged2);
     end;
 
     //////// !passwd command ///////////
@@ -6544,15 +6560,15 @@ begin
     if Matches(Config.IRC.Prefix + 'passwd *', Content) and (AChannel.Name <>
       Config.IRC.Channel) then
       try
-        seged := Content;
-        Delete(seged, 1, Length(Config.IRC.Prefix + 'passwd '));
-        seged2 := seged;
+        temp_var := Content;
+        Delete(temp_var, 1, Length(Config.IRC.Prefix + 'passwd '));
+        seged2 := temp_var;
         Delete(seged2, 1, Pos(' ', seged2));
-        Delete(seged, Pos(' ', seged), Length(seged));
-        ServerList[strtoint(seged) - 1].Pass := seged2;
-        if (strtoint(seged) - 1) = ServerTab.TabIndex then
+        Delete(temp_var, Pos(' ', temp_var), Length(temp_var));
+        ServerList[strtoint(temp_var) - 1].Pass := seged2;
+        if (strtoint(temp_var) - 1) = ServerTab.TabIndex then
           Pass.Text := seged2;
-        IRC.WriteLn('PRIVMSG ' + AUser.Nick + ' :Server (' + seged +
+        IRC.WriteLn('PRIVMSG ' + AUser.Nick + ' :Server (' + temp_var +
           ') password changed to ' + seged2);
       except
       end;
@@ -6561,20 +6577,20 @@ begin
 
     if Matches(Config.IRC.Prefix + 'say *', Content) then
       try
-        seged := Content;
-        Delete(seged, 1, Length(Config.IRC.Prefix + 'say '));
-        seged2 := seged;
+        temp_var := Content;
+        Delete(temp_var, 1, Length(Config.IRC.Prefix + 'say '));
+        seged2 := temp_var;
         Delete(seged2, 1, Pos(' ', seged2));
-        Delete(seged, Pos(' ', seged), Length(seged));
-        //ServerTab.Tabs[strtoint(seged)-1]:= seged2;
-    //    if not ServerList[strtoint(seged)-1].Client.Connected then IRCMsg(AChannel.Name,'Not connectd to ' + ServerTab.Tabs[strtoint(seged)-1]);
-        if not ServerList[strtoint(seged) - 1].Client.Connected then
-          IRCMsg(AChannel.Name, 'Not connectd to ' + ServerList[strtoint(seged)
+        Delete(temp_var, Pos(' ', temp_var), Length(temp_var));
+        //ServerTab.Tabs[strtoint(temp_var)-1]:= seged2;
+    //    if not ServerList[strtoint(temp_var)-1].Client.Connected then IRCMsg(AChannel.Name,'Not connectd to ' + ServerTab.Tabs[strtoint(temp_var)-1]);
+        if not ServerList[strtoint(temp_var) - 1].Client.Connected then
+          IRCMsg(AChannel.Name, 'Not connectd to ' + ServerList[strtoint(temp_var)
             - 1].ServerName);
-        //    IRC.WriteLn('PRIVMSG '+AChannel.Name+' :sent to ' + ServerTab.Tabs[strtoint(seged)-1] + ': ' + seged2 );
+        //    IRC.WriteLn('PRIVMSG '+AChannel.Name+' :sent to ' + ServerTab.Tabs[strtoint(temp_var)-1] + ': ' + seged2 );
         IRC.WriteLn('PRIVMSG ' + AChannel.Name + ' :sent to ' +
-          ServerList[strtoint(seged) - 1].ServerName + ': ' + seged2);
-        ServerList[strtoint(seged) - 1].Client.IOHandler.WriteLn('/say ' + seged2);
+          ServerList[strtoint(temp_var) - 1].ServerName + ': ' + seged2);
+        ServerList[strtoint(temp_var) - 1].Client.IOHandler.WriteLn('/say ' + seged2);
       except
       end;
 
@@ -6593,25 +6609,25 @@ begin
 
     if Matches(Config.IRC.Prefix + 'connect *', Content) then
       try
-        seged := Content;
-        Delete(seged, 1, Length(Config.IRC.Prefix + 'connect '));
-        if ServerList[strtoint(seged) - 1].Client.Connected then
+        temp_var := Content;
+        Delete(temp_var, 1, Length(Config.IRC.Prefix + 'connect '));
+        if ServerList[strtoint(temp_var) - 1].Client.Connected then
         begin
           IRC.WriteLn('PRIVMSG ' + AChannel.Name + ' :' +
-            ServerList[strtoint(seged) - 1].Client.Host +
+            ServerList[strtoint(temp_var) - 1].Client.Host +
             ' already connected.');
           exit;
         end;
-        if (strtoint(seged) > ServerTab.Tabs.Count) or (strtoint(seged) < 1)
+        if (strtoint(temp_var) > ServerTab.Tabs.Count) or (strtoint(temp_var) < 1)
           then
         begin
           IRC.WriteLn('PRIVMSG ' + AChannel.Name + ' :Error: No server number '
-            + seged + ' found. Please replace user.');
+            + temp_var + ' found. Please replace user.');
           exit;
         end;
 
         i := ServerTab.TabIndex;
-        ServerTab.TabIndex := strtoint(seged) - 1;
+        ServerTab.TabIndex := strtoint(temp_var) - 1;
         ServerTabChange(nil);
         ConnectClick(nil);
         ServerTab.TabIndex := i;
@@ -6623,25 +6639,25 @@ begin
 
     if Matches(Config.IRC.Prefix + 'disconnect *', Content) then
       try
-        seged := Content;
-        Delete(seged, 1, Length(Config.IRC.Prefix + 'disconnect '));
-        if not ServerList[strtoint(seged) - 1].Client.Connected then
+        temp_var := Content;
+        Delete(temp_var, 1, Length(Config.IRC.Prefix + 'disconnect '));
+        if not ServerList[strtoint(temp_var) - 1].Client.Connected then
         begin
           IRC.WriteLn('PRIVMSG ' + AChannel.Name + ' :' +
-            ServerList[strtoint(seged) - 1].Client.Host +
+            ServerList[strtoint(temp_var) - 1].Client.Host +
             ' already disconnected.');
           exit;
         end;
-        if (strtoint(seged) > ServerTab.Tabs.Count) or (strtoint(seged) < 1)
+        if (strtoint(temp_var) > ServerTab.Tabs.Count) or (strtoint(temp_var) < 1)
           then
         begin
           IRC.WriteLn('PRIVMSG ' + AChannel.Name + ' :Error: No server number '
-            + seged + ' found. Please replace user.');
+            + temp_var + ' found. Please replace user.');
           exit;
         end;
 
         i := ServerTab.TabIndex;
-        ServerTab.TabIndex := strtoint(seged) - 1;
+        ServerTab.TabIndex := strtoint(temp_var) - 1;
         ServerTabChange(nil);
         ConnectClick(nil);
         ServerTab.TabIndex := i;
@@ -6818,7 +6834,7 @@ begin
     end
     // check for command
     else if Matches('/*', buffer) then
-      ServerList[ServerTab.Tabindex].Client.IOHandler.WriteLn(buffer);
+      ServerList[ServerTab.Tabindex].Client.IOHandler.WriteLn(buffer, IndyTextEncoding_8Bit);
     
     if Length(url) > 0 then
     begin
@@ -6840,7 +6856,7 @@ end;
 procedure TForm1.IRCMsg(Target, Msg: string);
 begin
   try
-    IRC.IOHandler.WriteLn('PRIVMSG ' + Target + ' :' + Msg);
+    IRC.IOHandler.WriteLn('PRIVMSG ' + Target + ' :' + Msg, IndyTextEncoding_8Bit);
     IRCConsole.Lines.Append('(' + FormatDateTime('HH:mm:ss', now) + ') ' + '[' +
       Config.IRC.Nick + '] ' + Msg);
     //  IRCConsole.Lines.Add('(' + FormatDateTime('HH:mm:ss',now) + ') ' + '[' + Config.IRC.Nick + '] ' + Msg);
@@ -6895,8 +6911,8 @@ procedure TForm1.EventOccure(param, value, scriptfile: string; index: integer);
 var
   params, values: TStringList; //forlist
   f: textfile;
-  // seged,
-  sor: string;
+  // temp_var,
+  line_var: string;
   i: integer;
   // kezdo,
   // i,j, players {, forlow, forhigh, alpha, bravo}: integer;
@@ -6988,15 +7004,15 @@ begin
 
   // üzenettöredékek
   {
-       seged:= msg+' ';
+       temp_var:= msg+' ';
        params:= '';
        values:= '';
        i:= 1;
-       while Pos(' ',seged) > 0 do
+       while Pos(' ',temp_var) > 0 do
        begin
-        values:= values +'' + (Copy(seged,1,Pos(' ',seged)-1));
-        values:= values +'' + (seged);
-        Delete(seged,1,Pos(' ',seged));
+        values:= values +'' + (Copy(temp_var,1,Pos(' ',temp_var)-1));
+        values:= values +'' + (temp_var);
+        Delete(temp_var,1,Pos(' ',temp_var));
         //  dfgr
         params:= params +'' + ('$'+inttostr(i)+'$');
         params:= params +'' + ('$'+inttostr(i)+'-');
@@ -7084,18 +7100,18 @@ begin
 
         while not Eof(f) do
         begin
-          ReadLn(F, sor);
+          ReadLn(F, line_var);
 
-          if (sor <> '') and not Matches(sor, '*$*') then
+          if (line_var <> '') and not Matches(line_var, '*$*') then
           begin
 
             // remove spaces in front and at the end of the line
-            while (Pos(' ', sor) = 1) and (Length(sor) > 1) do
-              Delete(sor, 1, 1);
-            while (sor[length(sor)] = ' ') and (Length(sor) > 1) do
-              Delete(sor, Length(sor), 1);
+            while (Pos(' ', line_var) = 1) and (Length(line_var) > 1) do
+              Delete(line_var, 1, 1);
+            while (line_var[length(line_var)] = ' ') and (Length(line_var) > 1) do
+              Delete(line_var, Length(line_var), 1);
 
-            //    ServerList[index].Memo.Lines.Add(sor);
+            //    ServerList[index].Memo.Lines.Add(line_var);
             //    ServerList[index].Memo.Lines.Add('inif: '+booltostr(inif));
             //    ServerList[index].Memo.Lines.Add('infor: '+booltostr(infor));
             //    ServerList[index].Memo.Lines.Add('ifstate: '+booltostr(ifstate));
@@ -7103,36 +7119,36 @@ begin
 
             // itt volt a parse rész.
 
-            {    if Matches('FOR $I*',UpperCase(sor)) and not inif then // and not infor then
+            {    if Matches('FOR $I*',UpperCase(line_var)) and not inif then // and not infor then
                  begin
 
                   forlist:= TStringList.Create;
-                  Delete(sor,1,Length('FOR $I'));
+                  Delete(line_var,1,Length('FOR $I'));
 
-                  while (Pos(' ',sor) = 1) and (Length(sor)>1) do Delete(sor,1,1);
-                  while (sor[length(sor)] = ' ') and (Length(sor)>1) do Delete(sor,Length(sor),1);
+                  while (Pos(' ',line_var) = 1) and (Length(line_var)>1) do Delete(line_var,1,1);
+                  while (line_var[length(line_var)] = ' ') and (Length(line_var)>1) do Delete(line_var,Length(line_var),1);
 
-                  if Matches(':=* to *',sor) then
+                  if Matches(':=* to *',line_var) then
                   begin
-                   Delete(sor,1,2);
-                   while (Pos(' ',sor) = 1) and (Length(sor)>1) do Delete(sor,1,1);
+                   Delete(line_var,1,2);
+                   while (Pos(' ',line_var) = 1) and (Length(line_var)>1) do Delete(line_var,1,1);
 
-            //       forlist.Add(Copy(sor,1,Pos(' to ',sor)));
-                   seged:=Copy(sor,1,Pos(' to ',sor));
-                   Delete(sor,1,Pos('to',sor)+1);
+            //       forlist.Add(Copy(line_var,1,Pos(' to ',line_var)));
+                   temp_var:=Copy(line_var,1,Pos(' to ',line_var));
+                   Delete(line_var,1,Pos('to',line_var)+1);
 
-                   while (Pos(' ',seged) = 1) and (Length(seged)>1) do Delete(seged,1,1);
-                   while (seged[length(seged)] = ' ') and (Length(seged)>1) do Delete(seged,Length(seged),1);
-                   while (Pos(' ',sor) = 1) and (Length(sor)>1) do Delete(sor,1,1);
+                   while (Pos(' ',temp_var) = 1) and (Length(temp_var)>1) do Delete(temp_var,1,1);
+                   while (temp_var[length(temp_var)] = ' ') and (Length(temp_var)>1) do Delete(temp_var,Length(temp_var),1);
+                   while (Pos(' ',line_var) = 1) and (Length(line_var)>1) do Delete(line_var,1,1);
 
                   for i:= params.Count-1 downto 0 do
-                  if Matches('*'+params[i]+'*',sor) then
+                  if Matches('*'+params[i]+'*',line_var) then
                   begin
-                   sor:= AnsiReplaceStr(sor,params[i],values[i]);
+                   line_var:= AnsiReplaceStr(line_var,params[i],values[i]);
                   end;
 
-                   forlow:= strtoint(seged);
-                   forhigh:= strtoint(sor);
+                   forlow:= strtoint(temp_var);
+                   forhigh:= strtoint(line_var);
                    params.Add('$I');
                    values.Add(inttostr(forlow));
                    infor:= true;
@@ -7145,7 +7161,7 @@ begin
             //      continue;
                  end;
 
-                if Matches('ENDFOR',UpperCase(sor)) and not inif then //and infor
+                if Matches('ENDFOR',UpperCase(line_var)) and not inif then //and infor
                  begin
 
                   infor:= false;
@@ -7165,14 +7181,14 @@ begin
 
                 if infor then
                 begin
-                 forlist.Add(sor);
+                 forlist.Add(line_var);
                 end;
             //}
             //    if not infor then
-            ParseScript(sor, params, values, index); //,inif,voltmarif);
+            ParseScript(line_var, params, values, index); //,inif,voltmarif);
 
             //break;
-          end; // if sor <> ''
+          end; // if line_var <> ''
 
         end;
       except
@@ -7187,7 +7203,7 @@ begin
 
 end;
 
-procedure TForm1.ParseScript(sor: string; params, values: TStringList; index:
+procedure TForm1.ParseScript(line_var: string; params, values: TStringList; index:
   integer); // inif, voltmarif: boolean);
 var
   i: integer;
@@ -7199,16 +7215,16 @@ begin
   //  voltmarif:= false;
 
   // for j:= 1 to loop do
-  //  if sor <> '' then
+  //  if line_var <> '' then
   //  begin
 
       //////// COMMENTS ////////////
 
   // ignore commentlines starting with #
-  if Matches('#*', sor) then
+  if Matches('#*', line_var) then
     exit;
   // and multiline comments
-  if Matches('{*', sor) then
+  if Matches('{*', line_var) then
   begin
     inif := true;
     exit;
@@ -7216,39 +7232,39 @@ begin
 
   ///////// replacing paramters with values /////////
   for i := 0 to params.Count - 1 do
-    if Matches('*' + params[i] + '*', sor) then
+    if Matches('*' + params[i] + '*', line_var) then
     begin
-      sor := AnsiReplaceStr(sor, params[i], values[i]);
+      line_var := AnsiReplaceStr(line_var, params[i], values[i]);
     end;
   for i := params.Count - 1 downto 0 do
-    if Matches('*' + params[i] + '*', sor) then
+    if Matches('*' + params[i] + '*', line_var) then
     begin
-      sor := AnsiReplaceStr(sor, params[i], values[i]);
+      line_var := AnsiReplaceStr(line_var, params[i], values[i]);
     end;
 
   /////////////  IF //////////////////
 
-  if Matches('IF *', UpperCase(sor)) and not inif then
+  if Matches('IF *', UpperCase(line_var)) and not inif then
   begin
 
     voltmarif := true;
-    Delete(sor, 1, 2);
-    while Pos(' ', sor) = 1 do
-      Delete(sor, 1, 1);
-    while sor[length(sor)] = ' ' do
-      Delete(sor, Length(sor), 1);
+    Delete(line_var, 1, 2);
+    while Pos(' ', line_var) = 1 do
+      Delete(line_var, 1, 1);
+    while line_var[length(line_var)] = ' ' do
+      Delete(line_var, Length(line_var), 1);
 
     ////////  ISSET /////////////////
 
-    if Matches('ISSET *', UpperCase(sor)) then
+    if Matches('ISSET *', UpperCase(line_var)) then
     begin
-      Delete(sor, 1, Length('ISSET '));
-      while Pos(' ', sor) = 1 do
-        Delete(sor, 1, 1);
+      Delete(line_var, 1, Length('ISSET '));
+      while Pos(' ', line_var) = 1 do
+        Delete(line_var, 1, 1);
       for i := 0 to values.Count - 1 do
       begin
-        //      ServerList[index].Memo.Lines.Add(sor + ' vs. '+values[i]);
-        if Matches(sor + '*', values[i]) then
+        //      ServerList[index].Memo.Lines.Add(line_var + ' vs. '+values[i]);
+        if Matches(line_var + '*', values[i]) then
         begin
           inif := false;
           break;
@@ -7258,15 +7274,15 @@ begin
       end;
     end;
 
-    if Matches('NOT ISSET *', UpperCase(sor)) then
+    if Matches('NOT ISSET *', UpperCase(line_var)) then
     begin
-      Delete(sor, 1, Length('NOT ISSET '));
-      while Pos(' ', sor) = 1 do
-        Delete(sor, 1, 1);
+      Delete(line_var, 1, Length('NOT ISSET '));
+      while Pos(' ', line_var) = 1 do
+        Delete(line_var, 1, 1);
       for i := 0 to values.Count - 1 do
       begin
-        //      ServerList[index].Memo.Lines.Add(sor + ' vs. '+values[i]);
-        if not Matches(sor + '*', values[i]) then
+        //      ServerList[index].Memo.Lines.Add(line_var + ' vs. '+values[i]);
+        if not Matches(line_var + '*', values[i]) then
         begin
           inif := false;
           break;
@@ -7276,86 +7292,86 @@ begin
       end;
     end;
 
-    //ServerList[index].Memo.Lines.Add(sor);
+    //ServerList[index].Memo.Lines.Add(line_var);
 
     for i := 0 to values.Count - 1 do
-      if Matches(values[i] + '*', sor) then
+      if Matches(values[i] + '*', line_var) then
       begin
-        Delete(sor, 1, Length(values[i]));
-        //ServerList[index].Memo.Lines.Add(sor);
+        Delete(line_var, 1, Length(values[i]));
+        //ServerList[index].Memo.Lines.Add(line_var);
 
-        if Matches('*=*', sor) then
+        if Matches('*=*', line_var) then
         begin
-          Delete(sor, 1, Pos('=', sor));
-          while Pos(' ', sor) = 1 do
-            Delete(sor, 1, 1);
-          if not Matches(sor, values[i]) then
+          Delete(line_var, 1, Pos('=', line_var));
+          while Pos(' ', line_var) = 1 do
+            Delete(line_var, 1, 1);
+          if not Matches(line_var, values[i]) then
             inif := true;
         end;
 
-        if Matches('*>*', sor) and not Matches('*<>*', sor) then
+        if Matches('*>*', line_var) and not Matches('*<>*', line_var) then
         begin
-          Delete(sor, 1, Pos('>', sor));
-          //while Pos(' ',sor) = 1 do Delete(sor,1,1);
-          sor := Trim(sor);
+          Delete(line_var, 1, Pos('>', line_var));
+          //while Pos(' ',line_var) = 1 do Delete(line_var,1,1);
+          line_var := Trim(line_var);
 
           try
-            if not strtoint(sor) > strtoint(values[i]) then
+            if not strtoint(line_var) > strtoint(values[i]) then
               inif := true;
           except
           end;
           {
-           if not StrComp(PChar(sor),PChar(values[i]))>0 then
+           if not StrComp(PChar(line_var),PChar(values[i]))>0 then
              inif:= true;
            try
-             if not strtoint(sor) > strtoint(values[i]) then
+             if not strtoint(line_var) > strtoint(values[i]) then
                inif:= true;
            except
-             if not StrComp(PChar(sor),PChar(values[i]))>0 then
+             if not StrComp(PChar(line_var),PChar(values[i]))>0 then
                inif:= true;
            end;
-           if not strtoint(sor) > strtoint(values[i]) then
+           if not strtoint(line_var) > strtoint(values[i]) then
              inif:= true;
            voltmarif:= true;
            }
         end;
 
-        if Matches('*<*', sor) and not Matches('*<>*', sor) then
+        if Matches('*<*', line_var) and not Matches('*<>*', line_var) then
         begin
-          Delete(sor, 1, Pos('<', sor));
-          //while Pos(' ',sor) = 1 do Delete(sor,1,1);
-          sor := Trim(sor);
+          Delete(line_var, 1, Pos('<', line_var));
+          //while Pos(' ',line_var) = 1 do Delete(line_var,1,1);
+          line_var := Trim(line_var);
 
           try
-            if not strtoint(sor) < strtoint(values[i]) then
+            if not strtoint(line_var) < strtoint(values[i]) then
               inif := true;
           except
           end;
 
-          //      if not StrComp(PChar(sor),PChar(values[i]))<0 then inif:= true;
+          //      if not StrComp(PChar(line_var),PChar(values[i]))<0 then inif:= true;
           //      voltmarif:= true;
         end;
 
-        if Matches('*<>*', sor) then
+        if Matches('*<>*', line_var) then
         begin
-          Delete(sor, 1, Pos('<>', sor) + 1);
-          while Pos(' ', sor) = 1 do
-            Delete(sor, 1, 1);
-          if Matches(sor, values[i]) then
+          Delete(line_var, 1, Pos('<>', line_var) + 1);
+          while Pos(' ', line_var) = 1 do
+            Delete(line_var, 1, 1);
+          if Matches(line_var, values[i]) then
             inif := true;
           //      voltmarif:= true;
         end;
 
-        var1 := sor;
+        var1 := line_var;
         var2 := values[i];
       end;
-    sor := '';
+    line_var := '';
     //}
-  end; //Matches 'if' sor
+  end; //Matches 'if' line_var
 
   /////////// ENDIF //////////////////
 
-  if Matches('endif', LowerCase(sor)) then //and inif
+  if Matches('endif', LowerCase(line_var)) then //and inif
   begin
     inif := false;
     voltmarif := false;
@@ -7363,7 +7379,7 @@ begin
 
   ///////// ELSE /////////////////
 
-  if Matches('ELSE', UpperCase(sor)) and voltmarif then
+  if Matches('ELSE', UpperCase(line_var)) and voltmarif then
   begin
     //    if inif then inif:= false
     //    else inif:= true;
@@ -7372,40 +7388,40 @@ begin
       inif := true
     else
       inif := false;
-    //sor:= '';
+    //line_var:= '';
   end; //endif és inif
 
   ///////// IRCMSG ////////////////////
 
-  if Matches('IRCMSG *', UpperCase(sor)) and not inif then
+  if Matches('IRCMSG *', UpperCase(line_var)) and not inif then
   begin
-    Delete(sor, 1, Length('IRCMSG '));
-    //     Delete(sor,Length(sor),1);
+    Delete(line_var, 1, Length('IRCMSG '));
+    //     Delete(line_var,Length(line_var),1);
 
     for i := 0 to params.Count - 1 do
-      if Matches('*' + params[i] + '*', sor) then
+      if Matches('*' + params[i] + '*', line_var) then
       begin
-        Insert(values[i], sor, Pos(params[i], sor));
-        Delete(sor, Pos(params[i], sor), Length(params[i]));
+        Insert(values[i], line_var, Pos(params[i], line_var));
+        Delete(line_var, Pos(params[i], line_var), Length(params[i]));
       end;
 
     if IRC.Connected then
-      IRCMsg(Config.IRC.Channel, sor);
-    sor := '';
+      IRCMsg(Config.IRC.Channel, line_var);
+    line_var := '';
   end; //IRCMSG
 
   ///////////////// ADMINMSG ////////////////
 
-  if Matches('ADMINMSG *', UpperCase(sor)) and not inif then
+  if Matches('ADMINMSG *', UpperCase(line_var)) and not inif then
   begin
-    Delete(sor, 1, Length('ADMINMSG '));
-    //     Delete(sor,Length(sor),1);
+    Delete(line_var, 1, Length('ADMINMSG '));
+    //     Delete(line_var,Length(line_var),1);
 
     for i := 0 to params.Count - 1 do
-      if Matches('*' + params[i] + '*', sor) then
+      if Matches('*' + params[i] + '*', line_var) then
       begin
-        Insert(values[i], sor, Pos(params[i], sor));
-        Delete(sor, Pos(params[i], sor), Length(params[i]));
+        Insert(values[i], line_var, Pos(params[i], line_var));
+        Delete(line_var, Pos(params[i], line_var), Length(params[i]));
       end;
 
     //     if not Form1.Visible then RestoreMainForm;
@@ -7417,49 +7433,49 @@ begin
     end;
     //      AdminReq.Caption:= 'Admin request from ' + ServerTab.Tabs[index];
     AdminReq.Caption := 'Admin request from ' + ServerList[index].ServerName;
-    AdminReq.Label1.Caption := sor;
+    AdminReq.Label1.Caption := line_var;
     //      AdminReq.Show;
     //      AdminBubi.Title:= 'Admin request from ' + ServerTab.Tabs[index];
 {    AdminBubi.Title := 'Admin request from ' + ServerList[index].ServerName;
-    if (Length(AdminBubi.Prompt.Text) + Length(sor) > 254) then
+    if (Length(AdminBubi.Prompt.Text) + Length(line_var) > 254) then
       while (Length(AdminBubi.Prompt.Text)) > 1 do
       begin
         AdminBubi.Prompt.Delete(0);
       end;
-    AdminBubi.Prompt.Add(sor); //}
+    AdminBubi.Prompt.Add(line_var); //}
     if Config.SoundfileName <> '' then
       PlaySound(PAnsiChar(Config.SoundfileName), 0, SND_ASYNC)
     else
       PlaySound('SystemNotification', 0, SND_ASYNC);
 //    AdminBubi.Show(Screen.Width, Screen.Height - TaskBarHeight);
     //Beep;
-    sor := '';
+    line_var := '';
   end; //ADMINMSG
 
   // adding a timer.
   // usage: TIMER <TimerName> <repeat> <interval> <scriptfile>
-  if Matches('TIMER * * * *', UpperCase(sor)) and not inif then
+  if Matches('TIMER * * * *', UpperCase(line_var)) and not inif then
   begin
-    Delete(sor, 1, Length('TIMER '));
-    //     Delete(sor,Length(sor),1);
+    Delete(line_var, 1, Length('TIMER '));
+    //     Delete(line_var,Length(line_var),1);
 
     for i := 0 to params.Count - 1 do
-      if Matches('*' + params[i] + '*', sor) then
+      if Matches('*' + params[i] + '*', line_var) then
       begin
-        Insert(values[i], sor, Pos(params[i], sor));
-        Delete(sor, Pos(params[i], sor), Length(params[i]));
+        Insert(values[i], line_var, Pos(params[i], line_var));
+        Delete(line_var, Pos(params[i], line_var), Length(params[i]));
       end;
 
-    params.add(Copy(sor, 1, Pos(' ', sor)));
-    Delete(sor, 1, Length(params[params.Count - 1]));
+    params.add(Copy(line_var, 1, Pos(' ', line_var)));
+    Delete(line_var, 1, Length(params[params.Count - 1]));
 
-    params.add(Copy(sor, 1, Pos(' ', sor)));
-    Delete(sor, 1, Length(params[params.Count - 1]));
+    params.add(Copy(line_var, 1, Pos(' ', line_var)));
+    Delete(line_var, 1, Length(params[params.Count - 1]));
 
-    params.add(Copy(sor, 1, Pos(' ', sor)));
-    Delete(sor, 1, Length(params[params.Count - 1]));
+    params.add(Copy(line_var, 1, Pos(' ', line_var)));
+    Delete(line_var, 1, Length(params[params.Count - 1]));
 
-    params.add(sor);
+    params.add(line_var);
 
     params[params.Count - 1] := Trim(params[params.Count - 1]);
     params[params.Count - 2] := Trim(params[params.Count - 2]);
@@ -7489,108 +7505,108 @@ begin
     params.Delete(params.Count - 1);
     params.Delete(params.Count - 1);
 
-    //      if IRC.Connected then IRCMsg(Config.IRC.Channel,sor);
-    sor := '';
+    //      if IRC.Connected then IRCMsg(Config.IRC.Channel,line_var);
+    line_var := '';
   end; //TIMER
 
   //////////////  KILL /////////////
 
-  if Matches('KILL', UpperCase(sor)) and not inif then
+  if Matches('KILL', UpperCase(line_var)) and not inif then
   begin
     IRCConnectClick(nil);
   end;
 
   /////////////  HIDE ///////////
 
-  if Matches('HIDE', UpperCase(sor)) and not inif then
+  if Matches('HIDE', UpperCase(line_var)) and not inif then
   begin
     mutathatod := false;
   end;
 
   /////////////  HIDE LOG ///////////
 
-  if Matches('HIDE LOG', UpperCase(sor)) and not inif then
+  if Matches('HIDE LOG', UpperCase(line_var)) and not inif then
   begin
     logolhatsz := false;
   end;
 
   ///////// CLEAR ////////////////////
 
-  if Matches('CLEAR', UpperCase(sor)) and not inif then
+  if Matches('CLEAR', UpperCase(line_var)) and not inif then
   begin
     MemoAppend(index, ServerList[index].Memo.Font.Color, ''); //default textcolor fix
     ServerList[index].Memo.Clear;
-    sor := '';
+    line_var := '';
   end; //CLEAR
 
   ///////////////// WRITE /////////////
 
-  if Matches('WRITE *', UpperCase(sor)) and not inif then
+  if Matches('WRITE *', UpperCase(line_var)) and not inif then
   begin
-    Delete(sor, 1, Length('WRITE '));
-    //     Delete(sor,Length(sor),1);
+    Delete(line_var, 1, Length('WRITE '));
+    //     Delete(line_var,Length(line_var),1);
 
     for i := 0 to params.Count - 1 do
-      if Matches('*' + params[i] + '*', sor) then
+      if Matches('*' + params[i] + '*', line_var) then
       begin
-        Insert(values[i], sor, Pos(params[i], sor));
-        Delete(sor, Pos(params[i], sor), Length(params[i]));
+        Insert(values[i], line_var, Pos(params[i], line_var));
+        Delete(line_var, Pos(params[i], line_var), Length(params[i]));
       end;
 
-    MemoAppend(index, ServerList[index].Memo.Font.Color, '(' + FormatDateTime('HH:mm:ss', now) + ') ' + sor);
-    //     ServerList[index].Memo.Lines.Append{bb}('(' + FormatDateTime('HH:mm:ss',now) + ') ' +sor);
-    //     MemoAdd(ServerList[index].Memo,'(' + FormatDateTime('HH:mm:ss',now) + ') ' +sor);
-    sor := '';
+    MemoAppend(index, ServerList[index].Memo.Font.Color, '(' + FormatDateTime('HH:mm:ss', now) + ') ' + line_var);
+    //     ServerList[index].Memo.Lines.Append{bb}('(' + FormatDateTime('HH:mm:ss',now) + ') ' +line_var);
+    //     MemoAdd(ServerList[index].Memo,'(' + FormatDateTime('HH:mm:ss',now) + ') ' +line_var);
+    line_var := '';
   end;
 
   ///////////////// WRITEFILE /////////////
 
-  if Matches('WRITEFILE *', UpperCase(sor)) and not inif then
+  if Matches('WRITEFILE *', UpperCase(line_var)) and not inif then
   begin
-    Delete(sor, 1, Length('WRITEFILE '));
+    Delete(line_var, 1, Length('WRITEFILE '));
 
-    Trim(sor);
+    Trim(line_var);
 
-    AssignFile(f, ExtractFilePath(Application.ExeName) + Copy(sor, 1, Pos(' ',
-      sor)));
+    AssignFile(f, ExtractFilePath(Application.ExeName) + Copy(line_var, 1, Pos(' ',
+      line_var)));
 
-    if not FileExists(ExtractFilePath(Application.ExeName) + Copy(sor, 1,
-      Pos(' ', sor))) then
+    if not FileExists(ExtractFilePath(Application.ExeName) + Copy(line_var, 1,
+      Pos(' ', line_var))) then
       Rewrite(f)
     else
       Append(f);
 
-    Delete(sor, 1, Length(Copy(sor, 1, Pos(' ', sor))));
+    Delete(line_var, 1, Length(Copy(line_var, 1, Pos(' ', line_var))));
 
     for i := 0 to params.Count - 1 do
-      if Matches('*' + params[i] + '*', sor) then
+      if Matches('*' + params[i] + '*', line_var) then
       begin
-        Insert(values[i], sor, Pos(params[i], sor));
-        Delete(sor, Pos(params[i], sor), Length(params[i]));
+        Insert(values[i], line_var, Pos(params[i], line_var));
+        Delete(line_var, Pos(params[i], line_var), Length(params[i]));
       end;
 
-    WriteLn(f, sor);
+    WriteLn(f, line_var);
     Flush(f);
 
     CloseFile(f);
 
-    //     ServerList[index].Memo.Lines.Add('(' + FormatDateTime('HH:mm:ss',now) + ') ' +sor);
-    sor := '';
+    //     ServerList[index].Memo.Lines.Add('(' + FormatDateTime('HH:mm:ss',now) + ') ' +line_var);
+    line_var := '';
   end;
 
   ////////// / COMMANDS ////////////
 
-  if Matches('/*', sor) and not inif then
+  if Matches('/*', line_var) and not inif then
   begin
     for i := 0 to params.Count - 1 do
-      if Matches('*' + params[i] + '*', sor) then
+      if Matches('*' + params[i] + '*', line_var) then
       begin
-        Insert(values[i], sor, Pos(params[i], sor));
-        Delete(sor, Pos(params[i], sor), Length(params[i]));
+        Insert(values[i], line_var, Pos(params[i], line_var));
+        Delete(line_var, Pos(params[i], line_var), Length(params[i]));
       end;
-    ServerList[index].Client.IOHandler.WriteLn(sor);
-    ARSSECommands(sor, index);
-    sor := '';
+    ServerList[index].Client.IOHandler.WriteLn(line_var, IndyTextEncoding_8Bit);
+    ARSSECommands(line_var, index);
+    line_var := '';
   end;
 
   // end; //of for
@@ -7676,7 +7692,7 @@ begin
     if ServerList[index].RefreshMsg.Team[i] = team then
     begin
       ServerList[index].Client.IOHandler.WriteLn('/setteam' + inttostr(team2) + ' ' +
-        inttostr(ServerList[index].RefreshMsg.Number[i]));
+        inttostr(ServerList[index].RefreshMsg.Number[i]), IndyTextEncoding_8Bit);
       balanced := true;
       case team of
         1:
@@ -7696,7 +7712,7 @@ begin
   // until (a = b);
 
   if balanced then
-    ServerList[index].Client.IOHandler.WriteLn('/say Teams balanced.');
+    ServerList[index].Client.IOHandler.WriteLn('/say Teams balanced.', IndyTextEncoding_8Bit);
   RefreshClick(nil);
 
 end;
@@ -8143,10 +8159,10 @@ end;
 
 procedure TForm1.EditClick(Sender: TObject);
 begin
-  EditCmd.CmdName.Text := ActionList.Items[ActionList.ItemIndex];
-  EditCmd.CmdEditor.Lines := Config.CommandBox[ActionList.Itemindex].Commands;
-  EditCmd.item := ActionList.ItemIndex;
-  EditCmd.Caption := 'Edit Command';
+//  EditCmd.CmdName.Text := ActionList.Items[ActionList.ItemIndex];
+//  EditCmd.CmdEditor.Lines := Config.CommandBox[ActionList.Itemindex].Commands;
+//  EditCmd.item := ActionList.ItemIndex;
+//  EditCmd.Caption := 'Edit Command';
   EditCmd.ShowModal;
 end;
 
@@ -8182,14 +8198,14 @@ var
   t1, t2, i, j {,ind, tker}: integer;
   TKini: Tinifile;
   TKers: TStringList;
-  // seged: string;
+  // temp_var: string;
 
 begin
   // ind:= 0;
   j := 1;
   // tker:= 0;
   Delete(msg, 1, Length('(11:11:11) '));
-  // seged:=msg;
+  // temp_var:=msg;
 
   t1 := strtoint(Copy(msg, Pos('(', msg) + 1, 1));
   t2 := strtoint(Copy(msg, Pos('killed (', msg) + Length('killed ('), 1));
@@ -8299,11 +8315,11 @@ begin
 procedure TForm1.PassKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 var
-  allapot: TKeyboardState;
+  state: TKeyboardState;
 begin
   HotKeyDown(Sender, Key, Shift);
-  GetKeyboardState(allapot);
-  if ((allapot[vk_Control] and 128) <> 0) then
+  GetKeyboardState(state);
+  if ((state[vk_Control] and 128) <> 0) then
     Pass.PasswordChar := #0
   else
     Pass.PasswordChar := '*';
@@ -8751,7 +8767,7 @@ begin
       [mbYes, mbNo], 0) = mrYes) then
         begin
           ServerList[ServerTab.TabIndex].Client.IOHandler.WriteLn('/ban ' +
-            PlayerList.Selected.SubItems[0]);
+            PlayerList.Selected.SubItems[0], IndyTextEncoding_8Bit);
         end;
       // connect to server
       1: if not ServerList[ServerTab.TabIndex].Client.Connected then
@@ -8792,7 +8808,7 @@ begin
           [mbYes, mbNo], 0) = mrYes) then
         begin
           ServerList[ServerTab.TabIndex].Client.IOHandler.WriteLn('/kick ' +
-            PlayerList.Selected.SubItems[0]);
+            PlayerList.Selected.SubItems[0], IndyTextEncoding_8Bit);
         end;
       // toggle nick chat mode
       9: if Cmd.Enabled then
@@ -8818,7 +8834,7 @@ begin
       // recompile script
       13: if ServerList[ServerTab.TabIndex].Client.Connected then
         begin
-          ServerList[ServerTab.TabIndex].Client.IOHandler.WriteLn('/recompile');
+          ServerList[ServerTab.TabIndex].Client.IOHandler.WriteLn('/recompile', IndyTextEncoding_8Bit);
         end;
       // set /say
       14: if ServerList[ServerTab.TabIndex].Client.Connected then
@@ -8847,7 +8863,7 @@ begin
       // send clientlist command
       17: if ServerList[ServerTab.TabIndex].Client.Connected then
         begin
-          ServerList[ServerTab.TabIndex].Client.IOHandler.WriteLn('/clientlist');
+          ServerList[ServerTab.TabIndex].Client.IOHandler.WriteLn('/clientlist', IndyTextEncoding_8Bit);
         end;
     end;
 end;
